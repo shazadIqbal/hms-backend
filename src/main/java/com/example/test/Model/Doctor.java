@@ -11,8 +11,6 @@ public class Doctor {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     Long mrno;
-
-
     String  fullName;
     int mobile;
     int  emrNo;
