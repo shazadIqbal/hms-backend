@@ -12,19 +12,19 @@ public class Doctor {
     @GeneratedValue(strategy= GenerationType.AUTO)
     Long mrno;
     String  fullName;
-    int mobile;
-    int  emrNo;
+    String mobile;
+    Integer  emrNo;
     String nationality;
     String address;
     String daysservice;
-    int cnic;
+    Integer cnic;
     String email;
     String speciality;
     String qualification;
     String hoursday;
     String position;
     String religion;
-    int  sallary;
+    Integer  sallary;
     String dateOfbirth;
     String gender;
     String timeIn;
@@ -34,7 +34,7 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(String fullName, int mobile, int emrNo, String nationality, String address, String daysservice, int cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, int sallary, String dateOfbirth, String gender, String timeIn, String timeOut, Date createdDate) {
+    public Doctor(String fullName, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, int sallary, String dateOfbirth, String gender, String timeIn, String timeOut, Date createdDate) {
         this.fullName = fullName;
         this.mobile = mobile;
         this.emrNo = emrNo;
@@ -72,19 +72,19 @@ public class Doctor {
         this.fullName = fullName;
     }
 
-    public int getMobile() {
+    public String getMobile() {
         return mobile;
     }
 
-    public void setMobile(int mobile) {
+    public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    public int getEmrNo() {
+    public Integer getEmrNo() {
         return emrNo;
     }
 
-    public void setEmrNo(int emrNo) {
+    public void setEmrNo(Integer emrNo) {
         this.emrNo = emrNo;
     }
 
@@ -112,11 +112,11 @@ public class Doctor {
         this.daysservice = daysservice;
     }
 
-    public int getCnic() {
+    public Integer getCnic() {
         return cnic;
     }
 
-    public void setCnic(int cnic) {
+    public void setCnic(Integer cnic) {
         this.cnic = cnic;
     }
 
@@ -168,11 +168,11 @@ public class Doctor {
         this.religion = religion;
     }
 
-    public int getSallary() {
+    public Integer getSallary() {
         return sallary;
     }
 
-    public void setSallary(int sallary) {
+    public void setSallary(Integer sallary) {
         this.sallary = sallary;
     }
 

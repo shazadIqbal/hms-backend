@@ -2,7 +2,9 @@ package com.example.test.Service;
 
 
 import com.example.test.DTO.DoctorDTO;
+import com.example.test.Model.Directory;
 import com.example.test.Model.Doctor;
+import com.example.test.Repository.DirectoryRepository;
 import com.example.test.Repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ public class DoctorService {
 
     @Autowired
     DoctorRepository doctorRepository;
+    @Autowired
+    DirectoryRepository directoryRepository;
 
     public List<DoctorDTO> getDoctors(){
         List<Doctor> list = doctorRepository.findAll();
@@ -38,6 +42,7 @@ public class DoctorService {
     public String postDoctorFromService(DoctorDTO doc){
        // listDoctor.add(doc);
         Doctor doctor = new Doctor();
+        Directory directory=new Directory();
         //doctor.setMrno(doc.getMrNo());
         doctor.setFullName(doc.getFullName());
         doctor.setCreatedDate(new Date());
@@ -45,7 +50,19 @@ public class DoctorService {
         doctor.setCnic(doc.getCnic());
         doctor.setGender(doc.getGender());
 
+        directory.setName(doc.getFullName());
+        directory.setAddress(doc.getAddress());
+        directory.setStatus("Active");
+        directory.setErNo(doc.getEmrNo());
+        directory.setNumber(doc.getMobile());
         doctorRepository.save(doctor);
+
+        directoryRepository.save(directory);
+
+
+
+
+
 
         return "ADDED SUCCESFULLY";
 
