@@ -38,12 +38,26 @@ public class DoctorService {
     public String postDoctorFromService(DoctorDTO doc){
        // listDoctor.add(doc);
         Doctor doctor = new Doctor();
-        //doctor.setMrno(doc.getMrNo());
+        doctor.setMrno(doc.getMrNo());
         doctor.setFullName(doc.getFullName());
+//        doctor.setMobile(doc.getMobile());
+//        doctor.setEmrNo(doc.getEmrNo());
+//        doctor.setNationality(doc.getNationality());
+//        doctor.setDaysservice(doc.getDaysservice());
+//        doctor.setEmail(doc.getEmail());
+//        doctor.setSpeciality(doc.getSpeciality());
+//        doctor.setQualification(doc.getQualification());
+//        doctor.setHoursday(doc.getHoursday());
+        doctor.setPosition(doc.getPosition());
+        doctor.setReligion(doc.getReligion());
+        doctor.setSallary(doc.getSallary());
         doctor.setCreatedDate(new Date());
         doctor.setAddress(doc.getAddress());
         doctor.setCnic(doc.getCnic());
         doctor.setGender(doc.getGender());
+//        doctor.setDateOfbirth(doc.getDateOfbirth());
+//        doctor.setTimeIn(doc.getTimeIn());
+//        doctor.setTimeOut(doc.getTimeOut());
 
         doctorRepository.save(doctor);
 
