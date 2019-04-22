@@ -44,7 +44,7 @@ public class OpdErService {
     public String saveOpdErToAccounts(OpdErDTO accountData){
         Patient patient=patientRepository.findById(accountData.getId()).get();
         TransactionRestDTO responce=new TransactionRestDTO();
-        responce.setPatientId("P"+ accountData.getId());
+        responce.setAccountNoUUID(patient.getAccountNo());
         responce.setReceivedAmount(accountData.getCashRecieve());
         responce.setTotalAmount(accountData.getTotal());
         responce.setOperationType("Er");

@@ -2,7 +2,7 @@ package com.example.test.DTO;
 
 public class TransactionRestDTO {
     Double   totalAmount;
-    String   patientId;
+    String   accountNoUUID;
     Double   receivedAmount;
     String   description;
     String   operationType;
@@ -11,9 +11,9 @@ public class TransactionRestDTO {
     public TransactionRestDTO() {
     }
 
-    public TransactionRestDTO(Double totalAmount, String patientId, Double receivedAmount, String description, String operationType, String transactionType) {
+    public TransactionRestDTO(Double totalAmount, String   accountNoUUID, Double receivedAmount, String description, String operationType, String transactionType) {
         this.totalAmount = totalAmount;
-        this.patientId = patientId;
+        this.accountNoUUID = accountNoUUID;
         this.receivedAmount = receivedAmount;
         this.description = description;
         this.operationType = operationType;
@@ -28,12 +28,12 @@ public class TransactionRestDTO {
         this.totalAmount = totalAmount;
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getAccountNoUUID() {
+        return accountNoUUID;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setAccountNoUUID(String accountNoUUID) {
+        this.accountNoUUID = accountNoUUID;
     }
 
     public Double getReceivedAmount() {
