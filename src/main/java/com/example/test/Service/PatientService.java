@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,7 @@ public List<Patient> getPatients(){
         patient.setGender(pat.getGender());
         patient.setAddress(pat.getAddress());
        patient.setStatus("Active");
+       patient.setDate(new Date());
         patientRepository.save(patient);
         return "{\"ADDED SUCCESFULLY\":1}";
     }
