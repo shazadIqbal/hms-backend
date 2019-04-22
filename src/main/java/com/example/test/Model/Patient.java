@@ -1,6 +1,7 @@
 package com.example.test.Model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="Patient")
@@ -16,11 +17,15 @@ public class Patient {
     private String gender;
     private String address;
     private String status;
+    private Date date;
+
 
     public Patient() {
     }
 
     public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status) {
+        this.date=date;
+
         this.name = name;
         this.cnic = cnic;
         this.phoneNo = phoneNo;
@@ -92,5 +97,13 @@ public class Patient {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
