@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Transient;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -59,6 +60,9 @@ public List<Patient> getPatients(){
         patient.setAddress(pat.getAddress());
         patient.setStatus("Active");
         patient.setAccountNo(corrId.toString());
+       patient.setStatus("Active");
+       patient.setDate(new Date());
+
         patientRepository.save(patient);
         //Creating new patient account
         accountRestDTO.setId(patient.getAccountNo());
