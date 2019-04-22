@@ -1,6 +1,7 @@
 package com.example.test.Model;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name="Patient")
@@ -16,8 +17,17 @@ public class Patient {
     private String gender;
     private String address;
     private String status;
+    private String accountNo;
 
     public Patient() {
+    }
+
+    public String getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
     }
 
     public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status) {
