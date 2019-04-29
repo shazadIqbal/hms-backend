@@ -44,7 +44,7 @@ public class OpdErService {
     public String saveOpdErToAccounts(OpdErDTO accountData){
         Patient patient=patientRepository.findById(accountData.getId()).get();
         TransactionRestDTO responce=new TransactionRestDTO();
-        responce.setPatientId("P"+ accountData.getId());
+        responce.setAccountNoUUID(patient.getAccountNo());
         responce.setReceivedAmount(accountData.getCashRecieve());
         responce.setTotalAmount(accountData.getTotal());
         responce.setOperationType("Er");
@@ -81,7 +81,19 @@ public class OpdErService {
 //      return null;
 //    }
     public String descriptionlist(String patientName, String[] facilities){
-        String des = patientName + "avail " + facilities;
+
+        System.out.println(facilities.toString());
+        StringBuilder f= new StringBuilder();
+        for(int i=0; i<facilities.length;i++)
+        {
+            f.append(facilities[i]);
+            if(i<facilities.length-1){
+                f.append(" ,");
+            }
+
+        }
+
+        String des = patientName + "avail " + f;
         return des;
 
 
