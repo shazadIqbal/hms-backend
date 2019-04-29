@@ -8,6 +8,7 @@ import com.example.test.Repository.PatientRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,6 +19,9 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class PatientMonitorService {
+
+    @Value("${transaction.url}")
+    public String url;
 
     @Autowired
     PatientRepository patientRepository;
@@ -39,7 +43,7 @@ public class PatientMonitorService {
 
 //        aa4f062d-a115-42aa-bdcd-78e324426137
 
-            RestTemplateResponseDTO abc = restTemplate.getForObject("http://192.168.0.107:8081/api/transactions/" + accountId, RestTemplateResponseDTO.class);
+            RestTemplateResponseDTO abc = restTemplate.getForObject(url + accountId, RestTemplateResponseDTO.class);
 
 
             ObjectMapper mapper = new ObjectMapper();
