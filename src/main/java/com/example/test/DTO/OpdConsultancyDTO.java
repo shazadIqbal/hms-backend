@@ -1,14 +1,16 @@
 package com.example.test.DTO;
 
+import com.example.test.Model.Doctor;
+
 public class OpdConsultancyDTO {
-    String [] doctors;
+    Doctor doctors;
     Double cashRecieved;
     Long discount;
     Double total;
     Long id;
     Long sallary;
 
-    public OpdConsultancyDTO(String[] doctors, Double cashRecieved, Long discount, Double total, Long id, Long sallary) {
+    public OpdConsultancyDTO(Doctor doctors, Double cashRecieved, Long discount, Double total, Long id, Long sallary) {
         this.doctors = doctors;
         this.cashRecieved = cashRecieved;
         this.discount = discount;
@@ -20,11 +22,11 @@ public class OpdConsultancyDTO {
     public OpdConsultancyDTO() {
     }
 
-    public String[] getDoctors() {
+    public Doctor getDoctors() {
         return doctors;
     }
 
-    public void setDoctors(String[] doctors) {
+    public void setDoctors(Doctor doctors) {
         this.doctors = doctors;
     }
 

@@ -3,6 +3,7 @@ package com.example.test.Service;
 import com.example.test.DTO.OpdConsultancyDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.DTO.TransactionRestDTO;
+import com.example.test.Model.Doctor;
 import com.example.test.Model.Patient;
 import com.example.test.Repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,20 +41,12 @@ public class OpdConsultancyService {
 
     }
 
-    public String descriptionlist(String patientName, String[] doctors) {
+    public String descriptionlist(String patientName, Doctor doctors) {
 
        // System.out.println(facilities.toString());
-        StringBuilder d= new StringBuilder();
-        for(int i=0; i<doctors.length;i++)
-        {
-            d.append(doctors[i]);
-            if(i<doctors.length-1){
-                d.append(" ,");
-            }
 
-        }
 
-        String des = "This"+patientName + " avails " + " this "+ d;
+        String des = "This"+patientName + " avails " + " this "+ doctors.getFullName();
         return des;
 
 
