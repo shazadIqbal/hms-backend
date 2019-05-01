@@ -17,6 +17,7 @@ public class Doctor {
     String nationality;
     String address;
     String daysservice;
+    Long fees;
     Integer cnic;
     String email;
     String speciality;
@@ -34,10 +35,11 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(String fullName, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, int sallary, String dateOfbirth, String gender, String timeIn, String timeOut, Date createdDate) {
+    public Doctor(String fullName,Long fees, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, int sallary, String dateOfbirth, String gender, String timeIn, String timeOut, Date createdDate) {
         this.fullName = fullName;
         this.mobile = mobile;
         this.emrNo = emrNo;
+        this.fees=fees;
         this.nationality = nationality;
         this.address = address;
         this.daysservice = daysservice;
@@ -86,6 +88,14 @@ public class Doctor {
 
     public void setEmrNo(Integer emrNo) {
         this.emrNo = emrNo;
+    }
+
+    public Long getFees() {
+        return fees;
+    }
+
+    public void setFees(Long fees) {
+        this.fees = fees;
     }
 
     public String getNationality() {

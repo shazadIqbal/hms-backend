@@ -33,6 +33,8 @@ public class DoctorService {
             doctorDto.setCreatedDate(doctor.getCreatedDate());
             doctorDto.setCnic(doctor.getCnic());
             doctorDto.setGender(doctor.getGender());
+            doctorDto.setSallary(doctor.getSallary());
+            doctorDto.setFees(doctor.getFees());
 
             responseList.add(doctorDto);
         });
@@ -49,7 +51,8 @@ public class DoctorService {
         doctor.setAddress(doc.getAddress());
         doctor.setCnic(doc.getCnic());
         doctor.setGender(doc.getGender());
-
+        doctor.setSallary(doc.getSallary());
+        doctor.setFees(doc.getFees());
         directory.setName(doc.getFullName());
         directory.setAddress(doc.getAddress());
         directory.setStatus("Active");
