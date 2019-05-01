@@ -62,7 +62,7 @@ public class PatientMonitorService {
 
                 if (v.getOperationType().equalsIgnoreCase("ER")) {
                     er.add(v);
-                } else if (v.getOperationType().equalsIgnoreCase("OPD")) {
+                } else if (v.getOperationType().equalsIgnoreCase("CONSULTANCY")) {
                     opd.add(v);
                 } else if (v.getOperationType().equalsIgnoreCase("LAB")) {
                     lab.add(v);

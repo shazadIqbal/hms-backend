@@ -34,6 +34,7 @@ public class DoctorService {
             doctorDto.setCnic(doctor.getCnic());
             doctorDto.setGender(doctor.getGender());
             doctorDto.setSallary(doctor.getSallary());
+            doctorDto.setFees(doctor.getFees());
 
             responseList.add(doctorDto);
         });
@@ -49,6 +50,7 @@ public class DoctorService {
         doctor.setCreatedDate(new Date());
         doctor.setAddress(doc.getAddress());
         doctor.setCnic(doc.getCnic());
+        doctor.setFees(doc.getFees());
 
         doctor.setGender(doc.getGender());
         doctor.setSallary(doc.getSallary());
