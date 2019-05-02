@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 public class OpdConsultancyService {
     @Autowired
     PatientRepository patientRepository;
+
     @Value("${transaction.url}")
     public String url;
 
@@ -23,15 +24,15 @@ public class OpdConsultancyService {
 
     public String saveOpdConsultancyToAccounts(OpdConsultancyDTO data) {
         Patient patient = patientRepository.findById(data.getId()).get();
-        TransactionRestDTO response = new TransactionRestDTO();
-        response.setAccountNoUUID(patient.getAccountNo());
-        response.setReceivedAmount(data.getCashRecieved());
-        response.setTotalAmount(data.getTotal());
-        response.setOperationType("CONSULTANCY");
-        response.setTransactionType("DEBIT");
-        response.setDescription(descriptionlist(patient.getName(), data.getDoctors()));
-        RestTemplateResponseDTO result = restTemplate.postForObject(url, response, RestTemplateResponseDTO.class);
-        if (result.getCode().equalsIgnoreCase("200")) {
+        TransactionRestDTO request = new TransactionRestDTO();
+        request.setAccountNoUUID(patient.getAccountNo());
+        request.setReceivedAmount(data.getCashRecieved());
+        request.setTotalAmount(data.getTotal());
+        request.setOperationType("CONSULTANCY");
+        request.setTransactionType("DEBIT");
+        request.setDescription(descriptionlist(patient.getName(), data.getDoctors()));
+        RestTemplateResponseDTO response = restTemplate.postForObject(url, request, RestTemplateResponseDTO.class);
+        if (response.getCode().equalsIgnoreCase("200")) {
 
             return "{\"ADDED SUCCESFULLY\":1}";
         } else {
