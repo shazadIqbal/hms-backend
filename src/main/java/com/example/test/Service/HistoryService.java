@@ -1,15 +1,20 @@
 package com.example.test.Service;
 
 
+import com.example.test.Commons.Transactions;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.Model.History;
 import com.example.test.Model.Patient;
+import com.example.test.Repository.HistoryRepository;
 import com.example.test.Repository.PatientRepository;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,11 +31,16 @@ public class HistoryService {
     @Autowired
     PatientRepository patientRepository;
 
+    @Autowired
+    HistoryRepository historyRepository;
+
     RestTemplate restTemplate = new RestTemplate();
 
-    public RestTemplateResponseDTO getHistory(Long id) {
+
+    public String addHistory(Long id) {
 
         Optional<Patient> p = patientRepository.findById(id);
+
 
         Patient patient = p.get();
 
@@ -44,16 +54,39 @@ public class HistoryService {
 
             RestTemplateResponseDTO response = restTemplate.getForObject(url + accountId, RestTemplateResponseDTO.class);
 
-            
 
-        return response;
+            ObjectMapper mapper = new ObjectMapper();
+            List<Transactions> transactionList = mapper.convertValue(
+                    response.getBodyList(),
+                    new TypeReference<List<Transactions>>() {
+                    }
+            );
 
+
+            for(Transactions a : transactionList)
+            {
+                History history=new History();
+                history.setCurrency(a.getCurrency());
+                history.setTotalAmount(a.getTotalAmount());
+                history.setTransactionDate(a.getTransactionDate());
+                history.setTransactionType(a.getTransactionType());
+                history.setOperationType(a.getOperationType());
+                history.setReceivedAmount(a.getReceivedAmount());
+                history.setDues(a.getDues());
+                history.setPatient(patient);
+                history.setCurrency(a.getCurrency());
+                history.setDescription(a.getDescription());
+                historyRepository.save(history);
+            }
+
+
+
+            return "{\"Patient Discharge Successful successful\":1}";
         }
 
-        else
-        {
-            return new RestTemplateResponseDTO();
-        }
+
+        return "{\"An Error occured while discharging\":1}";
+
 
     }
 }

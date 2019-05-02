@@ -17,10 +17,10 @@ public class HistoryController {
     @Autowired
     HistoryService historyService;
 
-    @GetMapping("/{id}")
-    public RestTemplateResponseDTO getDirectory(@PathVariable("id") Long id)
+    @PostMapping("/{id}")
+    public String addHistory(@PathVariable("id") Long id)
     {
-        return historyService.getHistory(id);
+        return historyService.addHistory(id);
     }
 
 
