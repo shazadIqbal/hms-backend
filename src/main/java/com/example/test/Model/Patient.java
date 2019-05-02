@@ -21,7 +21,7 @@ public class Patient {
     private String address;
     private String status;
     private String accountNo;
-
+    private boolean obsRegisteration;
     private Date date;
 
 
@@ -37,9 +37,9 @@ public class Patient {
         this.accountNo = accountNo;
     }
 
-    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status) {
+    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, boolean obsRegisteration) {
         this.date=date;
-
+        this.obsRegisteration = obsRegisteration;
         this.name = name;
         this.cnic = cnic;
         this.phoneNo = phoneNo;
@@ -119,5 +119,13 @@ public class Patient {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public boolean isObsRegisteration() {
+        return obsRegisteration;
+    }
+
+    public void setObsRegisteration(boolean obsRegisteration) {
+        this.obsRegisteration = obsRegisteration;
     }
 }
