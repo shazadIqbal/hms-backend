@@ -1,6 +1,6 @@
 package com.example.test.Service;
 
-import com.example.test.DTO.OpdConsultancyDTO;
+import com.example.test.DTO.OpdGynyDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.DTO.TransactionRestDTO;
 import com.example.test.Model.Doctor;
@@ -12,26 +12,28 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class OpdConsultancyService {
+public class OpdGynyService {
     @Autowired
     PatientRepository patientRepository;
 
     @Value("${transaction.url}")
     public String url;
 
-
     RestTemplate restTemplate = new RestTemplate();
 
-    public String saveOpdConsultancyToAccounts(OpdConsultancyDTO data) {
+
+    public String saveOpdGynyToAccounts(OpdGynyDTO data){
         Patient patient = patientRepository.findById(data.getId()).get();
         TransactionRestDTO request = new TransactionRestDTO();
+
         request.setAccountNoUUID(patient.getAccountNo());
         request.setReceivedAmount(data.getCashRecieved());
         request.setTotalAmount(data.getTotal());
-        request.setOperationType("CONSULTANCY");
+        request.setOperationType("GYNY");
         request.setTransactionType("DEBIT");
-        request.setDescription(descriptionlist(patient.getName(), data.getDoctors()));
+        request.setDescription(descriptionList(patient.getName(), data.getDoctors()));
         RestTemplateResponseDTO response = restTemplate.postForObject(url, request, RestTemplateResponseDTO.class);
+
         if (response.getCode().equalsIgnoreCase("200")) {
 
             return "{\"ADDED SUCCESFULLY\":1}";
@@ -40,18 +42,15 @@ public class OpdConsultancyService {
         }
 
 
+
     }
 
-    public String descriptionlist(String patientName, Doctor doctors) {
 
-       // System.out.println(facilities.toString());
-
+    public String descriptionList(String patientName, Doctor doctors){
 
         String des = "This"+patientName + " avails " + " this "+ doctors.getFullName();
         return des;
 
-
-
-
     }
+  //  Patient patient = patientRepository.findById()
 }

@@ -2,6 +2,7 @@ package com.example.test.Model;
 
 import javax.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 import java.util.Date;
@@ -25,6 +26,17 @@ public class Patient {
     private Date date;
 
 
+    @OneToMany(mappedBy = "patient")
+    private List<History> history;
+
+
+    public List<History> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<History> history) {
+        this.history = history;
+    }
 
     public Patient() {
     }

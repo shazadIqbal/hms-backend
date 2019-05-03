@@ -11,6 +11,7 @@ public class DoctorDTO {
     String address;
     String daysservice;
    Integer cnic;
+   Long fees;
     String email;
     String speciality;
     String qualification;
@@ -23,11 +24,12 @@ public class DoctorDTO {
     String timeIn;
     String timeOut;
     Date createdDate;
-    public DoctorDTO(Long mrNo, String fullName, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, Integer sallary, String dateOfbirth, String gender, String timeIn, String timeOut) {
+    public DoctorDTO(Long mrNo,Long fees, String fullName, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, Integer sallary, String dateOfbirth, String gender, String timeIn, String timeOut) {
         this.mrNo = mrNo;
         this.fullName = fullName;
         this.mobile = mobile;
         this.emrNo = emrNo;
+        this.fees=fees;
         this.nationality = nationality;
         this.address = address;
         this.daysservice = daysservice;
@@ -43,6 +45,7 @@ public class DoctorDTO {
         this.gender = gender;
         this.timeIn = timeIn;
         this.timeOut = timeOut;
+
     }
 
     public DoctorDTO() {
@@ -78,6 +81,14 @@ public class DoctorDTO {
 
     public void setEmrNo(Integer emrNo) {
         this.emrNo = emrNo;
+    }
+
+    public Long getFees() {
+        return fees;
+    }
+
+    public void setFees(Long fees) {
+        this.fees = fees;
     }
 
     public String getNationality() {
