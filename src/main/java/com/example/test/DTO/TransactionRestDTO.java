@@ -1,6 +1,7 @@
 package com.example.test.DTO;
 
 public class TransactionRestDTO {
+
     Double   totalAmount;
     String   accountNoUUID;
     Double   receivedAmount;
