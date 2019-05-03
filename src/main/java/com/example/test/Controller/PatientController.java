@@ -24,6 +24,8 @@ public class PatientController {
     public List<Patient> getPatients(){
         return patientService.getPatients();
     }
+
+
     @RequestMapping(value = "/{id}" ,method = RequestMethod.GET)
     public Optional<Patient> getPatientsById(@PathVariable("id") Long id){
         return patientService.getPatientsById(id);

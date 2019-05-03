@@ -2,6 +2,7 @@ package com.example.test.Model;
 
 import javax.persistence.*;
 
+import java.util.List;
 import java.util.UUID;
 
 import java.util.Date;
@@ -21,10 +22,24 @@ public class Patient {
     private String address;
     private String status;
     private String accountNo;
+
     private boolean gynyRegistration;
+    private boolean obsRegisteration;
+
     private Date date;
 
 
+    @OneToMany(mappedBy = "patient")
+    private List<History> history;
+
+
+    public List<History> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<History> history) {
+        this.history = history;
+    }
 
     public Patient() {
     }
@@ -37,9 +52,9 @@ public class Patient {
         this.accountNo = accountNo;
     }
 
-    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, boolean gynyRegistration) {
+    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, boolean obsRegisteration, boolean gynyRegistration) {
         this.date=date;
-
+        this.obsRegisteration = obsRegisteration;
         this.name = name;
         this.cnic = cnic;
         this.phoneNo = phoneNo;
@@ -122,11 +137,21 @@ public class Patient {
         this.date = date;
     }
 
-    public boolean isRegistration() {
+
+  
+  public boolean isRegistration() {
         return gynyRegistration;
     }
 
     public void setRegistration(boolean gynyRegistration) {
         this.gynyRegistration = gynyRegistration;
+    }
+    public boolean isObsRegisteration() {
+        return obsRegisteration;
+    }
+
+    public void setObsRegisteration(boolean obsRegisteration) {
+        this.obsRegisteration = obsRegisteration;
+
     }
 }
