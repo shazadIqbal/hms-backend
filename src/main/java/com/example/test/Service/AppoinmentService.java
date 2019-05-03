@@ -69,8 +69,6 @@ public class AppoinmentService {
             return  null;
         }
 
-
-
     }
     public List<Appoinment> getAppoinmentByDate (Date date){
         String pattern = "yyyy-MM-dd";

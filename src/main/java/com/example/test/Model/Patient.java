@@ -21,7 +21,7 @@ public class Patient {
     private String address;
     private String status;
     private String accountNo;
-
+    private boolean gynyRegistration;
     private Date date;
 
 
@@ -37,7 +37,7 @@ public class Patient {
         this.accountNo = accountNo;
     }
 
-    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status) {
+    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, boolean gynyRegistration) {
         this.date=date;
 
         this.name = name;
@@ -47,6 +47,7 @@ public class Patient {
         this.gender = gender;
         this.address = address;
         this.status = status;
+        this.gynyRegistration = gynyRegistration;
     }
 
     public Long getId() {
@@ -119,5 +120,13 @@ public class Patient {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public boolean isRegistration() {
+        return gynyRegistration;
+    }
+
+    public void setRegistration(boolean gynyRegistration) {
+        this.gynyRegistration = gynyRegistration;
     }
 }
