@@ -23,7 +23,6 @@ public class AppoinmentService {
 
     public String saveAppoinment(AppoinmentDTO appoinment ){
 
-
         Appoinment appoinment1= new Appoinment();
         appoinment1.setSelectDoctor(appoinment.getSelectDoctor());
         appoinment1.setAppoinmentDate(appoinment.getAppoinmentDate());

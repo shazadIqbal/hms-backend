@@ -19,9 +19,7 @@ public class OpdErController {
     @PostMapping("/")
     public String save(@RequestBody OpdErDTO data)
     {
-return this.opdErService.saveOpdErToAccounts(data);
-
-
+            return this.opdErService.saveOpdErToAccounts(data);
     }
 
     }

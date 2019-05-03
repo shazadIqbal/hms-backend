@@ -37,8 +37,6 @@ public class OpdConsultancyService {
         } else {
             return "{\"Some Thing Went Wrong\":1}";
         }
-
-
     }
 
     public String descriptionlist(String patientName, Doctor doctors) {
@@ -48,8 +46,6 @@ public class OpdConsultancyService {
 
         String des = "This"+patientName + " avails " + " this "+ doctors.getFullName();
         return des;
-
-
 
 
     }
