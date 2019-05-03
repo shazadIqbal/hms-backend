@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +38,7 @@ public class HistoryService {
     RestTemplate restTemplate = new RestTemplate();
 
 
-    public String addHistory(Long id) {
+    public String addPatientHistory(Long id) {
 
         Optional<Patient> p = patientRepository.findById(id);
 
@@ -81,12 +82,25 @@ public class HistoryService {
 
 
 
-            return "{\"Patient Discharge Successful successful\":1}";
+            return "{\"Patient Discharge Successful\":1}";
         }
 
 
         return "{\"An Error occured while discharging\":1}";
 
 
+    }
+
+    public List<History> getPatientHistory(Long id)
+    {
+        Optional<Patient> response = patientRepository.findById(id);
+        Patient patient = response.get();
+        if(response.isPresent()){
+
+            List<History> histories=historyRepository.findByPatientId(id);
+
+            return  histories;
+        }
+        return  new ArrayList<>();
     }
 }
