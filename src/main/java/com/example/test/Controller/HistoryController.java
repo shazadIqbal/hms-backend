@@ -11,16 +11,22 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/history")
+@RequestMapping("/api/")
 public class HistoryController {
 
     @Autowired
     HistoryService historyService;
 
-    @PostMapping("/{id}")
-    public String addHistory(@PathVariable("id") Long id)
+    @GetMapping("addhistory/{id}")
+    public String addPatientHistory(@PathVariable("id") Long id)
     {
-        return historyService.addHistory(id);
+        return historyService.addPatientHistory(id);
+    }
+
+
+    @GetMapping("gethistory/{id}")
+    public List<History> getPatientHistory(@PathVariable("id") Long id){
+        return historyService.getPatientHistory(id);
     }
 
 
