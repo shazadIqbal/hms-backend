@@ -22,7 +22,10 @@ public class Patient {
     private String address;
     private String status;
     private String accountNo;
+
+    private boolean gynyRegistration;
     private boolean obsRegisteration;
+
     private Date date;
 
 
@@ -49,7 +52,7 @@ public class Patient {
         this.accountNo = accountNo;
     }
 
-    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, boolean obsRegisteration) {
+    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, boolean obsRegisteration, boolean gynyRegistration) {
         this.date=date;
         this.obsRegisteration = obsRegisteration;
         this.name = name;
@@ -59,6 +62,7 @@ public class Patient {
         this.gender = gender;
         this.address = address;
         this.status = status;
+        this.gynyRegistration = gynyRegistration;
     }
 
     public Long getId() {
@@ -133,11 +137,21 @@ public class Patient {
         this.date = date;
     }
 
+
+  
+  public boolean isRegistration() {
+        return gynyRegistration;
+    }
+
+    public void setRegistration(boolean gynyRegistration) {
+        this.gynyRegistration = gynyRegistration;
+    }
     public boolean isObsRegisteration() {
         return obsRegisteration;
     }
 
     public void setObsRegisteration(boolean obsRegisteration) {
         this.obsRegisteration = obsRegisteration;
+
     }
 }

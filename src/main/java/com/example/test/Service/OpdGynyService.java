@@ -25,10 +25,11 @@ public class OpdGynyService {
     public String saveOpdGynyToAccounts(OpdGynyDTO data){
         Patient patient = patientRepository.findById(data.getId()).get();
         TransactionRestDTO request = new TransactionRestDTO();
-
+        patient.setRegistration(true);
         request.setAccountNoUUID(patient.getAccountNo());
         request.setReceivedAmount(data.getCashRecieved());
         request.setTotalAmount(data.getTotal());
+
         request.setOperationType("GYNY");
         request.setTransactionType("DEBIT");
         request.setDescription(descriptionList(patient.getName(), data.getDoctors()));

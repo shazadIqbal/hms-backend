@@ -10,6 +10,7 @@ public class OpdGynyDTO {
     Long id;
     Long sallary;
 
+
     public OpdGynyDTO() {
     }
 

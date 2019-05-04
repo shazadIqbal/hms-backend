@@ -10,6 +10,7 @@ public class OpdConsultancyDTO {
     Long id;
     Long sallary;
 
+
     public OpdConsultancyDTO(Doctor doctors, Double cashRecieved, Long discount, Double total, Long id, Long sallary) {
         this.doctors = doctors;
         this.cashRecieved = cashRecieved;
