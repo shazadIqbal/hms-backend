@@ -45,7 +45,7 @@ public class OpdConsultancyService {
        // System.out.println(facilities.toString());
 
 
-        String des = "This"+patientName + " avails " + " this "+ doctors.getFullName();
+        String des = patientName + " Avails OPD CONSULTANCY BY Dr."+ doctors.getFullName();
         return des;
 
 
