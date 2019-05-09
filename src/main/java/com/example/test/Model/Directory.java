@@ -9,8 +9,6 @@ public class Directory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-
-
     String name;
     String number;
     String address;
