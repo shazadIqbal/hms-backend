@@ -22,9 +22,9 @@ public class Patient {
     private String address;
     private String status;
     private String accountNo;
-
-    private boolean gynyRegistration;
-    private boolean obsRegisteration;
+    private Boolean gynAndObsRegistration;
+    private String husbandOfAndFatherOf;
+    private Date registrationDate;
 
     private Date date;
 
@@ -52,9 +52,8 @@ public class Patient {
         this.accountNo = accountNo;
     }
 
-    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, boolean obsRegisteration, boolean gynyRegistration) {
+    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, Boolean gynAndObsRegistration,String husbandOfAndFatherOf,Date registrationDate ) {
         this.date=date;
-        this.obsRegisteration = obsRegisteration;
         this.name = name;
         this.cnic = cnic;
         this.phoneNo = phoneNo;
@@ -62,7 +61,9 @@ public class Patient {
         this.gender = gender;
         this.address = address;
         this.status = status;
-        this.gynyRegistration = gynyRegistration;
+        this.gynAndObsRegistration= gynAndObsRegistration;
+        this.husbandOfAndFatherOf=husbandOfAndFatherOf;
+        this.registrationDate = registrationDate;
     }
 
     public Long getId() {
@@ -138,20 +139,27 @@ public class Patient {
     }
 
 
-  
-  public boolean isRegistration() {
-        return gynyRegistration;
+    public Boolean getGynAndObsRegistration() {
+        return gynAndObsRegistration;
     }
 
-    public void setRegistration(boolean gynyRegistration) {
-        this.gynyRegistration = gynyRegistration;
-    }
-    public boolean isObsRegisteration() {
-        return obsRegisteration;
+    public void setGynAndObsRegistration(Boolean gynAndObsRegistration) {
+        this.gynAndObsRegistration = gynAndObsRegistration;
     }
 
-    public void setObsRegisteration(boolean obsRegisteration) {
-        this.obsRegisteration = obsRegisteration;
+    public String getHusbandOfAndFatherOf() {
+        return husbandOfAndFatherOf;
+    }
 
+    public void setHusbandOfAndFatherOf(String husbandOfAndFatherOf) {
+        this.husbandOfAndFatherOf = husbandOfAndFatherOf;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }

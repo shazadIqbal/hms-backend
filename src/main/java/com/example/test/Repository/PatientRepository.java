@@ -4,6 +4,7 @@ package com.example.test.Repository;
 import com.example.test.Model.Patient;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,5 +12,9 @@ import java.util.List;
 @Repository
 @Qualifier("patientRepository")
 public interface PatientRepository extends JpaRepository<Patient,Long> {
+
+    @Query(value = "select * from patient where gyn_and_obs_registration = TRUE AND status = 'ACTIVE' ",
+            nativeQuery = true)
+    public List<Patient> getAllGynyObsPatients();
 
 }
