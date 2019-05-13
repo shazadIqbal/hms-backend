@@ -68,13 +68,13 @@ public class DoctorService {
 
 
 
-        return "ADDED SUCCESFULLY";
+        return "{\"ADDED SUCCESFULLY\":1}";
 
     }
 
     public String delDoctor(){
         //listDoctor.clear();
-        return "DELETED SUCCESSFULLY";
+        return "{\"DELETED SUCCESFULLY\":1}";
     }
 
 }

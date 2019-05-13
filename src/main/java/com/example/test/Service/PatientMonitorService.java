@@ -75,15 +75,15 @@ public class PatientMonitorService {
 
             for (Transactions e : er) {
                 dues += e.getDues();
-                erTotal += e.getReceivedAmount();
+                erTotal += e.getTotalAmount();
             }
             for (Transactions o : opd) {
                 dues += o.getDues();
-                opdTotal += o.getReceivedAmount();
+                opdTotal += o.getTotalAmount();
             }
             for (Transactions l : lab) {
                 dues += l.getDues();
-                labTotal += l.getReceivedAmount();
+                labTotal += l.getTotalAmount();
             }
             long total = labTotal + opdTotal + erTotal;
 
