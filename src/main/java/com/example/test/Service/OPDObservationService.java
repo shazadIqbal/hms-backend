@@ -23,7 +23,7 @@ public class OPDObservationService {
 
     public String saveOpdObservationToAccounts(OPDObservationDTO data){
         Patient patient = patientRepository.findById(data.getId()).get();
-        patient.setObsRegisteration(true);
+       // patient.setObsRegisteration(true);
         TransactionRestDTO request = new TransactionRestDTO();
         request.setAccountNoUUID(patient.getAccountNo());
         request.setReceivedAmount(data.getCashRecieved());

@@ -33,6 +33,7 @@ public class PatientController {
 
     @RequestMapping(value = "/" ,method = RequestMethod.POST)
     public String postPatient(@RequestBody PatientDTO pat){
+
         return patientService.postPatient(pat);
     }
 
@@ -53,4 +54,16 @@ public class PatientController {
         return patientService.activePatientsById(id);
 
     }
+    // Update patient record
+    @PutMapping("/update/{id}")
+    public  String updatePatientByID(@PathVariable("id") Long id,@RequestBody PatientDTO patient){
+        return patientService.updatePatientByID(id,patient);
+        //return  null;
+    }
+
+@GetMapping("/allgynyobs")
+public List<Patient> getAllGynePatient(){
+        return patientService.getAllGynePatient();
+}
+
 }
