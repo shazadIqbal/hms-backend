@@ -1,21 +1,23 @@
 package com.example.test.Service;
 
 
+import com.example.test.DTO.AccountRestDTO;
 import com.example.test.DTO.DoctorDTO;
+import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.Model.Directory;
 import com.example.test.Model.Doctor;
 import com.example.test.Repository.DirectoryRepository;
 import com.example.test.Repository.DoctorRepository;
 //import org.graalvm.compiler.nodes.calc.IntegerDivRemNode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import javax.persistence.Transient;
 import javax.print.Doc;
 import javax.validation.constraints.Null;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class DoctorService {
@@ -25,6 +27,13 @@ public class DoctorService {
     DoctorRepository doctorRepository;
     @Autowired
     DirectoryRepository directoryRepository;
+    @Value("${account.url}")
+    public String url;
+
+    @Transient
+    private UUID corrId;
+
+    RestTemplate restTemplate = new RestTemplate();
 
     public List<DoctorDTO> getDoctors(){
         List<Doctor> list = doctorRepository.findAll();
@@ -54,6 +63,8 @@ public class DoctorService {
             doctorDto.setTimeIn(doctor.getTimeIn());
             doctorDto.setTimeOut(doctor.getTimeOut());
             doctorDto.setQualification(doctor.getQualification());
+            doctorDto.setAccountNo(doctor.getAccountNo());
+            doctorDto.setShare(doctor.getShare());
             responseList.add(doctorDto);
         });
        return  responseList;
@@ -62,6 +73,9 @@ public class DoctorService {
     public String postDoctorFromService(DoctorDTO doc){
         Doctor doctor = new Doctor();
         Directory directory=new Directory();
+        AccountRestDTO accountRestDTO=new AccountRestDTO();
+        corrId = UUID.randomUUID();
+        doctor.setAccountNo(corrId.toString());
         doctor.setFullName(doc.getFullName());
         doctor.setCreatedDate(new Date());
         doctor.setAddress(doc.getAddress());
@@ -84,6 +98,7 @@ public class DoctorService {
         doctor.setTimeIn(doc.getTimeIn());
         doctor.setTimeOut(doc.getTimeOut());
         doctor.setQualification(doc.getQualification());
+        doctor.setShare(doc.getShare());
         directory.setName(doc.getFullName());
         directory.setAddress(doc.getAddress());
         directory.setStatus("Active");
@@ -91,6 +106,12 @@ public class DoctorService {
         directory.setNumber(doc.getMobile());
         doctorRepository.save(doctor);
         directoryRepository.save(directory);
+        //Creating new Doctor account
+        accountRestDTO.setId(doctor.getAccountNo());
+        accountRestDTO.setGender(doctor.getGender());
+        accountRestDTO.setName(doctor.getFullName());
+        accountRestDTO.setAccountType("Doctor Account");
+        RestTemplateResponseDTO result=restTemplate.postForObject(url,accountRestDTO,RestTemplateResponseDTO.class);
         return "{\"ADDED SUCCESFULLY\":1}";
 
     }
