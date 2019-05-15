@@ -31,6 +31,9 @@ public class OpdConsultancyService {
         request.setOperationType("CONSULTANCY");
         request.setTransactionType("DEBIT");
         request.setDescription(descriptionlist(patient.getName(), data.getDoctors()));
+        request.setShareDescription(shareDescription(patient.getName(), data.getDoctors()));
+        request.setSharePercent(data.getDoctors().getShare());
+        request.setShareAccountNo(data.getDoctors().getAccountNo());
         RestTemplateResponseDTO response = restTemplate.postForObject(url, request, RestTemplateResponseDTO.class);
         if (response.getCode().equalsIgnoreCase("200")) {
 
@@ -49,5 +52,9 @@ public class OpdConsultancyService {
         return des;
 
 
+    }
+    public String shareDescription(String patientName, Doctor doctors){
+        String des = "Dr. " + doctors.getFullName() + " shares via " + patientName;
+        return des;
     }
 }

@@ -24,7 +24,9 @@ public class DoctorDTO {
     String timeIn;
     String timeOut;
     Date createdDate;
-    public DoctorDTO(Long mrNo,Long fees, String fullName, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, Integer sallary, String dateOfbirth, String gender, String timeIn, String timeOut) {
+    private String accountNo;
+    private Integer share;
+    public DoctorDTO(Long mrNo,Long fees, String fullName, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, Integer sallary, String dateOfbirth, String gender, String timeIn, String timeOut, String accountNo, Integer share) {
         this.mrNo = mrNo;
         this.fullName = fullName;
         this.mobile = mobile;
@@ -45,7 +47,7 @@ public class DoctorDTO {
         this.gender = gender;
         this.timeIn = timeIn;
         this.timeOut = timeOut;
-
+        this.accountNo = accountNo;
     }
 
     public DoctorDTO() {
@@ -217,5 +219,21 @@ public class DoctorDTO {
 
     public void setTimeOut(String timeOut) {
         this.timeOut = timeOut;
+    }
+
+    public String getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
+    }
+
+    public Integer getShare() {
+        return share;
+    }
+
+    public void setShare(Integer share) {
+        this.share = share;
     }
 }

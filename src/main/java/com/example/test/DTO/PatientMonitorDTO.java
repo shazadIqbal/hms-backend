@@ -4,18 +4,22 @@ import java.util.Date;
 
 public class PatientMonitorDTO {
 
-    Long id;
-    String name;
-    String number;
-    Date date;
-    Long er;
-    Long opd;
-    Long total;
-    Long lab;
-    Long dues;
+    private Long id;
+    private String name;
+    private String number;
+    private Date date;
+    private Long er;
+    private Long opd;
+    private Long total;
+    private Long lab;
+    private Long dues;
+
+    private Boolean gynAndObsRegistration;
+    private String husbandOfAndFatherOf;
+    private Date registrationDate;
 
 
-    public PatientMonitorDTO(Long id, String name, String number, Date date, Long er, Long opd, Long total, Long lab, Long dues) {
+    public PatientMonitorDTO(Long id, String name, String number, Date date, Long er, Long opd, Long total, Long lab, Long dues, Boolean gynAndObsRegistration,String husbandOfAndFatherOf,Date registrationDate) {
         this.id = id;
         this.name = name;
         this.number = number;
@@ -25,6 +29,9 @@ public class PatientMonitorDTO {
         this.total = total;
         this.lab = lab;
         this.dues = dues;
+        this.gynAndObsRegistration=gynAndObsRegistration;
+        this.husbandOfAndFatherOf=husbandOfAndFatherOf;
+        this.registrationDate=registrationDate;
     }
 
     public PatientMonitorDTO() {
@@ -101,5 +108,29 @@ public class PatientMonitorDTO {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Boolean getGynAndObsRegistration() {
+        return gynAndObsRegistration;
+    }
+
+    public void setGynAndObsRegistration(Boolean gynAndObsRegistration) {
+        this.gynAndObsRegistration = gynAndObsRegistration;
+    }
+
+    public String getHusbandOfAndFatherOf() {
+        return husbandOfAndFatherOf;
+    }
+
+    public void setHusbandOfAndFatherOf(String husbandOfAndFatherOf) {
+        this.husbandOfAndFatherOf = husbandOfAndFatherOf;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }

@@ -31,11 +31,13 @@ public class Doctor {
     String timeIn;
     String timeOut;
     Date createdDate;
+    private String accountNo;
+    private Integer share;
 
     public Doctor() {
     }
 
-    public Doctor(String fullName,Long fees, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, int sallary, String dateOfbirth, String gender, String timeIn, String timeOut, Date createdDate) {
+    public Doctor(String fullName,Long fees, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, int sallary, String dateOfbirth, String gender, String timeIn, String timeOut, Date createdDate,String accountNo, Integer share) {
         this.fullName = fullName;
         this.mobile = mobile;
         this.emrNo = emrNo;
@@ -56,6 +58,7 @@ public class Doctor {
         this.timeIn = timeIn;
         this.timeOut = timeOut;
         this.createdDate = createdDate;
+        this.accountNo = accountNo;
     }
 
     public Long getMrno() {
@@ -224,6 +227,22 @@ public class Doctor {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public String getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
+    }
+
+    public Integer getShare() {
+        return share;
+    }
+
+    public void setShare(Integer share) {
+        this.share = share;
     }
 }
 

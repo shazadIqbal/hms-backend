@@ -1,5 +1,7 @@
 package com.example.test.DTO;
 
+import java.util.Date;
+
 public class PatientDTO {
     private Long id;
     private String name;
@@ -9,11 +11,14 @@ public class PatientDTO {
     private String gender;
     private String address;
     private String status;
+    private Boolean gynAndObsRegistration;
+    private String husbandOfAndFatherOf;
+    private Date registrationDate;
 
     public PatientDTO() {
     }
 
-    public PatientDTO(Long id, String name, String cnic, String phoneNo, Integer age, String gender, String address, String status) {
+    public PatientDTO(Long id, String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, Boolean gynAndObsRegistration,String HOFANDFO,Date registrationDate ) {
         this.id = id;
         this.name = name;
         this.cnic = cnic;
@@ -22,6 +27,9 @@ public class PatientDTO {
         this.gender = gender;
         this.address = address;
         this.status = status;
+        this.gynAndObsRegistration= gynAndObsRegistration;
+        this.husbandOfAndFatherOf=HOFANDFO;
+        this.registrationDate = registrationDate;
     }
 
     public Long getId() {
@@ -86,5 +94,29 @@ public class PatientDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Boolean getGynAndObsRegistration() {
+        return gynAndObsRegistration;
+    }
+
+    public void setGynAndObsRegistration(Boolean gynAndObsRegistration) {
+        this.gynAndObsRegistration = gynAndObsRegistration;
+    }
+
+    public String getHusbandOfAndFatherOf() {
+        return husbandOfAndFatherOf;
+    }
+
+    public void setHusbandOfAndFatherOf(String husbandOfAndFatherOf) {
+        this.husbandOfAndFatherOf = husbandOfAndFatherOf;
+    }
+
+    public Date getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(Date registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }
