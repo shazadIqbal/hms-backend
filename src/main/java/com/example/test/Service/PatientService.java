@@ -58,10 +58,15 @@ public List<Patient> getPatients(){
         patient.setAge(pat.getAge());
         patient.setGender(pat.getGender());
         patient.setAddress(pat.getAddress());
+        patient.setHusbandOfAndFatherOf(pat.getHusbandOfAndFatherOf());
+        patient.setRegistrationDate(pat.getRegistrationDate());
+        patient.setGynAndObsRegistration(pat.getGynAndObsRegistration());
         patient.setStatus("Active");
         patient.setAccountNo(corrId.toString());
        patient.setStatus("Active");
        patient.setDate(new Date());
+
+//       if patient is registered in gynyAndObs
 
         patientRepository.save(patient);
         //Creating new patient account
@@ -108,4 +113,27 @@ public List<Patient> activePatientsById(Long id){
     return this.getPatients();
 
 }
+
+public String updatePatientByID(Long id,PatientDTO pat){
+    Optional<Patient> patient = patientRepository.findById(id);
+
+        Patient updatedPatient = patient.get();
+        updatedPatient.setAddress(pat.getAddress());
+        updatedPatient.setAge(pat.getAge());
+        updatedPatient.setCnic(pat.getCnic());
+        updatedPatient.setPhoneNo(pat.getPhoneNo());
+        updatedPatient.setGender(pat.getGender());
+        updatedPatient.setName(pat.getName());
+        updatedPatient.setGynAndObsRegistration(pat.getGynAndObsRegistration() == null ? Boolean.FALSE : Boolean.TRUE);
+        updatedPatient.setRegistrationDate(pat.getRegistrationDate());
+        updatedPatient.setHusbandOfAndFatherOf(pat.getHusbandOfAndFatherOf());
+
+        patientRepository.save(updatedPatient);
+    return "{\" UPDATED SUCCESFULLY\":1}";
+}
+
+
+    public List<Patient> getAllGynePatient() {
+        return patientRepository.getAllGynyObsPatients();
+    }
 }

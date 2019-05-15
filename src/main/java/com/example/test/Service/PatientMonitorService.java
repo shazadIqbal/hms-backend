@@ -32,23 +32,23 @@ public class PatientMonitorService {
 
     public PatientMonitorDTO getPatientMonitor(Long id) {
         PatientMonitorDTO patientMonitorDTO = new PatientMonitorDTO();
-        Optional<Patient> response = patientRepository.findById(id);
+        Optional<Patient> patientModel = patientRepository.findById(id);
         RestTemplateResponseDTO restTemplateResponseDTO = new RestTemplateResponseDTO();
-        Patient patient = response.get();
+        Patient patient = patientModel.get();
 
-        if(response.isPresent()) {
+        if(patientModel.isPresent()) {
 
             String accountId = patient.getAccountNo();
 
 
 //        aa4f062d-a115-42aa-bdcd-78e324426137
 
-            RestTemplateResponseDTO abc = restTemplate.getForObject(url + accountId, RestTemplateResponseDTO.class);
+            RestTemplateResponseDTO restResponse = restTemplate.getForObject(url + accountId, RestTemplateResponseDTO.class);
 
 
             ObjectMapper mapper = new ObjectMapper();
             List<Transactions> transactions = mapper.convertValue(
-                    abc.getBodyList(),
+                    restResponse.getBodyList(),
                     new TypeReference<List<Transactions>>() {
                     }
             );
@@ -92,7 +92,9 @@ public class PatientMonitorService {
             patientMonitorDTO.setName(patient.getName());
             patientMonitorDTO.setNumber(patient.getPhoneNo());
             patientMonitorDTO.setDate(patient.getDate());
-
+            patientMonitorDTO.setRegistrationDate(patient.getRegistrationDate());
+            patientMonitorDTO.setGynAndObsRegistration(patient.getGynAndObsRegistration());
+            patientMonitorDTO.setHusbandOfAndFatherOf(patient.getHusbandOfAndFatherOf());
             patientMonitorDTO.setEr(erTotal);
             patientMonitorDTO.setLab(labTotal);
             patientMonitorDTO.setOpd(opdTotal);
