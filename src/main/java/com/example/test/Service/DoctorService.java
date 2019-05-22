@@ -141,6 +141,7 @@ public class DoctorService {
            updateDoc.get().setHoursday(doc.getHoursday());
            updateDoc.get().setPosition(doc.getPosition());
            updateDoc.get().setReligion(doc.getReligion());
+           updateDoc.get().setShare(doc.getShare());
            updateDoc.get().setTimeIn(doc.getTimeIn());
            updateDoc.get().setTimeOut(doc.getTimeOut());
             if (directory != null) {
