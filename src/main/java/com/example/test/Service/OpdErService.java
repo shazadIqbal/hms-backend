@@ -93,9 +93,8 @@ public class OpdErService {
 
         }
 
-        String des = patientName + "avail " + f;
+        String des = "Patient name "+patientName + " avails " + f + " by ER";
         return des;
-
 
     }
 
