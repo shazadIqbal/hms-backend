@@ -21,7 +21,7 @@ import java.util.*;
 
 @Service
 public class DoctorService {
-   // List listDoctor=new ArrayList<>();
+    // List listDoctor=new ArrayList<>();
 
     @Autowired
     DoctorRepository doctorRepository;
@@ -67,7 +67,7 @@ public class DoctorService {
             doctorDto.setShare(doctor.getShare());
             responseList.add(doctorDto);
         });
-       return  responseList;
+        return  responseList;
     }
 
     public String postDoctorFromService(DoctorDTO doc){
@@ -117,33 +117,32 @@ public class DoctorService {
     }
     public String updateDoctorFromService(Long mrNo,String mobile,DoctorDTO doc){
         Doctor doctor = new Doctor();
-       Optional<Doctor> updateDoc = doctorRepository.findById(mrNo);
-       Directory directory = directoryRepository.findByNumber(mobile);
+        Optional<Doctor> updateDoc = doctorRepository.findById(mrNo);
+        Directory directory = directoryRepository.findByNumber(mobile);
 
         if(updateDoc.isPresent()){
-           updateDoc.get();
+            updateDoc.get();
 //           Directory diretoryObj =new Directory();
-           updateDoc.get().setFullName(doc.getFullName());
-           updateDoc.get().setCreatedDate(new Date());
-           updateDoc.get().setAddress(doc.getAddress());
-           updateDoc.get().setCnic(doc.getCnic());
-           updateDoc.get().setFees(doc.getFees());
-           updateDoc.get().setGender(doc.getGender());
-           updateDoc.get().setSallary(doc.getSallary());
-           updateDoc.get().setEmrNo(doc.getEmrNo());
-           updateDoc.get().setEmail(doc.getEmail());
-           updateDoc.get().setDateOfbirth(doc.getDateOfbirth());
-           updateDoc.get().setDaysservice(doc.getDaysservice());
-           updateDoc.get().setQualification(doc.getQualification());
-           updateDoc.get().setNationality(doc.getNationality());
-           updateDoc.get().setMobile(doc.getMobile());
-           updateDoc.get().setSpeciality(doc.getSpeciality());
-           updateDoc.get().setHoursday(doc.getHoursday());
-           updateDoc.get().setPosition(doc.getPosition());
-           updateDoc.get().setReligion(doc.getReligion());
-           updateDoc.get().setShare(doc.getShare());
-           updateDoc.get().setTimeIn(doc.getTimeIn());
-           updateDoc.get().setTimeOut(doc.getTimeOut());
+            updateDoc.get().setFullName(doc.getFullName());
+            updateDoc.get().setCreatedDate(new Date());
+            updateDoc.get().setAddress(doc.getAddress());
+            updateDoc.get().setCnic(doc.getCnic());
+            updateDoc.get().setFees(doc.getFees());
+            updateDoc.get().setGender(doc.getGender());
+            updateDoc.get().setSallary(doc.getSallary());
+            updateDoc.get().setEmrNo(doc.getEmrNo());
+            updateDoc.get().setEmail(doc.getEmail());
+            updateDoc.get().setDateOfbirth(doc.getDateOfbirth());
+            updateDoc.get().setDaysservice(doc.getDaysservice());
+            updateDoc.get().setQualification(doc.getQualification());
+            updateDoc.get().setNationality(doc.getNationality());
+            updateDoc.get().setMobile(doc.getMobile());
+            updateDoc.get().setSpeciality(doc.getSpeciality());
+            updateDoc.get().setHoursday(doc.getHoursday());
+            updateDoc.get().setPosition(doc.getPosition());
+            updateDoc.get().setReligion(doc.getReligion());
+            updateDoc.get().setTimeIn(doc.getTimeIn());
+            updateDoc.get().setTimeOut(doc.getTimeOut());
             if (directory != null) {
                 directory.setName(doc.getFullName());
                 directory.setAddress(doc.getAddress());
@@ -152,16 +151,16 @@ public class DoctorService {
                 directory.setNumber(doc.getMobile());
             }
 
-           Doctor existingDoc = doctorRepository.save(updateDoc.get());
+            Doctor existingDoc = doctorRepository.save(updateDoc.get());
             if (existingDoc != null){
                 directoryRepository.save(directory);
             }
-           return "{\"UPDATED SUCCESFULLY\":1}";
-       }
-       else
-       {
-           return "{\"NoDoctorAvailablesWithThisID\":1}";
-       }
+            return "{\"UPDATED SUCCESFULLY\":1}";
+        }
+        else
+        {
+            return "{\"NoDoctorAvailablesWithThisID\":1}";
+        }
 
 
 
@@ -172,16 +171,16 @@ public class DoctorService {
         return "{\"DELETED SUCCESFULLY\":1}";
     }
 
-//    Get Doctor by id will get only that doctor whose id is passed
-  public Doctor getDocByID(Long mrNo){
-      Optional<Doctor> doc= doctorRepository.findById(mrNo);
-      if (doc.isPresent()) {
-          return doc.get();
-      }
-      else {
-          return  null;
-      }
+    //    Get Doctor by id will get only that doctor whose id is passed
+    public Doctor getDocByID(Long mrNo){
+        Optional<Doctor> doc= doctorRepository.findById(mrNo);
+        if (doc.isPresent()) {
+            return doc.get();
+        }
+        else {
+            return  null;
+        }
 
-  }
+    }
 
 }
