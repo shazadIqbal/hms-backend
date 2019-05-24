@@ -14,19 +14,29 @@ public class PatientPackage {
     Date pStartDate;
     Date pEndDate;
     String pSponsor;
+    Long pPrice;
     String status;
 
     public PatientPackage() {
 
     }
 
-    public PatientPackage(String pName, String pFacility, Date pStartDate, Date pEndDate, String pSponsor, String status) {
+    public PatientPackage(String pName, String pFacility, Date pStartDate, Date pEndDate, String pSponsor, String status, Long pPrice) {
         this.pName = pName;
         this.pFacility = pFacility;
         this.pStartDate = pStartDate;
         this.pEndDate = pEndDate;
         this.pSponsor = pSponsor;
         this.status = status;
+        this.pPrice = pPrice;
+    }
+
+    public Long getpPrice() {
+        return pPrice;
+    }
+
+    public void setpPrice(Long pPrice) {
+        this.pPrice = pPrice;
     }
 
     public Long getId() {
