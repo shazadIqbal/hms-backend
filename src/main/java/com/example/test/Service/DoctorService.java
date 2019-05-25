@@ -35,13 +35,14 @@ public class DoctorService {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    public List<DoctorDTO> getDoctors(){
+    public List<DoctorDTO> getDoctors() {
         List<Doctor> list = doctorRepository.findAll();
         List<DoctorDTO> responseList = new ArrayList<>();
-        list.forEach(doctor ->{
+        list.forEach(doctor -> {
             DoctorDTO doctorDto = new DoctorDTO();
             doctorDto.setMrNo(doctor.getMrno());
             doctorDto.setFullName(doctor.getFullName());
+            doctorDto.setEmail(doctor.getEmail());
             doctorDto.setAddress(doctor.getAddress());
             doctorDto.setCreatedDate(doctor.getCreatedDate());
             doctorDto.setCnic(doctor.getCnic());
@@ -67,58 +68,73 @@ public class DoctorService {
             doctorDto.setShare(doctor.getShare());
             responseList.add(doctorDto);
         });
-        return  responseList;
+        return responseList;
     }
 
-    public String postDoctorFromService(DoctorDTO doc){
+    public String postDoctorFromService(DoctorDTO doc) {
         Doctor doctor = new Doctor();
-        Directory directory=new Directory();
-        AccountRestDTO accountRestDTO=new AccountRestDTO();
-        corrId = UUID.randomUUID();
-        doctor.setAccountNo(corrId.toString());
-        doctor.setFullName(doc.getFullName());
-        doctor.setCreatedDate(new Date());
-        doctor.setAddress(doc.getAddress());
-        doctor.setCnic(doc.getCnic());
-        doctor.setFees(doc.getFees());
-        doctor.setGender(doc.getGender());
-        doctor.setSallary(doc.getSallary());
-        doctor.setMobile(doc.getMobile());
-        doctor.setEmail(doc.getEmail());
-        doctor.setDateOfbirth(doc.getDateOfbirth());
-        doctor.setSpeciality(doc.getSpeciality());
-        doctor.setReligion(doc.getReligion());
-        doctor.setPosition(doc.getPosition());
-        doctor.setEmrNo(doc.getEmrNo());
-        doctor.setDaysservice((doc.getDaysservice()));
-        doctor.setNationality((doc.getNationality()));
-        doctor.setEmrNo(doc.getEmrNo());
-        doctor.setSpeciality(doc.getSpeciality());
-        doctor.setHoursday(doc.getHoursday());
-        doctor.setTimeIn(doc.getTimeIn());
-        doctor.setTimeOut(doc.getTimeOut());
-        doctor.setQualification(doc.getQualification());
-        doctor.setShare(doc.getShare());
-        directory.setName(doc.getFullName());
-        directory.setAddress(doc.getAddress());
-        directory.setStatus("Active");
-        directory.setErNo(doc.getEmrNo());
-        directory.setNumber(doc.getMobile());
-        doctorRepository.save(doctor);
-        directoryRepository.save(directory);
-        //Creating new Doctor account
-        accountRestDTO.setId(doctor.getAccountNo());
-        accountRestDTO.setGender(doctor.getGender());
-        accountRestDTO.setName(doctor.getFullName());
-        accountRestDTO.setAccountType("Doctor Account");
-        RestTemplateResponseDTO result=restTemplate.postForObject(url,accountRestDTO,RestTemplateResponseDTO.class);
-        return "{\"ADDED SUCCESFULLY\":1}";
+        Directory directory = new Directory();
+        AccountRestDTO accountRestDTO = new AccountRestDTO();
 
+//        Prevent Same Records
+        Doctor findDoctorByMobileNo = doctorRepository.findByMobile(doc.getMobile());
+//        when saving a doctor no two doctors can have the same mobile no so when saving
+//        you must check whether the mobile number is already present or not
+//        if already present than doctorCanNotAdd else Add this new doctor
+        try {
+            if (findDoctorByMobileNo.getMobile()==null) {
+                corrId = UUID.randomUUID();
+                doctor.setAccountNo(corrId.toString());
+                doctor.setFullName(doc.getFullName());
+                doctor.setCreatedDate(new Date());
+                doctor.setAddress(doc.getAddress());
+                doctor.setCnic(doc.getCnic());
+                doctor.setFees(doc.getFees());
+                doctor.setGender(doc.getGender());
+                doctor.setSallary(doc.getSallary());
+                doctor.setMobile(doc.getMobile());
+                doctor.setEmail(doc.getEmail());
+                doctor.setDateOfbirth(doc.getDateOfbirth());
+                doctor.setSpeciality(doc.getSpeciality());
+                doctor.setReligion(doc.getReligion());
+                doctor.setPosition(doc.getPosition());
+                doctor.setEmrNo(doc.getEmrNo());
+                doctor.setDaysservice((doc.getDaysservice()));
+                doctor.setNationality((doc.getNationality()));
+                doctor.setEmrNo(doc.getEmrNo());
+                doctor.setSpeciality(doc.getSpeciality());
+                doctor.setHoursday(doc.getHoursday());
+                doctor.setTimeIn(doc.getTimeIn());
+                doctor.setTimeOut(doc.getTimeOut());
+                doctor.setQualification(doc.getQualification());
+                doctor.setShare(doc.getShare());
+                directory.setName(doc.getFullName());
+                directory.setAddress(doc.getAddress());
+                directory.setStatus("Active");
+                directory.setErNo(doc.getEmrNo());
+                directory.setNumber(doc.getMobile());
+                doctorRepository.save(doctor);
+                directoryRepository.save(directory);
+                //Creating new Doctor account
+                accountRestDTO.setId(doctor.getAccountNo());
+                accountRestDTO.setGender(doctor.getGender());
+                accountRestDTO.setName(doctor.getFullName());
+                accountRestDTO.setAccountType("Doctor Account");
+                RestTemplateResponseDTO result = restTemplate.postForObject(url, accountRestDTO, RestTemplateResponseDTO.class);
+
+            }
+        }catch (Exception e){
+            System.out.println(e);
+            return "{\"CAN NOT ADD DUPLICATE RECORD\"Warn\":1}";
+        }
+        return "{\"ADDED SUCCESFULLY\":1}";
     }
+
     public String updateDoctorFromService(Long mrNo,String mobile,DoctorDTO doc){
         Doctor doctor = new Doctor();
         Optional<Doctor> updateDoc = doctorRepository.findById(mrNo);
         Directory directory = directoryRepository.findByNumber(mobile);
+//
 
         if(updateDoc.isPresent()){
             updateDoc.get();
@@ -143,6 +159,7 @@ public class DoctorService {
             updateDoc.get().setReligion(doc.getReligion());
             updateDoc.get().setTimeIn(doc.getTimeIn());
             updateDoc.get().setTimeOut(doc.getTimeOut());
+            updateDoc.get().setShare(doc.getShare());
             if (directory != null) {
                 directory.setName(doc.getFullName());
                 directory.setAddress(doc.getAddress());

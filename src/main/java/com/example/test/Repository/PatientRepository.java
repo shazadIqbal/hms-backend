@@ -17,4 +17,6 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
             nativeQuery = true)
     public List<Patient> getAllGynyObsPatients();
 
+    public Patient findByPhoneNo(String phoneNo);
+
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Transient;
+import javax.sql.rowset.spi.SyncResolver;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -51,32 +52,39 @@ public List<Patient> getPatients(){
     public String postPatient(PatientDTO pat){
     Patient patient = new Patient();
         AccountRestDTO accountRestDTO=new AccountRestDTO();
-        corrId = UUID.randomUUID();
-        patient.setName(pat.getName());
-        patient.setCnic(pat.getCnic());
-        patient.setPhoneNo(pat.getPhoneNo());
-        patient.setAge(pat.getAge());
-        patient.setGender(pat.getGender());
-        patient.setAddress(pat.getAddress());
-        patient.setHusbandOfAndFatherOf(pat.getHusbandOfAndFatherOf());
-        patient.setRegistrationDate(pat.getRegistrationDate());
-        patient.setGynAndObsRegistration(pat.getGynAndObsRegistration());
-        patient.setStatus("Active");
-        patient.setAccountNo(corrId.toString());
-       patient.setStatus("Active");
-       patient.setDate(new Date());
+        Patient findPatientByMobile = patientRepository.findByPhoneNo(pat.getPhoneNo());
+        if(findPatientByMobile.getPhoneNo()==null) {
+            corrId = UUID.randomUUID();
+            patient.setName(pat.getName());
+            patient.setCnic(pat.getCnic());
+            patient.setPhoneNo(pat.getPhoneNo());
+            patient.setAge(pat.getAge());
+            patient.setGender(pat.getGender());
+            patient.setAddress(pat.getAddress());
+            patient.setHusbandOfAndFatherOf(pat.getHusbandOfAndFatherOf());
+            patient.setRegistrationDate(pat.getRegistrationDate());
+            patient.setGynAndObsRegistration(pat.getGynAndObsRegistration());
+            patient.setStatus("Active");
+            patient.setAccountNo(corrId.toString());
+            patient.setStatus("Active");
+            patient.setDate(new Date());
 
 //       if patient is registered in gynyAndObs
 
-        patientRepository.save(patient);
-        //Creating new patient account
-        accountRestDTO.setId(patient.getAccountNo());
-        accountRestDTO.setGender(pat.getGender());
-        accountRestDTO.setName(pat.getName());
-        accountRestDTO.setAccountType("Patient Account");
-        RestTemplateResponseDTO result=restTemplate.postForObject(url,accountRestDTO,RestTemplateResponseDTO.class);
+            patientRepository.save(patient);
+            //Creating new patient account
+            accountRestDTO.setId(patient.getAccountNo());
+            accountRestDTO.setGender(pat.getGender());
+            accountRestDTO.setName(pat.getName());
+            accountRestDTO.setAccountType("Patient Account");
+            RestTemplateResponseDTO result = restTemplate.postForObject(url, accountRestDTO, RestTemplateResponseDTO.class);
+//00 Means posted successfully 01 means duplicate
 
-        return "{\" ADDED SUCCESFULLY\":1}";
+            return "00";
+        }
+        else{
+            return "01";
+        }
     }
 
     public String delPatient(){
