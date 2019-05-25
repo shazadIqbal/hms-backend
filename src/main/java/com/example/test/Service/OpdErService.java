@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.persistence.Transient;
 import java.util.UUID;
 
+
 @Service
 public class OpdErService {
     @Autowired
@@ -21,7 +22,7 @@ public class OpdErService {
    public OpdErDTO erDTO=new OpdErDTO();
 
     @Transient
-    private UUID corrId = UUID.randomUUID();
+    private UUID ref;
     RestTemplate restTemplate = new RestTemplate();
 
     @Value("${transaction.url}")
@@ -50,6 +51,11 @@ public class OpdErService {
         responce.setOperationType("Er");
         responce.setDescription(descriptionlist(patient.getName(),accountData.getFacilities()));
         responce.setTransactionType("DEBIT");
+
+        //refid
+
+        responce.setTransactionRefId(ref.randomUUID().toString());
+
         RestTemplateResponseDTO result=restTemplate.postForObject(url,responce,RestTemplateResponseDTO.class);
        if(result.getCode().equalsIgnoreCase("200")) {
 
@@ -93,9 +99,8 @@ public class OpdErService {
 
         }
 
-        String des = patientName + "avail " + f;
+        String des = "Patient name "+patientName + " avails " + f + " by ER";
         return des;
-
 
     }
 

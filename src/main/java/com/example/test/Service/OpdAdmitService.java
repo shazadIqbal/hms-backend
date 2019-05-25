@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.persistence.Transient;
 import javax.validation.constraints.Null;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class OpdAdmitService {
@@ -24,15 +26,19 @@ public class OpdAdmitService {
     @Value("${transaction.url}")
     public String url;
 
+    @Transient
+    private UUID ref;
+
     RestTemplate restTemplate = new RestTemplate();
 
     public String saveOpdAdmit(OpdAdmitDTO opdAdmitDTO) {
         Patient patient = patientRepository.findById(opdAdmitDTO.getPatientID()).get(); //it will get patient id
-        Optional<Bed> bed = bedRepository.findById(opdAdmitDTO.getBedID());
+       Optional<Bed> bed = bedRepository.findById(opdAdmitDTO.getBedID());
         if (bed.isPresent()) {
             Bed bednew = bed.get();
             bednew.setOccupied(true);
-            //bedRepository.save(bednew);
+            bednew.setBedType(opdAdmitDTO.getBedType());
+            bedRepository.save(bednew);
             TransactionRestDTO request = new TransactionRestDTO();
             request.setAccountNoUUID(patient.getAccountNo());
             request.setReceivedAmount(opdAdmitDTO.getCashRecieved());
@@ -40,6 +46,12 @@ public class OpdAdmitService {
             request.setOperationType("ADMIT");
             request.setTransactionType("DEBIT");
             request.setDescription(opdAdmitdescriptionlist(patient.getName(), opdAdmitDTO.getBedID()));
+
+            //refid
+
+            request.setTransactionRefId(ref.randomUUID().toString());
+
+
             RestTemplateResponseDTO result = restTemplate.postForObject(url, request, RestTemplateResponseDTO.class);
             if (result.getCode().equalsIgnoreCase("200")) {
 
@@ -56,8 +68,16 @@ public class OpdAdmitService {
     }
 
     public String opdAdmitdescriptionlist(String patientName, long bedID){
-        String des = "  This  "+patientName + " avails " + " this "+ bedID;
-        return des;
+//        OpdAdmitDTO opdAdmitDTO = new OpdAdmitDTO();
+        Optional<Bed> bed = bedRepository.findById(bedID);
+        String des;
+        if (bed.isPresent()) {
+
+            des = patientName + " avails " + " the bed number  " + bedID + " of bedtype " + bed.get().getBedType();
+            return des;
+        }
+        return  "NO DESCRIPTION AVAILAIBLE";
+
     }
 
     }

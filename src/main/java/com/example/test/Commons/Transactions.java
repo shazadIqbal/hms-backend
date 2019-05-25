@@ -14,8 +14,9 @@ public class Transactions {
     private String currency;
     private String operationType;
     private Double dues;
+    private String transactionRefId;
 
-    public Transactions(Long id, Date transactionDate, Long receivedAmount, Double totalAmount, String transactionType, String description, String currency, String operationType, Double dues) {
+    public Transactions(String transactionRefId,Long id, Date transactionDate, Long receivedAmount, Double totalAmount, String transactionType, String description, String currency, String operationType, Double dues) {
         this.id = id;
         this.transactionDate = transactionDate;
         this.receivedAmount = receivedAmount;
@@ -25,9 +26,18 @@ public class Transactions {
         this.currency = currency;
         this.operationType = operationType;
         this.dues = dues;
+        this.transactionRefId=transactionRefId;
     }
 
     public Transactions() {
+    }
+
+    public String getTransactionRefId() {
+        return transactionRefId;
+    }
+
+    public void setTransactionRefId(String transactionRefId) {
+        this.transactionRefId = transactionRefId;
     }
 
     public Long getId() {

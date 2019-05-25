@@ -34,6 +34,7 @@ public class PatientPackageService {
         patientPackage.setpStartDate(pack.getpStartDate());
         patientPackage.setpEndDate(pack.getpEndDate());
         patientPackage.setpSponsor(pack.getpSponsor());
+        patientPackage.setpPrice(pack.getpPrice());
         patientPackage.setStatus("Active");
         patientPackageRepository.save(patientPackage);
         return "{\"ADDED SUCCESFULLY\":1}";

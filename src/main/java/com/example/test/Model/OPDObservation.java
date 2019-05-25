@@ -3,15 +3,15 @@ package com.example.test.Model;
 public class OPDObservation {
     String [] doctors;
     Long discount;
-    Long sallary;
+    Long fees;
 
     public OPDObservation() {
     }
 
-    public OPDObservation(String[] doctors, Long discount, Long sallary) {
+    public OPDObservation(String[] doctors, Long discount, Long fees) {
         this.doctors = doctors;
         this.discount = discount;
-        this.sallary = sallary;
+        this.fees = fees;
     }
 
     public String[] getDoctors() {
@@ -30,12 +30,12 @@ public class OPDObservation {
         this.discount = discount;
     }
 
-    public Long getSallary() {
-        return sallary;
+    public Long getFees() {
+        return fees;
     }
 
-    public void setSallary(Long sallary) {
-        this.sallary = sallary;
+    public void setFees(Long fees) {
+        this.fees = fees;
     }
 }
 

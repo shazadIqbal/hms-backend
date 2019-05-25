@@ -8,18 +8,18 @@ public class OPDObservationDTO {
     Long discount;
     Double total;
     Long id;
-    Long sallary;
+    Long fees;
 
     public OPDObservationDTO() {
     }
 
-    public OPDObservationDTO(Doctor doctors, Double cashRecieved, Long discount, Double total, Long id, Long sallary) {
+    public OPDObservationDTO(Doctor doctors, Double cashRecieved, Long discount, Double total, Long id, Long fees) {
         this.doctors = doctors;
         this.cashRecieved = cashRecieved;
         this.discount = discount;
         this.total = total;
         this.id = id;
-        this.sallary = sallary;
+        this.fees = fees;
     }
 
     public Doctor getDoctors() {
@@ -62,11 +62,11 @@ public class OPDObservationDTO {
         this.id = id;
     }
 
-    public Long getSallary() {
-        return sallary;
+    public Long getFees() {
+        return fees;
     }
 
-    public void setSallary(Long sallary) {
-        this.sallary = sallary;
+    public void setFees(Long fees) {
+        this.fees = fees;
     }
 }
