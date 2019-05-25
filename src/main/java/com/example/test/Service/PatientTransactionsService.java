@@ -37,4 +37,21 @@ public class PatientTransactionsService {
         return  new ArrayList<>();
     }
 
+    public RestTemplateResponseDTO  deletePatientTransaction(String refId) {
+
+
+        RestTemplateResponseDTO restTemplateResponseDTO=restTemplate.getForObject(url+"delete/"+refId,RestTemplateResponseDTO.class);
+
+
+
+        return restTemplateResponseDTO;
+    }
+
+    public RestTemplateResponseDTO updatePatientTransactionById(Long id,Transactions transactions)
+    {
+        RestTemplateResponseDTO restTemplateResponseDTO=restTemplate.postForObject(url+"update/"+id,transactions,RestTemplateResponseDTO.class);
+
+        return restTemplateResponseDTO;
+
+    }
 }

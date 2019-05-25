@@ -11,10 +11,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.persistence.Transient;
+import java.util.UUID;
+
 @Service
 public class OpdConsultancyService {
     @Autowired
     PatientRepository patientRepository;
+
+    @Transient
+    private UUID ref;
 
     @Value("${transaction.url}")
     public String url;
@@ -29,6 +35,9 @@ public class OpdConsultancyService {
         request.setReceivedAmount(data.getCashRecieved());
         request.setTotalAmount(data.getTotal());
         request.setOperationType("CONSULTANCY");
+        // SSET TRAnsaction reff id
+        request.setTransactionRefId(ref.randomUUID().toString());
+
         request.setTransactionType("DEBIT");
         request.setDescription(descriptionlist(patient.getName(), data.getDoctors()));
         request.setShareDescription(shareDescription(patient.getName(), data.getDoctors()));

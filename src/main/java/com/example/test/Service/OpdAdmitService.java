@@ -12,8 +12,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.persistence.Transient;
 import javax.validation.constraints.Null;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class OpdAdmitService {
@@ -23,6 +25,9 @@ public class OpdAdmitService {
     BedRepository bedRepository;
     @Value("${transaction.url}")
     public String url;
+
+    @Transient
+    private UUID ref;
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -40,6 +45,12 @@ public class OpdAdmitService {
             request.setOperationType("ADMIT");
             request.setTransactionType("DEBIT");
             request.setDescription(opdAdmitdescriptionlist(patient.getName(), opdAdmitDTO.getBedID()));
+
+            //refid
+
+            request.setTransactionRefId(ref.randomUUID().toString());
+
+
             RestTemplateResponseDTO result = restTemplate.postForObject(url, request, RestTemplateResponseDTO.class);
             if (result.getCode().equalsIgnoreCase("200")) {
 

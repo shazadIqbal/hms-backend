@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.persistence.Transient;
+import java.util.UUID;
+
 @Service
 public class OpdGynyService {
     @Autowired
@@ -19,6 +22,9 @@ public class OpdGynyService {
     @Value("${transaction.url}")
     public String url;
 
+
+    @Transient
+    private UUID ref;
     RestTemplate restTemplate = new RestTemplate();
 
 
@@ -29,7 +35,7 @@ public class OpdGynyService {
         request.setAccountNoUUID(patient.getAccountNo());
         request.setReceivedAmount(data.getCashRecieved());
         request.setTotalAmount(data.getTotal());
-
+        request.setTransactionRefId(ref.randomUUID().toString());
         request.setOperationType("GYNY");
         request.setTransactionType("DEBIT");
         request.setDescription(descriptionList(patient.getName(), data.getDoctors()));

@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.persistence.Transient;
+import java.util.UUID;
+
 @Service
 public class OPDObservationService {
 
@@ -18,6 +21,10 @@ public class OPDObservationService {
     PatientRepository patientRepository;
     @Value("${transaction.url}")
     public String url;
+
+
+    @Transient
+    private UUID ref ;
 
     RestTemplate restTemplate = new RestTemplate();
 
@@ -30,7 +37,13 @@ public class OPDObservationService {
         request.setTotalAmount(data.getTotal());
         request.setOperationType("OBSERVATION");
         request.setTransactionType("DEBIT");
+
         request.setDescription(descriptionlist(patient.getName(), data.getDoctors()));
+
+        //refid
+
+        request.setTransactionRefId(ref.randomUUID().toString());
+
         RestTemplateResponseDTO result = restTemplate.postForObject(url, request, RestTemplateResponseDTO.class);
         if (result.getCode().equalsIgnoreCase("200")){
             return "{\"ADDED SUCCESFULLY\":1}";
