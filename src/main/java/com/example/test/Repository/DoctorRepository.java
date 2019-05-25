@@ -11,5 +11,6 @@ import org.springframework.stereotype.Repository;
 @Qualifier("doctorRepository")
 public interface DoctorRepository extends JpaRepository<Doctor,Long> {
 
+    public Doctor findByMobile(String mobile);
 
 }

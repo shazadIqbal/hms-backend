@@ -53,7 +53,7 @@ public class OPDObservationService {
     }
 
     public String descriptionlist(String patientName, Doctor doctors) {
-        String des = "This" + patientName + " avails " + " this "+ doctors.getFullName();
+        String des = "The" + patientName + " avails " + " this "+ doctors.getFullName();
         return des;
     }
 }
