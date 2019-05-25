@@ -9,18 +9,28 @@ public class PatientPackageDTO {
     Date pEndDate;
     String pSponsor;
     String status;
+    Long pPrice;
 
     public PatientPackageDTO() {
 
     }
 
-    public PatientPackageDTO(String pName, String pFacility, Date pStartDate, Date pEndDate, String pSponsor, String status) {
+    public PatientPackageDTO(String pName, String pFacility, Date pStartDate, Date pEndDate, String pSponsor, String status, Long pPrice) {
         this.pName = pName;
         this.pFacility = pFacility;
         this.pStartDate = pStartDate;
         this.pEndDate = pEndDate;
         this.pSponsor = pSponsor;
         this.status = status;
+        this.pPrice = pPrice;
+    }
+
+    public Long getpPrice() {
+        return pPrice;
+    }
+
+    public void setpPrice(Long pPrice) {
+        this.pPrice = pPrice;
     }
 
     public String getpName() {
