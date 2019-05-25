@@ -24,7 +24,7 @@ public class OPDObservationService {
 
 
     @Transient
-    private UUID ref ;
+    private UUID ref;
 
     RestTemplate restTemplate = new RestTemplate();
 
