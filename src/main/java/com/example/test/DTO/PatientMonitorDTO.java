@@ -18,8 +18,12 @@ public class PatientMonitorDTO {
     private String husbandOfAndFatherOf;
     private Date registrationDate;
 
+    Long admit;
+    String admitLabel;
+    Long gyne;
+    Long obs;
 
-    public PatientMonitorDTO(Long id, String name, String number, Date date, Long er, Long opd, Long total, Long lab, Long dues, Boolean gynAndObsRegistration,String husbandOfAndFatherOf,Date registrationDate) {
+    public PatientMonitorDTO(Long id, String name, String number, Date date, Long er, Long opd, Long total, Long lab, Long dues, Boolean gynAndObsRegistration,String husbandOfAndFatherOf,Date registrationDate, Long admit, String admitLabel, Long gyne, Long obs) {
         this.id = id;
         this.name = name;
         this.number = number;
@@ -32,6 +36,10 @@ public class PatientMonitorDTO {
         this.gynAndObsRegistration=gynAndObsRegistration;
         this.husbandOfAndFatherOf=husbandOfAndFatherOf;
         this.registrationDate=registrationDate;
+        this.admit = admit;
+        this.admitLabel = admitLabel;
+        this.gyne = gyne;
+        this.obs = obs;
     }
 
     public PatientMonitorDTO() {
@@ -132,5 +140,37 @@ public class PatientMonitorDTO {
 
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public Long getAdmit() {
+        return admit;
+    }
+
+    public void setAdmit(Long admit) {
+        this.admit = admit;
+    }
+
+    public String getAdmitLabel() {
+        return admitLabel;
+    }
+
+    public void setAdmitLabel(String admitLabel) {
+        this.admitLabel = admitLabel;
+    }
+
+    public Long getGyne() {
+        return gyne;
+    }
+
+    public void setGyne(Long gyne) {
+        this.gyne = gyne;
+    }
+
+    public Long getObs() {
+        return obs;
+    }
+
+    public void setObs(Long obs) {
+        this.obs = obs;
     }
 }
