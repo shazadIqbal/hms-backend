@@ -29,6 +29,7 @@ public class OpdAdmitService {
     public String saveOpdAdmit(OpdAdmitDTO opdAdmitDTO) {
         Patient patient = patientRepository.findById(opdAdmitDTO.getPatientID()).get(); //it will get patient id
        Optional<Bed> bed = bedRepository.findById(opdAdmitDTO.getBedID());
+
         if (bed.isPresent()) {
             Bed bednew = bed.get();
             bednew.setOccupied(true);
@@ -62,7 +63,7 @@ public class OpdAdmitService {
         String des;
         if (bed.isPresent()) {
 
-            des = patientName + " avails " + " the bed number  " + bedID + " of bedtype " + bed.get().getBedType();
+            des = patientName + " avails " + " the bed   number  " + bedID + " of bedtype " + bed.get().getBedType();
             return des;
         }
         return  "NO DESCRIPTION AVAILAIBLE";
