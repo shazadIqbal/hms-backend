@@ -82,7 +82,7 @@ public class DoctorService {
 //        you must check whether the mobile number is already present or not
 //        if already present than doctorCanNotAdd else Add this new doctor
         try {
-            if (findDoctorByMobileNo.getMobile()==null) {
+            if (findDoctorByMobileNo == null) {
                 corrId = UUID.randomUUID();
                 doctor.setAccountNo(corrId.toString());
                 doctor.setFullName(doc.getFullName());

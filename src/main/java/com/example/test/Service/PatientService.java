@@ -53,7 +53,7 @@ public List<Patient> getPatients(){
     Patient patient = new Patient();
         AccountRestDTO accountRestDTO=new AccountRestDTO();
         Patient findPatientByMobile = patientRepository.findByPhoneNo(pat.getPhoneNo());
-        if(findPatientByMobile.getPhoneNo()==null) {
+        if(findPatientByMobile == null) {
             corrId = UUID.randomUUID();
             patient.setName(pat.getName());
             patient.setCnic(pat.getCnic());
@@ -132,7 +132,7 @@ public String updatePatientByID(Long id,PatientDTO pat){
         updatedPatient.setPhoneNo(pat.getPhoneNo());
         updatedPatient.setGender(pat.getGender());
         updatedPatient.setName(pat.getName());
-        updatedPatient.setGynAndObsRegistration(pat.getGynAndObsRegistration() == null ? Boolean.FALSE : Boolean.TRUE);
+        updatedPatient.setGynAndObsRegistration(pat.getGynAndObsRegistration() == null || !pat.getGynAndObsRegistration()  ? Boolean.FALSE : Boolean.TRUE);
         updatedPatient.setRegistrationDate(pat.getRegistrationDate());
         updatedPatient.setHusbandOfAndFatherOf(pat.getHusbandOfAndFatherOf());
 
