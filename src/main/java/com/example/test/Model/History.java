@@ -21,6 +21,10 @@ public class History {
     private String currency;
     private String operationType;
     private Double dues;
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
 
     //    @ManyToMany(mappedBy = "transactions")
     @ManyToOne
@@ -29,21 +33,22 @@ public class History {
     private Patient patient;
 
     public History() {
+
     }
 
-    public String getOperationType() {
-        return operationType;
-    }
-
-    public void setOperationType(String operationType) {
+    public History(Date transactionDate, Long receivedAmount, Double totalAmount, String transactionType, String description, String currency, String operationType, Double dues, String createdBy, String updatedBy, Date createdAt, Date updateAt, Patient patient) {
+        this.transactionDate = transactionDate;
+        this.receivedAmount = receivedAmount;
+        this.totalAmount = totalAmount;
+        this.transactionType = transactionType;
+        this.description = description;
+        this.currency = currency;
         this.operationType = operationType;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
+        this.dues = dues;
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
         this.patient = patient;
     }
 
@@ -79,14 +84,6 @@ public class History {
         this.totalAmount = totalAmount;
     }
 
-    public Double getDues() {
-        return dues;
-    }
-
-    public void setDues(Double dues) {
-        this.dues = dues;
-    }
-
     public String getTransactionType() {
         return transactionType;
     }
@@ -111,5 +108,59 @@ public class History {
         this.currency = currency;
     }
 
+    public String getOperationType() {
+        return operationType;
+    }
 
+    public void setOperationType(String operationType) {
+        this.operationType = operationType;
+    }
+
+    public Double getDues() {
+        return dues;
+    }
+
+    public void setDues(Double dues) {
+        this.dues = dues;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
 }

@@ -20,7 +20,7 @@ public class BedService {
          //LOOP for creating multiple objects of the beds of same type with dif id
         for(int i = 0; i < bedDto.getBedsQuantity(); i++){
             try{
-                bedRepository.save(new Bed(bedDto.getBedType(), Boolean.FALSE   , bedDto.getPrice()));
+                bedRepository.save(new Bed(bedDto.getBedType(), Boolean.FALSE , bedDto.getPrice(),bedDto.getCreatedBy(),bedDto.getUpdatedBy(),bedDto.getUpdateAt(),bedDto.getCreatedAt()));
             }catch(Exception e){
                 System.out.println(e);
                 return "{\"bed failed to create\":1}";

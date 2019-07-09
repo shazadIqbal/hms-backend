@@ -6,6 +6,7 @@ public class OpdGyny {
     Long sallary;
 
     public OpdGyny() {
+
     }
 
     public OpdGyny(String[] doctors, Long discount, Long sallary) {

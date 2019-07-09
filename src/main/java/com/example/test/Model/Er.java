@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 
 import javax.persistence.*;
 import javax.swing.text.View;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -21,6 +22,10 @@ public class Er {
     private Integer extraCharges;
     private Integer total;
     private String status;
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
 
 
 
@@ -35,20 +40,17 @@ public class Er {
     public Er() {
     }
 
-    public Er(String name, String resources, Integer price, Integer extraCharges, Integer total, String status) {
+    public Er(String name, String resources, Integer price, Integer extraCharges, Integer total, String status, String createdBy, String updatedBy, Date createdAt, Date updateAt, List<Facility> facilities) {
         this.name = name;
         this.resources = resources;
         this.price = price;
         this.extraCharges = extraCharges;
         this.total = total;
-    }
-
-    public Er(String name, String resources, Integer price, Integer extraCharges, Integer total,String status, List<Facility> facilities) {
-        this.name = name;
-        this.resources = resources;
-        this.price = price;
-        this.extraCharges = extraCharges;
-        this.total = total;
+        this.status = status;
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
         this.facilities = facilities;
     }
 
@@ -99,15 +101,6 @@ public class Er {
     public void setTotal(Integer total) {
         this.total = total;
     }
-  //  @JsonManagedReference
-
-    public List<Facility> getFacilities() {
-        return facilities;
-    }
-
-    public void setFacilities(List<Facility> facilities) {
-        this.facilities = facilities;
-    }
 
     public String getStatus() {
         return status;
@@ -117,7 +110,46 @@ public class Er {
         this.status = status;
     }
 
-//    @Override
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
+    }
+
+    public List<Facility> getFacilities() {
+        return facilities;
+    }
+
+    public void setFacilities(List<Facility> facilities) {
+        this.facilities = facilities;
+    }
+    //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;
 //        if (o == null || getClass() != o.getClass()) return false;

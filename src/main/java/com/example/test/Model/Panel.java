@@ -16,19 +16,26 @@ public class Panel {
     String  panelStartDate;
     String panelEndDate;
     String[] panelFacility;
-
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
     String status;
     Date date;
 
     public Panel() {
     }
 
-    public Panel(String panelName, String panelType, String panelStartDate, String panelEndDate, String[] panelFacility, String status, Date date) {
+    public Panel(String panelName, String panelType, String panelStartDate, String panelEndDate, String[] panelFacility, String createdBy, String updatedBy, Date createdAt, Date updateAt, String status, Date date) {
         this.panelName = panelName;
         this.panelType = panelType;
         this.panelStartDate = panelStartDate;
         this.panelEndDate = panelEndDate;
         this.panelFacility = panelFacility;
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
         this.status = status;
         this.date = date;
     }
@@ -79,6 +86,38 @@ public class Panel {
 
     public void setPanelFacility(String[] panelFacility) {
         this.panelFacility = panelFacility;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
     }
 
     public String getStatus() {

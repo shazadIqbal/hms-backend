@@ -33,15 +33,18 @@ public class Doctor {
     Date createdDate;
     private String accountNo;
     private Integer share;
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
 
     public Doctor() {
     }
 
-    public Doctor(String fullName,Long fees, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, int sallary, String dateOfbirth, String gender, String timeIn, String timeOut, Date createdDate,String accountNo, Integer share) {
+    public Doctor(String fullName, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, Integer sallary, String dateOfbirth, Long fees, String gender, String timeIn, String timeOut, Date createdDate, String accountNo, Integer share, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.fullName = fullName;
         this.mobile = mobile;
         this.emrNo = emrNo;
-        this.fees=fees;
         this.nationality = nationality;
         this.address = address;
         this.daysservice = daysservice;
@@ -54,11 +57,17 @@ public class Doctor {
         this.religion = religion;
         this.sallary = sallary;
         this.dateOfbirth = dateOfbirth;
+        this.fees = fees;
         this.gender = gender;
         this.timeIn = timeIn;
         this.timeOut = timeOut;
         this.createdDate = createdDate;
         this.accountNo = accountNo;
+        this.share = share;
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
     }
 
     public Long getMrno() {
@@ -115,14 +124,6 @@ public class Doctor {
 
     public void setDaysservice(String daysservice) {
         this.daysservice = daysservice;
-    }
-
-    public Long getFees() {
-        return fees;
-    }
-
-    public void setFees(Long fees) {
-        this.fees = fees;
     }
 
     public Integer getCnic() {
@@ -197,6 +198,14 @@ public class Doctor {
         this.dateOfbirth = dateOfbirth;
     }
 
+    public Long getFees() {
+        return fees;
+    }
+
+    public void setFees(Long fees) {
+        this.fees = fees;
+    }
+
     public String getGender() {
         return gender;
     }
@@ -243,6 +252,38 @@ public class Doctor {
 
     public void setShare(Integer share) {
         this.share = share;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
     }
 }
 

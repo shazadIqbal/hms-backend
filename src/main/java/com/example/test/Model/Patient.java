@@ -27,33 +27,20 @@ public class Patient {
     private Date registrationDate;
 
     private Date date;
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
 
 
     @OneToMany(mappedBy = "patient")
     private List<History> history;
 
-
-    public List<History> getHistory() {
-        return history;
-    }
-
-    public void setHistory(List<History> history) {
-        this.history = history;
-    }
-
     public Patient() {
+
     }
 
-    public String getAccountNo() {
-        return accountNo;
-    }
-
-    public void setAccountNo(String accountNo) {
-        this.accountNo = accountNo;
-    }
-
-    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, Boolean gynAndObsRegistration,String husbandOfAndFatherOf,Date registrationDate ) {
-        this.date=date;
+    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, String accountNo, Boolean gynAndObsRegistration, String husbandOfAndFatherOf, Date registrationDate, Date date, String createdBy, String updatedBy, Date createdAt, Date updateAt, List<History> history) {
         this.name = name;
         this.cnic = cnic;
         this.phoneNo = phoneNo;
@@ -61,9 +48,16 @@ public class Patient {
         this.gender = gender;
         this.address = address;
         this.status = status;
-        this.gynAndObsRegistration= gynAndObsRegistration;
-        this.husbandOfAndFatherOf=husbandOfAndFatherOf;
+        this.accountNo = accountNo;
+        this.gynAndObsRegistration = gynAndObsRegistration;
+        this.husbandOfAndFatherOf = husbandOfAndFatherOf;
         this.registrationDate = registrationDate;
+        this.date = date;
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
+        this.history = history;
     }
 
     public Long getId() {
@@ -130,14 +124,13 @@ public class Patient {
         this.status = status;
     }
 
-    public Date getDate() {
-        return date;
+    public String getAccountNo() {
+        return accountNo;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setAccountNo(String accountNo) {
+        this.accountNo = accountNo;
     }
-
 
     public Boolean getGynAndObsRegistration() {
         return gynAndObsRegistration;
@@ -161,5 +154,53 @@ public class Patient {
 
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
+    }
+
+    public List<History> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<History> history) {
+        this.history = history;
     }
 }

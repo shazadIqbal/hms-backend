@@ -1,17 +1,27 @@
 package com.example.test.Model;
 
+import java.util.Date;
+
 public class OpdConsultancy {
     String [] doctors;
     Long discount;
     Long sallary;
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
 
     public OpdConsultancy() {
     }
 
-    public OpdConsultancy(String[] doctors, Long discount, Long sallary) {
+    public OpdConsultancy(String[] doctors, Long discount, Long sallary, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.doctors = doctors;
         this.discount = discount;
         this.sallary = sallary;
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
     }
 
     public String[] getDoctors() {
@@ -36,5 +46,37 @@ public class OpdConsultancy {
 
     public void setSallary(Long sallary) {
         this.sallary = sallary;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
     }
 }

@@ -17,13 +17,20 @@ public class PatientMonitorDTO {
     private Boolean gynAndObsRegistration;
     private String husbandOfAndFatherOf;
     private Date registrationDate;
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
 
     Long admit;
     String admitLabel;
     Long gyne;
     Long obs;
 
-    public PatientMonitorDTO(Long id, String name, String number, Date date, Long er, Long opd, Long total, Long lab, Long dues, Boolean gynAndObsRegistration,String husbandOfAndFatherOf,Date registrationDate, Long admit, String admitLabel, Long gyne, Long obs) {
+    public PatientMonitorDTO() {
+    }
+
+    public PatientMonitorDTO(Long id, String name, String number, Date date, Long er, Long opd, Long total, Long lab, Long dues, Boolean gynAndObsRegistration, String husbandOfAndFatherOf, Date registrationDate, String createdBy, String updatedBy, Date createdAt, Date updateAt, Long admit, String admitLabel, Long gyne, Long obs) {
         this.id = id;
         this.name = name;
         this.number = number;
@@ -33,17 +40,49 @@ public class PatientMonitorDTO {
         this.total = total;
         this.lab = lab;
         this.dues = dues;
-        this.gynAndObsRegistration=gynAndObsRegistration;
-        this.husbandOfAndFatherOf=husbandOfAndFatherOf;
-        this.registrationDate=registrationDate;
+        this.gynAndObsRegistration = gynAndObsRegistration;
+        this.husbandOfAndFatherOf = husbandOfAndFatherOf;
+        this.registrationDate = registrationDate;
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
         this.admit = admit;
         this.admitLabel = admitLabel;
         this.gyne = gyne;
         this.obs = obs;
     }
 
-    public PatientMonitorDTO() {
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Long getEr() {
@@ -86,38 +125,6 @@ public class PatientMonitorDTO {
         this.dues = dues;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public Boolean getGynAndObsRegistration() {
         return gynAndObsRegistration;
     }
@@ -140,6 +147,38 @@ public class PatientMonitorDTO {
 
     public void setRegistrationDate(Date registrationDate) {
         this.registrationDate = registrationDate;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
     }
 
     public Long getAdmit() {
@@ -174,3 +213,4 @@ public class PatientMonitorDTO {
         this.obs = obs;
     }
 }
+

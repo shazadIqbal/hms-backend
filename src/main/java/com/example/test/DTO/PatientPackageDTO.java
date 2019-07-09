@@ -10,12 +10,16 @@ public class PatientPackageDTO {
     String pSponsor;
     String status;
     Long pPrice;
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
 
     public PatientPackageDTO() {
 
     }
 
-    public PatientPackageDTO(String pName, String pFacility, Date pStartDate, Date pEndDate, String pSponsor, String status, Long pPrice) {
+    public PatientPackageDTO(String pName, String pFacility, Date pStartDate, Date pEndDate, String pSponsor, String status, Long pPrice, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.pName = pName;
         this.pFacility = pFacility;
         this.pStartDate = pStartDate;
@@ -23,14 +27,10 @@ public class PatientPackageDTO {
         this.pSponsor = pSponsor;
         this.status = status;
         this.pPrice = pPrice;
-    }
-
-    public Long getpPrice() {
-        return pPrice;
-    }
-
-    public void setpPrice(Long pPrice) {
-        this.pPrice = pPrice;
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
     }
 
     public String getpName() {
@@ -79,5 +79,45 @@ public class PatientPackageDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Long getpPrice() {
+        return pPrice;
+    }
+
+    public void setpPrice(Long pPrice) {
+        this.pPrice = pPrice;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
     }
 }
