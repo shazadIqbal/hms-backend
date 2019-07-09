@@ -80,10 +80,10 @@ public List<Patient> getPatients(){
             RestTemplateResponseDTO result = restTemplate.postForObject(url, accountRestDTO, RestTemplateResponseDTO.class);
 //00 Means posted successfully 01 means duplicate
 
-            return "00";
+            return "{\"SAVEDSUCCESFULLY\":1}";
         }
         else{
-            return "01";
+            return "{\"NOT SUCCESFULL\":1}";
         }
     }
 
