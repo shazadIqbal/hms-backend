@@ -26,16 +26,24 @@ public class DoctorDTO {
     Date createdDate;
     private String accountNo;
     private Integer share;
-    public DoctorDTO(Long mrNo,Long fees, String fullName, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, Integer sallary, String dateOfbirth, String gender, String timeIn, String timeOut, String accountNo, Integer share) {
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
+
+    public DoctorDTO() {
+    }
+
+    public DoctorDTO(Long mrNo, String fullName, String mobile, Integer emrNo, String nationality, String address, String daysservice, Integer cnic, Long fees, String email, String speciality, String qualification, String hoursday, String position, String religion, Integer sallary, String dateOfbirth, String gender, String timeIn, String timeOut, Date createdDate, String accountNo, Integer share, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.mrNo = mrNo;
         this.fullName = fullName;
         this.mobile = mobile;
         this.emrNo = emrNo;
-        this.fees=fees;
         this.nationality = nationality;
         this.address = address;
         this.daysservice = daysservice;
         this.cnic = cnic;
+        this.fees = fees;
         this.email = email;
         this.speciality = speciality;
         this.qualification = qualification;
@@ -47,10 +55,13 @@ public class DoctorDTO {
         this.gender = gender;
         this.timeIn = timeIn;
         this.timeOut = timeOut;
+        this.createdDate = createdDate;
         this.accountNo = accountNo;
-    }
-
-    public DoctorDTO() {
+        this.share = share;
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
     }
 
     public Long getMrNo() {
@@ -85,14 +96,6 @@ public class DoctorDTO {
         this.emrNo = emrNo;
     }
 
-    public Long getFees() {
-        return fees;
-    }
-
-    public void setFees(Long fees) {
-        this.fees = fees;
-    }
-
     public String getNationality() {
         return nationality;
     }
@@ -123,6 +126,14 @@ public class DoctorDTO {
 
     public void setCnic(Integer cnic) {
         this.cnic = cnic;
+    }
+
+    public Long getFees() {
+        return fees;
+    }
+
+    public void setFees(Long fees) {
+        this.fees = fees;
     }
 
     public String getEmail() {
@@ -201,14 +212,6 @@ public class DoctorDTO {
         return timeIn;
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
     public void setTimeIn(String timeIn) {
         this.timeIn = timeIn;
     }
@@ -219,6 +222,14 @@ public class DoctorDTO {
 
     public void setTimeOut(String timeOut) {
         this.timeOut = timeOut;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 
     public String getAccountNo() {
@@ -235,5 +246,37 @@ public class DoctorDTO {
 
     public void setShare(Integer share) {
         this.share = share;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
     }
 }

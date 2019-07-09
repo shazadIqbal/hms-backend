@@ -2,6 +2,8 @@ package com.example.test.DTO;
 
 import com.example.test.Model.Doctor;
 
+import java.util.Date;
+
 public class OpdConsultancyDTO {
     Doctor doctors;
     Double cashRecieved;
@@ -9,18 +11,25 @@ public class OpdConsultancyDTO {
     Double total;
     Long id;
     Long sallary;
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
 
+    public OpdConsultancyDTO() {
+    }
 
-    public OpdConsultancyDTO(Doctor doctors, Double cashRecieved, Long discount, Double total, Long id, Long sallary) {
+    public OpdConsultancyDTO(Doctor doctors, Double cashRecieved, Long discount, Double total, Long id, Long sallary, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.doctors = doctors;
         this.cashRecieved = cashRecieved;
         this.discount = discount;
         this.total = total;
         this.id = id;
         this.sallary = sallary;
-    }
-
-    public OpdConsultancyDTO() {
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
     }
 
     public Doctor getDoctors() {
@@ -69,5 +78,37 @@ public class OpdConsultancyDTO {
 
     public void setSallary(Long sallary) {
         this.sallary = sallary;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
     }
 }

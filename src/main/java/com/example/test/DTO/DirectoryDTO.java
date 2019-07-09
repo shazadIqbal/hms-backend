@@ -1,6 +1,7 @@
 package com.example.test.DTO;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.Date;
 
 public class DirectoryDTO {
 
@@ -8,16 +9,23 @@ public class DirectoryDTO {
     String number;
     String address;
     Integer erNo;
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
 
-    public DirectoryDTO(String name, String number, String address, Integer erNo) {
-
+    public DirectoryDTO(String name, String number, String address, Integer erNo, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.name = name;
         this.number = number;
         this.address = address;
         this.erNo = erNo;
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
     }
-    public DirectoryDTO() {
 
+    public DirectoryDTO() {
 
     }
 
@@ -51,5 +59,37 @@ public class DirectoryDTO {
 
     public void setErNo(Integer erNo) {
         this.erNo = erNo;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
     }
 }

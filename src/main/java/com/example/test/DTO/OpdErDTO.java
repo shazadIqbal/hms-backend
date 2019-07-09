@@ -1,5 +1,7 @@
 package com.example.test.DTO;
 
+import java.util.Date;
+
 public class OpdErDTO {
     String[] facilities;
     Double cashRecieve;
@@ -7,17 +9,25 @@ public class OpdErDTO {
     Double total;
     Long id;
     double dues;
+    private String CreatedBy;
+    private String UpdatedBy;
+    private Date CreatedAt;
+    private Date UpdateAt;
 
     public OpdErDTO() {
     }
 
-    public OpdErDTO(String[] facilities, Double cashRecieve, Long discount, Double total, Long id, double dues) {
+    public OpdErDTO(String[] facilities, Double cashRecieve, Long discount, Double total, Long id, double dues, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.facilities = facilities;
         this.cashRecieve = cashRecieve;
         this.discount = discount;
         this.total = total;
         this.id = id;
         this.dues = dues;
+        CreatedBy = createdBy;
+        UpdatedBy = updatedBy;
+        CreatedAt = createdAt;
+        UpdateAt = updateAt;
     }
 
     public String[] getFacilities() {
@@ -66,5 +76,37 @@ public class OpdErDTO {
 
     public void setDues(double dues) {
         this.dues = dues;
+    }
+
+    public String getCreatedBy() {
+        return CreatedBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        CreatedBy = createdBy;
+    }
+
+    public String getUpdatedBy() {
+        return UpdatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        UpdatedBy = updatedBy;
+    }
+
+    public Date getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public Date getUpdateAt() {
+        return UpdateAt;
+    }
+
+    public void setUpdateAt(Date updateAt) {
+        UpdateAt = updateAt;
     }
 }
