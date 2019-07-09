@@ -5,6 +5,7 @@ import com.example.test.Model.Patient;
 import com.example.test.Repository.PatientRepository;
 import com.example.test.Service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
