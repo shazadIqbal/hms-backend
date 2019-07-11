@@ -4,14 +4,24 @@ public class AuthToken {
 
     private String token;
     private String username;
+    private String userType;
+
+    public AuthToken(String token, String username, String userType) {
+        this.token = token;
+        this.username = username;
+        this.userType = userType;
+    }
 
     public AuthToken(){
 
     }
 
-    public AuthToken(String token, String username){
-        this.token = token;
-        this.username = username;
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public AuthToken(String token){
