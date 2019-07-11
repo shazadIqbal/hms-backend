@@ -1,10 +1,12 @@
 package com.example.test.Service;
 
+import com.example.test.Commons.ApiResponse;
 import com.example.test.DTO.UserDto;
 import com.example.test.Model.User;
 import com.example.test.Repository.UserDao;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -67,15 +69,20 @@ public class UserServiceImpl implements UserDetailsService {
         return userDto;
     }
 
-    public User save(UserDto user) {
-	    User newUser = new User();
-	    newUser.setEmail(user.getEmail());
-	    newUser.setName(user.getName());
-	    newUser.setClientId(user.getClientId());
-	    newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-		newUser.setUserType(user.getUserType());
-		newUser.setActive(user.isActive());
-		
-        return userDao.save(newUser);
+    public ApiResponse save(UserDto user) {
+		User founduser = userDao.findByEmail(user.getEmail());
+		if(founduser == null) {
+			User newUser = new User();
+			newUser.setEmail(user.getEmail());
+			newUser.setName(user.getName());
+			newUser.setClientId(user.getClientId());
+			newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+			newUser.setUserType(user.getUserType());
+			newUser.setActive(user.isActive());
+			return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.",	userDao.save(newUser));//return ;
+		}else{
+			return new ApiResponse<>(HttpStatus.NOT_FOUND.value(), "User Already exsist.",null);//return ;
+		}
+
     }
 }
