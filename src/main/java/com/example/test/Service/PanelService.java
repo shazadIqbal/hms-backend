@@ -105,7 +105,7 @@ public class PanelService {
 
 
                 }
-                return "successfully added";
+                return "{\"Successfully Added\":1}";
 
 
             }
