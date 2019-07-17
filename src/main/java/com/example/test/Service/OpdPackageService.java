@@ -35,6 +35,7 @@ public class OpdPackageService {
         request.setReceivedAmount(data.getCashRecieved());
         request.setTotalAmount(data.getTotal());
         request.setOperationType("PACKAGE");
+        request.setTransactionType("DEBIT");
         request.setTransactionRefId(ref.randomUUID().toString());
         request.setDescription(descriptionList(patient.getName(),data.getPackageName(),data.getPackageFacility()));
         RestTemplateResponseDTO response = restTemplate.postForObject(url, request,RestTemplateResponseDTO.class);
