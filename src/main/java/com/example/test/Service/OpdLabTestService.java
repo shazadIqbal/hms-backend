@@ -30,7 +30,7 @@ public class OpdLabTestService {
         Patient patient = patientRepository.findById(data.getId()).get();
         TransactionRestDTO response = new TransactionRestDTO();
         response.setAccountNoUUID(patient.getAccountNo());
-        response.setOperationType("Labtest");
+        response.setOperationType("LABTEST");
         response.setTransactionType("DEBIT");
         response.setReceivedAmount(data.getCashRecieve());
         response.setTotalAmount(data.getTotal());

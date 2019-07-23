@@ -25,7 +25,7 @@ public class Patient {
     private Boolean gynAndObsRegistration;
     private String husbandOfAndFatherOf;
     private Date registrationDate;
-
+    @Temporal(TemporalType.DATE)
     private Date date;
     private String CreatedBy;
     private String UpdatedBy;

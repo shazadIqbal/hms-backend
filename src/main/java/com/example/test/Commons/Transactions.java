@@ -7,7 +7,7 @@ public class Transactions {
 
     private Long id;
     private Date transactionDate;
-    private Long receivedAmount;
+    private Double receivedAmount;
     private Double totalAmount;
     private String transactionType;
     private String description;
@@ -16,7 +16,7 @@ public class Transactions {
     private Double dues;
     private String transactionRefId;
 
-    public Transactions(String transactionRefId,Long id, Date transactionDate, Long receivedAmount, Double totalAmount, String transactionType, String description, String currency, String operationType, Double dues) {
+    public Transactions(String transactionRefId,Long id, Date transactionDate, Double receivedAmount, Double totalAmount, String transactionType, String description, String currency, String operationType, Double dues) {
         this.id = id;
         this.transactionDate = transactionDate;
         this.receivedAmount = receivedAmount;
@@ -56,11 +56,11 @@ public class Transactions {
         this.transactionDate = transactionDate;
     }
 
-    public Long getReceivedAmount() {
+    public Double getReceivedAmount() {
         return receivedAmount;
     }
 
-    public void setReceivedAmount(Long receivedAmount) {
+    public void setReceivedAmount(Double receivedAmount) {
         this.receivedAmount = receivedAmount;
     }
 

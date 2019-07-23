@@ -34,7 +34,7 @@ public class PatientTransactionsService {
             List<Transactions> transactions = restTemplateResponseDTO.getBodyList();
             return  transactions;
         }
-        return  new ArrayList<>();
+        return  new ArrayList<Transactions>();
     }
 
     public RestTemplateResponseDTO  deletePatientTransaction(String refId) {
