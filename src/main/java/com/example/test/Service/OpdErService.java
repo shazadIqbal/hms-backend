@@ -48,7 +48,7 @@ public class OpdErService {
         responce.setAccountNoUUID(patient.getAccountNo());
         responce.setReceivedAmount(accountData.getCashRecieve());
         responce.setTotalAmount(accountData.getTotal());
-        responce.setOperationType("Er");
+        responce.setOperationType("ER");
         responce.setDescription(descriptionlist(patient.getName(),accountData.getFacilities()));
         responce.setTransactionType("DEBIT");
 

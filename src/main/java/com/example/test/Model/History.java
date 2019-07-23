@@ -14,7 +14,7 @@ public class History {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private Date transactionDate;
-    private Long receivedAmount;
+    private Double receivedAmount;
     private Double totalAmount;
     private String transactionType;
     private String description;
@@ -36,7 +36,7 @@ public class History {
 
     }
 
-    public History(Date transactionDate, Long receivedAmount, Double totalAmount, String transactionType, String description, String currency, String operationType, Double dues, String createdBy, String updatedBy, Date createdAt, Date updateAt, Patient patient) {
+    public History(Date transactionDate, Double receivedAmount, Double totalAmount, String transactionType, String description, String currency, String operationType, Double dues, String createdBy, String updatedBy, Date createdAt, Date updateAt, Patient patient) {
         this.transactionDate = transactionDate;
         this.receivedAmount = receivedAmount;
         this.totalAmount = totalAmount;
@@ -68,11 +68,11 @@ public class History {
         this.transactionDate = transactionDate;
     }
 
-    public Long getReceivedAmount() {
+    public Double getReceivedAmount() {
         return receivedAmount;
     }
 
-    public void setReceivedAmount(Long receivedAmount) {
+    public void setReceivedAmount(Double receivedAmount) {
         this.receivedAmount = receivedAmount;
     }
 
