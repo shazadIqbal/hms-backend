@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserDetailsService {
 			newUser.setClientId(user.getClientId());
 			newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 			newUser.setUserType(user.getUserType());
-			newUser.setActive(user.isActive());
+			newUser.setActive(user.getActive());
 			return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.",	userDao.save(newUser));//return ;
 		}else{
 			return new ApiResponse<>(HttpStatus.NOT_FOUND.value(), "User Already exsist.",null);//return ;

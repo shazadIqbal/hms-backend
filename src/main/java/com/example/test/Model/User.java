@@ -17,7 +17,7 @@ public class User {
     private String password;
 
     @Column
-    private boolean isActive;
+    private Boolean active;
     
     @Column
     private String userType;
@@ -71,12 +71,12 @@ public class User {
 		this.name = name;
 	}
 
-	public boolean isActive() {
-		return isActive;
+	public Boolean isActive() {
+		return active;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setActive(Boolean isActive) {
+		this.active = isActive;
 	}
 
 	public Long getClientId() {
