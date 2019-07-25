@@ -2,11 +2,16 @@ package com.example.test.Service;
 
 import com.example.test.DTO.PatientPackageDTO;
 import com.example.test.Model.PatientPackage;
+import com.example.test.Model.User;
 import com.example.test.Repository.PatientPackageRepository;
+import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +20,9 @@ public class PatientPackageService {
 
     @Autowired
     PatientPackageRepository patientPackageRepository;
+
+    @Autowired
+    UserDao userDao;
 
     public List<PatientPackage> getPackages() {
         List<PatientPackage> list = patientPackageRepository.findAll();
@@ -35,6 +43,8 @@ public class PatientPackageService {
         patientPackage.setpEndDate(pack.getpEndDate());
         patientPackage.setpSponsor(pack.getpSponsor());
         patientPackage.setpPrice(pack.getpPrice());
+        patientPackage.setCreatedAt(new Date());
+        patientPackage.setCreatedBy(username());
         patientPackage.setStatus("Active");
         patientPackageRepository.save(patientPackage);
         return "{\"ADDED SUCCESFULLY\":1}";
@@ -49,5 +59,16 @@ public class PatientPackageService {
             patientPackageRepository.save(packagedel);
         }
         return this.getPackages();
+    }
+
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        return  user.getName();
+
     }
 }

@@ -4,9 +4,14 @@ import com.example.test.DTO.AccountRestDTO;
 import com.example.test.DTO.PatientDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.Model.Patient;
+import com.example.test.Model.User;
 import com.example.test.Repository.PatientRepository;
+import com.example.test.Repository.UserDao;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,6 +32,8 @@ public class PatientService {
     @Value("${account.url}")
     public String url;
 
+    @Autowired
+    UserDao userDao;
     @Transient
     private UUID corrId;
 
@@ -56,6 +63,9 @@ public List<Patient> getPatients(){
         if(findPatientByMobile == null) {
             corrId = UUID.randomUUID();
             patient.setName(pat.getName());
+
+            patient.setCreatedAt(new Date());
+            patient.setCreatedBy(username());
             patient.setCnic(pat.getCnic());
             patient.setPhoneNo(pat.getPhoneNo());
             patient.setAge(pat.getAge());
@@ -130,6 +140,9 @@ public String updatePatientByID(Long id,PatientDTO pat){
         updatedPatient.setAge(pat.getAge());
         updatedPatient.setCnic(pat.getCnic());
         updatedPatient.setPhoneNo(pat.getPhoneNo());
+        updatedPatient.setUpdatedBy(username());
+        updatedPatient.setUpdateAt(new Date());
+
         updatedPatient.setGender(pat.getGender());
         updatedPatient.setName(pat.getName());
         updatedPatient.setGynAndObsRegistration(pat.getGynAndObsRegistration() == null || !pat.getGynAndObsRegistration()  ? Boolean.FALSE : Boolean.TRUE);
@@ -143,5 +156,18 @@ public String updatePatientByID(Long id,PatientDTO pat){
 
     public List<Patient> getAllGynePatient() {
         return patientRepository.getAllGynyObsPatients();
+    }
+
+
+
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        return  user.getName();
+
     }
 }

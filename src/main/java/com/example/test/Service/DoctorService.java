@@ -6,11 +6,15 @@ import com.example.test.DTO.DoctorDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.Model.Directory;
 import com.example.test.Model.Doctor;
+import com.example.test.Model.User;
 import com.example.test.Repository.DirectoryRepository;
 import com.example.test.Repository.DoctorRepository;
 //import org.graalvm.compiler.nodes.calc.IntegerDivRemNode;
+import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,6 +33,9 @@ public class DoctorService {
     DirectoryRepository directoryRepository;
     @Value("${account.url}")
     public String url;
+
+    @Autowired
+    UserDao userDao;
 
     @Transient
     private UUID corrId;
@@ -72,7 +79,11 @@ public class DoctorService {
     }
 
     public String postDoctorFromService(DoctorDTO doc) {
+
+
         Doctor doctor = new Doctor();
+        doctor.setCreatedDate(new Date());
+        doctor.setCreatedBy(username());
         Directory directory = new Directory();
         AccountRestDTO accountRestDTO = new AccountRestDTO();
 
@@ -143,6 +154,8 @@ public class DoctorService {
             updateDoc.get().setCreatedDate(new Date());
             updateDoc.get().setAddress(doc.getAddress());
             updateDoc.get().setCnic(doc.getCnic());
+            updateDoc.get().setUpdateAt(new Date());
+            updateDoc.get().setUpdatedBy(username());
             updateDoc.get().setFees(doc.getFees());
             updateDoc.get().setGender(doc.getGender());
             updateDoc.get().setSallary(doc.getSallary());
@@ -200,4 +213,14 @@ public class DoctorService {
 
     }
 
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        return  user.getName();
+
+    }
 }

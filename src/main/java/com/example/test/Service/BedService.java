@@ -2,11 +2,16 @@ package com.example.test.Service;
 
         import com.example.test.DTO.BedDto;
         import com.example.test.Model.Bed;
+        import com.example.test.Model.User;
         import com.example.test.Repository.BedRepository;
+        import com.example.test.Repository.UserDao;
         import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.security.core.context.SecurityContextHolder;
+        import org.springframework.security.core.userdetails.UserDetails;
         import org.springframework.stereotype.Service;
 
         import java.util.ArrayList;
+        import java.util.Date;
         import java.util.List;
 
 @Service
@@ -16,11 +21,15 @@ public class BedService {
     BedRepository bedRepository;
 
     //adding admission
+    @Autowired
+    UserDao userDao;
+
     public String createBed(BedDto bedDto){
          //LOOP for creating multiple objects of the beds of same type with dif id
+
         for(int i = 0; i < bedDto.getBedsQuantity(); i++){
             try{
-                bedRepository.save(new Bed(bedDto.getBedType(), Boolean.FALSE , bedDto.getPrice(),bedDto.getCreatedBy(),bedDto.getUpdatedBy(),bedDto.getUpdateAt(),bedDto.getCreatedAt()));
+                bedRepository.save(new Bed(bedDto.getBedType(), Boolean.FALSE , bedDto.getPrice(),username(),bedDto.getUpdatedBy(),bedDto.getUpdateAt(),new Date()));
             }catch(Exception e){
                 System.out.println(e);
                 return "{\"bed failed to create\":1}";
@@ -53,6 +62,17 @@ public List<Bed> getSelectedBedType(String bedType){
     return responseList;
 
 }
+
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        return  user.getName();
+
+    }
 
 
 
