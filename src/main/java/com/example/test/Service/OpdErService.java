@@ -4,13 +4,18 @@ import com.example.test.DTO.OpdErDTO;
 import com.example.test.DTO.TransactionRestDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.Model.Patient;
+import com.example.test.Model.User;
 import com.example.test.Repository.PatientRepository;
+import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Transient;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -24,6 +29,10 @@ public class OpdErService {
     @Transient
     private UUID ref;
     RestTemplate restTemplate = new RestTemplate();
+
+    @Autowired
+    UserDao userDao;
+
 
     @Value("${transaction.url}")
     public  String  url;
@@ -43,9 +52,15 @@ public class OpdErService {
 
 
     public String saveOpdErToAccounts(OpdErDTO accountData){
+
+
+
+
         Patient patient=patientRepository.findById(accountData.getId()).get();
         TransactionRestDTO responce=new TransactionRestDTO();
         responce.setAccountNoUUID(patient.getAccountNo());
+        responce.setCreatedBy(username());
+        responce.setCreatedAt(new Date());
         responce.setReceivedAmount(accountData.getCashRecieve());
         responce.setTotalAmount(accountData.getTotal());
         responce.setOperationType("ER");
@@ -103,5 +118,14 @@ public class OpdErService {
         return des;
 
     }
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
 
+        return  user.getName();
+
+    }
 }

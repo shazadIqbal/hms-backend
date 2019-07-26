@@ -4,9 +4,13 @@ import com.example.test.DTO.OpdLabTestDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.DTO.TransactionRestDTO;
 import com.example.test.Model.Patient;
+import com.example.test.Model.User;
 import com.example.test.Repository.PatientRepository;
+import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,6 +22,9 @@ public class OpdLabTestService {
     @Autowired
     PatientRepository patientRepository;
 
+    @Autowired
+    UserDao userDao;
+
     @Value("${transaction.url}")
     public  String  url;
 
@@ -27,10 +34,14 @@ public class OpdLabTestService {
     RestTemplate restTemplate = new RestTemplate();
 
     public String saveToAccounts(OpdLabTestDTO data) {
+
+
+
         Patient patient = patientRepository.findById(data.getId()).get();
         TransactionRestDTO response = new TransactionRestDTO();
         response.setAccountNoUUID(patient.getAccountNo());
         response.setOperationType("LABTEST");
+        response.setCreatedBy(username());
         response.setTransactionType("DEBIT");
         response.setReceivedAmount(data.getCashRecieve());
         response.setTotalAmount(data.getTotal());
@@ -67,6 +78,16 @@ public class OpdLabTestService {
 
         String des = patientName + "avails " + f;
         return des;
+
+    }
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        return  user.getName();
 
     }
 }

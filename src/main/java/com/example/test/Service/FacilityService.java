@@ -3,8 +3,12 @@ package com.example.test.Service;
 import com.example.test.DTO.FacilityDTO;
 import com.example.test.DTO.PanelFacilityDTO;
 import com.example.test.Model.Facility;
+import com.example.test.Model.User;
 import com.example.test.Repository.FacilityRepository;
+import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -14,12 +18,18 @@ public class FacilityService {
     @Autowired
     FacilityRepository facilityRepository;
 
+
+    @Autowired
+    UserDao userDao;
     //Insert Facility into Database
     public String postFacility(FacilityDTO facilityDto){
+
         Facility facility = new Facility();
         facility.setName(facilityDto.getName());
         facility.setPrice(facilityDto.getPrice());
         facility.setStatus("Active");
+        facility.setCreatedAt(new Date());
+        facility.setCreatedBy(username());
         facilityRepository.save(facility);
         return "{\"ADDED SUCCESFULLY\":1}";
     }
@@ -58,5 +68,16 @@ public class FacilityService {
     public Optional<Facility> getFacilityById(Long id){
         Optional<Facility> facility = facilityRepository.findById(id);
         return facility;
+    }
+
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        return  user.getName();
+
     }
 }

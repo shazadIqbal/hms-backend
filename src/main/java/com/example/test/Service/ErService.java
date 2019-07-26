@@ -2,8 +2,12 @@ package com.example.test.Service;
 
 import com.example.test.DTO.ErDTO;
 import com.example.test.Model.Er;
+import com.example.test.Model.User;
 import com.example.test.Repository.ErRepository;
+import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,9 +16,17 @@ import java.util.*;
 public class ErService {
     @Autowired
     ErRepository erRepository;
+
+    @Autowired
+    UserDao userDao;
+
     public String postEr(ErDTO erDTO){
+
+
         Er er = new Er();
         er.setName(erDTO.getName());
+        er.setCreatedAt(new Date());
+        er.setCreatedBy(username());
         er.setResources(erDTO.getResources());
         er.setPrice(erDTO.getPrice());
         er.setExtraCharges(erDTO.getExtraCharges());
@@ -65,4 +77,14 @@ public class ErService {
         return er;
     }
 
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        return  user.getName();
+
+    }
 }

@@ -4,9 +4,13 @@ import com.example.test.DTO.LabtestCategoryDTO;
 import com.example.test.DTO.LabtestDTO;
 import com.example.test.Model.Labtest;
 import com.example.test.Model.Labtestcategory;
+import com.example.test.Model.User;
 import com.example.test.Repository.LabtestRepository;
 import com.example.test.Repository.LabtestCategoryRepository;
+import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -23,7 +27,15 @@ public class LabtestService {
     @Autowired
     LabtestRepository labtestRepository;
 
+    @Autowired
+    UserDao userDao;
+
     public String postCategory(LabtestCategoryDTO labtestCategoryDTO){
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
 
         Labtestcategory labtestcategory=labtestCategoryRepository.findByCategory(labtestCategoryDTO.getCategory());
         if(labtestcategory != null){
@@ -33,6 +45,9 @@ public class LabtestService {
             lab.setCategory(labtestCategoryDTO.getCategory());
             lab.setCreatedDate(new Date());
             lab.setStatus("ACTIVE");
+            lab.setCreatedAt(new Date());
+            lab.setCreatedBy(user.getName());
+
             labtestCategoryRepository.save(lab);
             return "{\"Lab Test Category added successfully\":1}";
         }
@@ -51,11 +66,15 @@ public class LabtestService {
     }
 
     public String postLabTest(LabtestDTO labtestDTO){
+
+
         Labtest labtest = new Labtest();
         labtest.setCategory(labtestDTO.getCategory());
         labtest.setName(labtestDTO.getName());
         labtest.setDetails(labtestDTO.getDetails());
         labtest.setPrice(labtestDTO.getPrice());
+        labtest.setCreatedDate(new Date());
+        labtest.setCreatedBy(username());
         labtest.setCreatedDate(new Date());
         labtest.setStatus("ACTIVE");
         labtestRepository.save(labtest);
@@ -99,6 +118,17 @@ public class LabtestService {
         else {
             return null;
         }
+
+    }
+
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        return  user.getName();
 
     }
 }

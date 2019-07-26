@@ -5,13 +5,18 @@ import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.DTO.TransactionRestDTO;
 import com.example.test.Model.Doctor;
 import com.example.test.Model.Patient;
+import com.example.test.Model.User;
 import com.example.test.Repository.PatientRepository;
+import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Transient;
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -22,6 +27,9 @@ public class OpdConsultancyService {
     @Transient
     private UUID ref;
 
+    @Autowired
+    UserDao userDao;
+
     @Value("${transaction.url}")
     public String url;
 
@@ -29,11 +37,16 @@ public class OpdConsultancyService {
     RestTemplate restTemplate = new RestTemplate();
 
     public String saveOpdConsultancyToAccounts(OpdConsultancyDTO data) {
+
+
+
         Patient patient = patientRepository.findById(data.getId()).get();
         TransactionRestDTO request = new TransactionRestDTO();
         request.setAccountNoUUID(patient.getAccountNo());
         request.setReceivedAmount(data.getCashRecieved());
         request.setTotalAmount(data.getTotal());
+        request.setCreatedAt(new Date());
+        request.setCreatedBy(username());
         request.setOperationType("CONSULTANCY");
         // SSET TRAnsaction reff id
         request.setTransactionRefId(ref.randomUUID().toString());
@@ -65,5 +78,16 @@ public class OpdConsultancyService {
     public String shareDescription(String patientName, Doctor doctors){
         String des = "Dr. " + doctors.getFullName() + " shares via " + patientName;
         return des;
+    }
+
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        return  user.getName();
+
     }
 }

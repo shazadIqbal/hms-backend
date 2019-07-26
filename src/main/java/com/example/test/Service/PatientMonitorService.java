@@ -4,11 +4,15 @@ import com.example.test.Commons.Transactions;
 import com.example.test.DTO.PatientMonitorDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.Model.Patient;
+import com.example.test.Model.User;
 import com.example.test.Repository.PatientRepository;
+import com.example.test.Repository.UserDao;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -26,11 +30,20 @@ public class PatientMonitorService {
     @Autowired
     PatientRepository patientRepository;
 
+    @Autowired
+    UserDao userDao;
 
     RestTemplate restTemplate = new RestTemplate();//connect two spring applications together
 
 
     public PatientMonitorDTO getPatientMonitor(Long id) {
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        System.out.println("========>>>>"+user.getName()+"<<<<=============");
         PatientMonitorDTO patientMonitorDTO = new PatientMonitorDTO();
         Optional<Patient> patientModel = patientRepository.findById(id);
        // RestTemplateResponseDTO restTemplateResponseDTO = new RestTemplateResponseDTO();
@@ -121,6 +134,7 @@ public class PatientMonitorService {
             patientMonitorDTO.setName(patient.getName());
             patientMonitorDTO.setNumber(patient.getPhoneNo());
             patientMonitorDTO.setDate(patient.getDate());
+
             patientMonitorDTO.setRegistrationDate(patient.getRegistrationDate());
             patientMonitorDTO.setGynAndObsRegistration(patient.getGynAndObsRegistration());
             patientMonitorDTO.setHusbandOfAndFatherOf(patient.getHusbandOfAndFatherOf());

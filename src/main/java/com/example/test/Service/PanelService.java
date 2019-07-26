@@ -5,9 +5,13 @@ import com.example.test.DTO.PanelDTO;
 import com.example.test.DTO.PanelFacilityDTO;
 import com.example.test.Model.Panel;
 import com.example.test.Model.PanelFacility;
+import com.example.test.Model.User;
 import com.example.test.Repository.PanelFacilityRepository;
 import com.example.test.Repository.PanelRepository;
+import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,6 +27,9 @@ public class PanelService {
     PanelRepository panelRepository;
     @Autowired
     PanelFacilityRepository facilityRepository;
+
+    @Autowired
+    UserDao userDao;
 
 
             public List<Panel>deletePanelById(Long id){
@@ -71,6 +78,8 @@ public class PanelService {
                 panelsave.setPanelFacility(panel.getPanelFacility());
                 String startDate=panel.getPanelStartDate().substring(0,10);
                 String endDate=panel.getPanelStartDate().substring(0,10);
+                panelsave.setCreatedAt(new Date());
+                panelsave.setCreatedBy(username());
                 panelsave.setPanelStartDate(startDate);
                 panelsave.setPanelEndDate(endDate);
                 panelsave.setStatus("ACTIVE");
@@ -98,6 +107,8 @@ public class PanelService {
                     return  "{\"Already Exsist\":1}";
                 }else{
                     PanelFacility newFacility= new PanelFacility();
+                    panelFacility.setCreatedAt(new Date());
+                    panelFacility.setCreatedBy(username());
                     newFacility.setFacilityName(facility.getFacilityName());
                     newFacility.setStatus("ACTIVE");
                     newFacility.setDate(new Date());
@@ -124,5 +135,15 @@ public class PanelService {
 
              }
 
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        return  user.getName();
+
+    }
 
 }

@@ -3,9 +3,13 @@ package com.example.test.Service;
 import com.example.test.DTO.AppoinmentDTO;
 import com.example.test.Model.Appoinment;
 import com.example.test.Model.Patient;
+import com.example.test.Model.User;
 import com.example.test.Repository.AppoinmentRepository;
 import com.example.test.Repository.PatientRepository;
+import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -21,13 +25,19 @@ public class AppoinmentService {
     @Autowired
     PatientRepository patientRepository;
 
+    @Autowired
+    UserDao userDao;
+
     public String saveAppoinment(AppoinmentDTO appoinment ){
+
 
         Appoinment appoinment1= new Appoinment();
         appoinment1.setSelectDoctor(appoinment.getSelectDoctor());
         appoinment1.setAppoinmentDate(appoinment.getAppoinmentDate());
         appoinment1.setTime(appoinment.getTime());
         appoinment1.setId(appoinment.getId());
+        appoinment1.setCreatedAt(new Date());
+        appoinment1.setCreatedBy(username());
         appoinment1.setStatus("ACTIVE");
         Patient patient=patientRepository.getOne(appoinment.getId());
         if(patient!=null) {
@@ -121,6 +131,17 @@ public class AppoinmentService {
 
         return "updated successfully";
 
+
+    }
+
+    public String username()
+    {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+        User user = userDao.findByEmail(username);
+
+        return  user.getName();
 
     }
 
