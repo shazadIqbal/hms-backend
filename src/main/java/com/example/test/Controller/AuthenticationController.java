@@ -14,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/token")
@@ -43,5 +45,10 @@ public class AuthenticationController {
     public ApiResponse<User> saveUser(@RequestBody UserDto user){
 
         return new ApiResponse<>(HttpStatus.OK.value(), "User saved successfully.",userService.save(user));
+    }
+
+    @RequestMapping(value = "/getusers", method = RequestMethod.GET)
+    public List<User> getAllUsers(){
+        return this.userService.findAll();
     }
 }
