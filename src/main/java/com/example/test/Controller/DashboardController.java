@@ -1,6 +1,7 @@
 package com.example.test.Controller;
 
 
+import com.example.test.Commons.Transactions;
 import com.example.test.DTO.DashboardReportDTO;
 import com.example.test.DTO.DashboardResponseDTO;
 import com.example.test.DTO.GetReportsByTimeDTO;
@@ -50,6 +51,9 @@ public class DashboardController {
         return dashboardService.getDashboardPatients(getReportsByTimeDTO);
     }
 
-
+    @PostMapping("/employeereports")
+    public List<Transactions> gatAllTransactions(@RequestBody GetReportsByTimeDTO getReportsByTimeDTO){
+        return dashboardService.getAlltransactions(getReportsByTimeDTO);
+    }
 
 }

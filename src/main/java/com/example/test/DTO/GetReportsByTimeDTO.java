@@ -16,6 +16,7 @@ public class GetReportsByTimeDTO {
     public GetReportsByTimeDTO(String from, String till, String role) {
         this.from = from;
         this.till = till;
+        this.role = role;
     }
 
     public String getRole() {
