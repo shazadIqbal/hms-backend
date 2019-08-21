@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Transient;
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -46,6 +47,7 @@ public class OpdLabTestService {
         response.setReceivedAmount(data.getCashRecieve());
         response.setTotalAmount(data.getTotal());
         response.setDescription(descriptionlist(patient.getName(), data.getLabTests()));
+        response.setCreatedAt(new Date());
 
         //refid
 

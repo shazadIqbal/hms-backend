@@ -1,7 +1,9 @@
 package com.example.test.Service;
 
 import com.example.test.Commons.Transactions;
-import com.example.test.DTO.*;
+import com.example.test.DTO.DashboardResponseDTO;
+import com.example.test.DTO.GetReportsByTimeDTO;
+import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.Model.Patient;
 import com.example.test.Repository.PatientRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -11,10 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class DashboardService {
@@ -173,7 +173,7 @@ public class DashboardService {
 
     public List<DashboardResponseDTO> getDashboardPatients(GetReportsByTimeDTO getReportsByTimeDTO)
     {
-        List<Patient> patients =patientRepository.getCountOfPatientByDate(getReportsByTimeDTO.getFrom(),getReportsByTimeDTO.getTill());
+        List<Patient> patients = patientRepository.getCountOfPatientByDate(getReportsByTimeDTO.getFrom(),getReportsByTimeDTO.getTill());
 
 
         Map<String,Long> map = new HashMap<>();
@@ -204,6 +204,30 @@ public class DashboardService {
     }
 
 
+    public List<Transactions> getAllHospitalTransactions(GetReportsByTimeDTO getReportsByTimeDTO){
+
+        RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.postForObject(url+"dashboard/hospitalreports",getReportsByTimeDTO,RestTemplateResponseDTO.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        return objectMapper.convertValue(
+                restTemplateResponseDTO.getBodyList(),
+                new TypeReference<List<Transactions>>(){}
+
+        );
+    }
+
+    public List<Transactions> getAllDoctorTransactions(GetReportsByTimeDTO getReportsByTimeDTO){
+
+        RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.postForObject(url+"dashboard/doctortransactions",getReportsByTimeDTO,RestTemplateResponseDTO.class);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        return objectMapper.convertValue(
+                restTemplateResponseDTO.getBodyList(),
+                new TypeReference<List<Transactions>>(){}
+        );
+    }
 
 
     }
