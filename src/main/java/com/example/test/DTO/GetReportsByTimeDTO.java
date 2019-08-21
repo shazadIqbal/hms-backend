@@ -1,7 +1,5 @@
 package com.example.test.DTO;
 
-import java.util.Date;
-
 public class GetReportsByTimeDTO {
 
     private String from;

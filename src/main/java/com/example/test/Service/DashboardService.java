@@ -229,5 +229,16 @@ public class DashboardService {
         );
     }
 
+    public List<Transactions> getAlltransactions(GetReportsByTimeDTO getReportsByTimeDTO) {
+        RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.postForObject(url+"dashboard/employeereports", getReportsByTimeDTO, RestTemplateResponseDTO.class);
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.convertValue(
+                restTemplateResponseDTO.getBodyList(),
+                new TypeReference<List<Transactions>>(){}
+        );
+
+    }
+
+
 
     }

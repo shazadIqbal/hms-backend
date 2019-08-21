@@ -49,19 +49,19 @@ public class DashboardController {
         return dashboardService.getDashboardPatients(getReportsByTimeDTO);
     }
 
+    @PostMapping("/employeereports")
+    public List<Transactions> gatAllTransactions(@RequestBody GetReportsByTimeDTO getReportsByTimeDTO){
+        return dashboardService.getAlltransactions(getReportsByTimeDTO);
+    }
+
     @PostMapping("/hospitalreports")
-    public List<Transactions> getAllHospitalTransactions(@RequestBody GetReportsByTimeDTO getReportsByTimeDTO){
-
-        return dashboardService.getAllHospitalTransactions(getReportsByTimeDTO);
+    public List<Transactions> getHospitalTransactions(@RequestBody GetReportsByTimeDTO getReportsByTimeDTO){
+        return  dashboardService.getAllHospitalTransactions(getReportsByTimeDTO);
     }
-
     @PostMapping("/doctortransactions")
-    public List<Transactions> getAllDoctorTransactions(@RequestBody GetReportsByTimeDTO getReportsByTimeDTO){
-
+    public List<Transactions> getDoctorTransactions(@RequestBody GetReportsByTimeDTO getReportsByTimeDTO){
         return  dashboardService.getAllDoctorTransactions(getReportsByTimeDTO);
-
     }
-
 
 
 }
