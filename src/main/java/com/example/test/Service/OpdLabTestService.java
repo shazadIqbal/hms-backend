@@ -4,7 +4,9 @@ import com.example.test.DTO.OpdLabTestDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.DTO.TransactionRestDTO;
 import com.example.test.Model.Patient;
+import com.example.test.Model.PatientLabtestDetails;
 import com.example.test.Model.User;
+import com.example.test.Repository.PatientLabtestDetailsRepository;
 import com.example.test.Repository.PatientRepository;
 import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class OpdLabTestService {
     PatientRepository patientRepository;
 
     @Autowired
+    PatientLabtestDetailsRepository patientLabtestDetailsRepository;
+
+    @Autowired
     UserDao userDao;
 
     @Value("${transaction.url}")
@@ -36,6 +41,17 @@ public class OpdLabTestService {
 
     public String saveToAccounts(OpdLabTestDTO data) {
 
+//        for(int i=0; i<data.getLabTests().length;i++){
+            for(String labtest:data.getLabTests()){
+        PatientLabtestDetails patientLabtestDetails = new PatientLabtestDetails();
+        patientLabtestDetails.setCreatedDate(new Date());
+//        patientLabtestDetails.setLabtestName(data.getLabTests()[i]);
+                patientLabtestDetails.setLabtestName(labtest);
+        patientLabtestDetails.setPatient(data.getPatient());
+        patientLabtestDetails.setStatus("In Progress");
+        patientLabtestDetailsRepository.save(patientLabtestDetails);
+            }
+//    }
 
 
         Patient patient = patientRepository.findById(data.getId()).get();
@@ -92,4 +108,6 @@ public class OpdLabTestService {
         return  user.getName();
 
     }
+
+
 }

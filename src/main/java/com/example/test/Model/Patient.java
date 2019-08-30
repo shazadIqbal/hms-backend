@@ -1,11 +1,10 @@
 package com.example.test.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-
-import java.util.List;
-import java.util.UUID;
-
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="Patient")
@@ -35,6 +34,10 @@ public class Patient {
 
     @OneToMany(mappedBy = "patient")
     private List<History> history;
+
+    @OneToMany(mappedBy = "patientLab")
+    @JsonIgnore
+    private List<PatientLabtestDetails> patientLabtestDetails;
 
     public Patient() {
 
@@ -202,5 +205,13 @@ public class Patient {
 
     public void setHistory(List<History> history) {
         this.history = history;
+    }
+
+    public List<PatientLabtestDetails> getPatientLabtestDetails() {
+        return patientLabtestDetails;
+    }
+
+    public void setPatientLabtestDetails(List<PatientLabtestDetails> patientLabtestDetails) {
+        this.patientLabtestDetails = patientLabtestDetails;
     }
 }

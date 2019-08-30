@@ -1,5 +1,7 @@
 package com.example.test.DTO;
 
+import com.example.test.Model.Patient;
+
 import java.util.Date;
 
 public class OpdLabTestDTO {
@@ -12,6 +14,7 @@ public class OpdLabTestDTO {
     private String UpdatedBy;
     private Date CreatedAt;
     private Date UpdateAt;
+    private Patient patient;
 
     public OpdLabTestDTO() {
     }
@@ -98,5 +101,13 @@ public class OpdLabTestDTO {
 
     public void setUpdateAt(Date updateAt) {
         UpdateAt = updateAt;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 }
