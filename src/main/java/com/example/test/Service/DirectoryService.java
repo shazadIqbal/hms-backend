@@ -44,18 +44,17 @@ public class DirectoryService {
     }
 
     public List<Directory> getDirectory() {
-        List<Directory>  response= directoryRepository.findAll();
-        List<Directory> data=new ArrayList<>();
-
-        response.forEach(v->{
-            if(v.getStatus().equalsIgnoreCase("Active"))
-            {
-                data.add(v);
-            }
-        });
-
-
-        return data;
+        List<Directory>  response = directoryRepository.getAllDoctors();
+//        List<Directory> data=new ArrayList<>();
+//
+//        response.forEach(v->{
+//            if(v.getStatus().equalsIgnoreCase("Active"))
+//            {
+//                data.add(v);
+//            }
+//        });
+//
+        return response;
 
     }
 
