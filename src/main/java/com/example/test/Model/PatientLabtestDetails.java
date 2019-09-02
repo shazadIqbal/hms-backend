@@ -2,6 +2,7 @@ package com.example.test.Model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,7 +18,7 @@ public class PatientLabtestDetails {
 
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
-    @JsonBackReference
+   // @JsonBackReference
     private Patient patientLab;
 
     public PatientLabtestDetails() {
@@ -45,11 +46,11 @@ public class PatientLabtestDetails {
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
-
+    @JsonIgnore
     public Patient getPatient() {
         return patientLab;
     }
-
+    @JsonIgnore
     public void setPatient(Patient patient) {
         this.patientLab = patient;
     }

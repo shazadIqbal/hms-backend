@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Transient;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -107,6 +108,11 @@ public class OpdLabTestService {
 
         return  user.getName();
 
+    }
+    public RestTemplateResponseDTO getPatientLabtestDetails(){
+        List<PatientLabtestDetails> patientLabtestDetails = patientLabtestDetailsRepository.findAll();
+        RestTemplateResponseDTO response = new RestTemplateResponseDTO("200","Get Successfully",patientLabtestDetails);
+        return response;
     }
 
 
