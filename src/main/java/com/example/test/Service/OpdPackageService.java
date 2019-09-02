@@ -27,7 +27,7 @@ public class OpdPackageService {
     @Transient
     private UUID ref;
 
-    @Value("http://localhost:8083/api/transactions/")
+    @Value("${transaction.url}")
     public String url;
 
     @Autowired
@@ -40,7 +40,7 @@ public class OpdPackageService {
         Patient patient = patientRepository.findById(data.getId()).get();
         TransactionRestDTO request = new TransactionRestDTO();
         request.setAccountNoUUID(patient.getAccountNo());
-        request.setReceivedAmount(data.getCashRecieved());
+        request.setReceivedAmount(data.getCashReceived());
         request.setCreatedAt(new Date());
         request.setCreatedBy(username());
         request.setTotalAmount(data.getTotal());

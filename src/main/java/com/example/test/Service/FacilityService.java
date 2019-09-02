@@ -35,14 +35,14 @@ public class FacilityService {
     }
 
     public List<Facility> getFacility(){
-        List<Facility> facilities = facilityRepository.findAll();
-        List<Facility> activeFacilities = new ArrayList<>();
-        facilities.forEach(facility -> {
-            if(facility.getStatus().equalsIgnoreCase("Active")){
-                activeFacilities.add(facility);
-            }
-        });
-        return activeFacilities;
+        List<Facility> facilities = facilityRepository.getAllFacilities();
+//        List<Facility> activeFacilities = new ArrayList<>();
+//        facilities.forEach(facility -> {
+//            if(facility.getStatus().equalsIgnoreCase("Active")){
+//                activeFacilities.add(facility);
+//            }
+//        });
+        return facilities;
     }
     public String deleteFacilityById(Long id){
         Optional<Facility> facility = facilityRepository.findById(id);

@@ -13,7 +13,7 @@ public class Directory {
     String name;
     String number;
     String address;
-    Integer erNo;
+    String erNo;
     String status;
     private String CreatedBy;
     private String UpdatedBy;
@@ -23,7 +23,7 @@ public class Directory {
     public Directory() {
     }
 
-    public Directory(String name, String number, String address, Integer erNo, String status, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
+    public Directory(String name, String number, String address, String erNo, String status, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.name = name;
         this.number = number;
         this.address = address;
@@ -67,11 +67,11 @@ public class Directory {
         this.address = address;
     }
 
-    public Integer getErNo() {
+    public String getErNo() {
         return erNo;
     }
 
-    public void setErNo(Integer erNo) {
+    public void setErNo(String erNo) {
         this.erNo = erNo;
     }
 

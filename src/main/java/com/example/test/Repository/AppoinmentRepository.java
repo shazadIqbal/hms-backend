@@ -18,4 +18,7 @@ public interface AppoinmentRepository extends JpaRepository<Appoinment,Long> {
     public List<Appoinment> findByAppoinmentDate(@Param("appoinmentDate") String appoinmentDate );
 
     public List<Appoinment> findByStatus(String status);
+
+    @Query(value = "select * from appoinment where status = 'ACTIVE'" , nativeQuery = true)
+    public List<Appoinment> getAllAppoinments();
 }

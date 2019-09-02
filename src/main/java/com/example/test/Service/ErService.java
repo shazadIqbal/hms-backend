@@ -37,14 +37,14 @@ public class ErService {
         return "{\"ADDED SUCCESFULLY\":1}";
     }
     public List<Er> getEr(){
-        List<Er> er = erRepository.findAll();
-        List<Er> activeEr = new ArrayList<>();
-        er.forEach(ers ->{
-            if(ers.getStatus().equalsIgnoreCase("Active")){
-                activeEr.add(ers);
-            }
-        });
-        return activeEr;
+        List<Er> er = erRepository.getAllEr();
+//        List<Er> activeEr = new ArrayList<>();
+//        er.forEach(ers ->{
+//            if(ers.getStatus().equalsIgnoreCase("Active")){
+//                activeEr.add(ers);
+//            }
+//        });
+        return er;
     }
 
     public String updateErByID(ErDTO er, Long id){

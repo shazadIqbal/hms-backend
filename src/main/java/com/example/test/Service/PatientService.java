@@ -38,64 +38,76 @@ public class PatientService {
     private UUID corrId;
 
     RestTemplate restTemplate = new RestTemplate();
+
     //Get Active Patients from Database
-public List<Patient> getPatients(){
-    List<Patient> list = patientRepository.findAll();
-    List<Patient> responseList = new ArrayList<>();
-    list.forEach(patient -> {
-       if(patient.getStatus().equalsIgnoreCase("Active")){
-           responseList.add(patient);
-       }
-    });
-    return responseList;
-}
+    public List<Patient> getPatients() {
+        List<Patient> list = patientRepository.getAllPatients();
+//    List<Patient> responseList = new ArrayList<>();
+//    list.forEach(patient -> {
+//       if(patient.getStatus().equalsIgnoreCase("Active")){
+//           responseList.add(patient);
+//       }
+//    });
+        return list;
+    }
 //Get Patients By ID
 
-    public Optional<Patient> getPatientsById(Long id){
-    Optional<Patient> patients = patientRepository.findById(id);
-    return patients;
+    public Optional<Patient> getPatientsById(Long id) {
+        Optional<Patient> patients = patientRepository.findById(id);
+        return patients;
     }
-//Insert Patient into Database
-    public String postPatient(PatientDTO pat){
-    Patient patient = new Patient();
-        AccountRestDTO accountRestDTO=new AccountRestDTO();
-        Patient findPatientByMobile = patientRepository.findByPhoneNo(pat.getPhoneNo());
-        if(findPatientByMobile == null) {
-            corrId = UUID.randomUUID();
-            patient.setName(pat.getName());
 
-            patient.setCreatedAt(new Date());
-            patient.setCreatedBy(username());
-            patient.setCnic(pat.getCnic());
-            patient.setPhoneNo(pat.getPhoneNo());
-            patient.setAge(pat.getAge());
-            patient.setGender(pat.getGender());
-            patient.setAddress(pat.getAddress());
-            patient.setHusbandOfAndFatherOf(pat.getHusbandOfAndFatherOf());
-            patient.setRegistrationDate(pat.getRegistrationDate());
-            patient.setGynAndObsRegistration(pat.getGynAndObsRegistration());
-            patient.setStatus("Active");
-            patient.setAccountNo(corrId.toString());
-            patient.setStatus("Active");
-            patient.setDate(new Date());
+    //Insert Patient into Database
+    public String postPatient(PatientDTO pat) {
+
+            Patient patient = new Patient();
+            AccountRestDTO accountRestDTO = new AccountRestDTO();
+            Patient findPatientByMobile = patientRepository.findByPhoneNo(pat.getPhoneNo());
+            if (findPatientByMobile == null) {
+                corrId = UUID.randomUUID();
+                patient.setName(pat.getName());
+
+                patient.setCreatedAt(new Date());
+                patient.setCreatedBy(username());
+                patient.setCnic(pat.getCnic());
+                patient.setPhoneNo(pat.getPhoneNo());
+                patient.setAge(pat.getAge());
+                patient.setGender(pat.getGender());
+                patient.setAddress(pat.getAddress());
+                patient.setHusbandOfAndFatherOf(pat.getHusbandOfAndFatherOf());
+                patient.setRegistrationDate(pat.getRegistrationDate());
+                patient.setGynAndObsRegistration(pat.getGynAndObsRegistration());
+                patient.setStatus("Active");
+                patient.setAccountNo(corrId.toString());
+                patient.setStatus("Active");
+                patient.setDate(new Date());
 
 //       if patient is registered in gynyAndObs
 
-            patientRepository.save(patient);
-            //Creating new patient account
-            accountRestDTO.setId(patient.getAccountNo());
-            accountRestDTO.setGender(pat.getGender());
-            accountRestDTO.setName(pat.getName());
-            accountRestDTO.setAccountType("Patient Account");
-            RestTemplateResponseDTO result = restTemplate.postForObject(url, accountRestDTO, RestTemplateResponseDTO.class);
+//            patientRepository.save(patient);
+                //Creating new patient account
+                accountRestDTO.setId(patient.getAccountNo());
+                accountRestDTO.setGender(pat.getGender());
+                accountRestDTO.setName(pat.getName());
+                accountRestDTO.setAccountType("Patient Account");
+                RestTemplateResponseDTO result = restTemplate.postForObject(url, accountRestDTO, RestTemplateResponseDTO.class);
 //00 Means posted successfully 01 means duplicate
-
+        if(result.getCode().equalsIgnoreCase("200")){
+            patientRepository.save(patient);
             return "{\"SAVEDSUCCESFULLY\":1}";
         }
         else{
             return "{\"NOT SUCCESFULL\":1}";
         }
-    }
+
+            } else {
+                return "{\"NOT SUCCESFULL\":1}";
+            }
+
+
+        }
+
+
 
     public String delPatient(){
     return "DELETED SUCCESFULLY";

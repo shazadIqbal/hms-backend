@@ -12,6 +12,7 @@ public class PatientMonitorDTO {
     private Long opd;
     private Long total;
     private Long lab;
+    private Long patientPackage;
     private Long dues;
 
     private Boolean gynAndObsRegistration;
@@ -26,7 +27,7 @@ public class PatientMonitorDTO {
     public PatientMonitorDTO() {
     }
 
-    public PatientMonitorDTO(Long id, String name, String number, Date date, Long er, Long opd, Long total, Long lab, Long dues, Boolean gynAndObsRegistration, String husbandOfAndFatherOf, Date registrationDate, Long admit, String admitLabel, Long gyne, Long obs) {
+    public PatientMonitorDTO(Long id, String name, String number, Date date, Long er, Long opd, Long total, Long lab, Long patientPackage, Long dues, Boolean gynAndObsRegistration, String husbandOfAndFatherOf, Date registrationDate, Long admit, String admitLabel, Long gyne, Long obs) {
         this.id = id;
         this.name = name;
         this.number = number;
@@ -35,6 +36,7 @@ public class PatientMonitorDTO {
         this.opd = opd;
         this.total = total;
         this.lab = lab;
+        this.patientPackage = patientPackage;
         this.dues = dues;
         this.gynAndObsRegistration = gynAndObsRegistration;
         this.husbandOfAndFatherOf = husbandOfAndFatherOf;
@@ -172,6 +174,14 @@ public class PatientMonitorDTO {
 
     public void setObs(Long obs) {
         this.obs = obs;
+    }
+
+    public Long getPatientPackage() {
+        return patientPackage;
+    }
+
+    public void setPatientPackage(Long patientPackage) {
+        this.patientPackage = patientPackage;
     }
 }
 

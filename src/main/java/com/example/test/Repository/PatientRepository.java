@@ -23,4 +23,8 @@ public interface PatientRepository extends JpaRepository<Patient,Long> {
     @Query(value= "select * from patient where date between  :from AND :till",nativeQuery = true)
     public List<Patient> getCountOfPatientByDate(@Param("from") String from,@Param("till") String till);
 
+
+    @Query(value = "select * from patient where status = 'ACTIVE' ", nativeQuery = true)
+    public List<Patient> getAllPatients();
+
 }

@@ -8,10 +8,10 @@ import java.util.Date;
 public class PanelFacility {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    Long id;
-    String facilityName;
-    Date date;
-    String status;
+    private Long id;
+    private String facilityName;
+    private Date date;
+    private String status;
     private String CreatedBy;
     private String UpdatedBy;
     private Date CreatedAt;
