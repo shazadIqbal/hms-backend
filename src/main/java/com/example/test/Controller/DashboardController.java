@@ -2,10 +2,8 @@ package com.example.test.Controller;
 
 
 import com.example.test.Commons.Transactions;
-import com.example.test.DTO.DashboardReportDTO;
 import com.example.test.DTO.DashboardResponseDTO;
 import com.example.test.DTO.GetReportsByTimeDTO;
-import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.Service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -55,5 +53,15 @@ public class DashboardController {
     public List<Transactions> gatAllTransactions(@RequestBody GetReportsByTimeDTO getReportsByTimeDTO){
         return dashboardService.getAlltransactions(getReportsByTimeDTO);
     }
+
+    @PostMapping("/hospitalreports")
+    public List<Transactions> getHospitalTransactions(@RequestBody GetReportsByTimeDTO getReportsByTimeDTO){
+        return  dashboardService.getAllHospitalTransactions(getReportsByTimeDTO);
+    }
+    @PostMapping("/doctortransactions")
+    public List<Transactions> getDoctorTransactions(@RequestBody GetReportsByTimeDTO getReportsByTimeDTO){
+        return  dashboardService.getAllDoctorTransactions(getReportsByTimeDTO);
+    }
+
 
 }

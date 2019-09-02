@@ -28,6 +28,18 @@ public class RestTemplateResponseDTO<T> {
         UpdateAt = updateAt;
     }
 
+    public RestTemplateResponseDTO(String code, String message, List<T> bodyList) {
+        this.code = code;
+        this.message = message;
+        this.bodyList = bodyList;
+    }
+
+    public RestTemplateResponseDTO(String code, String message, T body) {
+        this.code = code;
+        this.message = message;
+        this.body = body;
+    }
+
     public String getCode() {
         return code;
     }

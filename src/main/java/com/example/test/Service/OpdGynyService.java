@@ -51,6 +51,9 @@ public class OpdGynyService {
         request.setTransactionRefId(ref.randomUUID().toString());
         request.setOperationType("GYNY");
         request.setTransactionType("DEBIT");
+        request.setSharePercent(data.getDoctors().getShare());
+        request.setShareAccountNo(data.getDoctors().getAccountNo());
+        request.setShareDescription(shareDescription(patient.getName(), data.getDoctors()));
         request.setDescription(descriptionList(patient.getName(), data.getDoctors()));
         RestTemplateResponseDTO response = restTemplate.postForObject(url, request, RestTemplateResponseDTO.class);
 
@@ -71,6 +74,11 @@ public class OpdGynyService {
         String des = "This"+patientName + " avails " + " this "+ doctors.getFullName();
         return des;
 
+    }
+
+    public String shareDescription(String patientName, Doctor doctors){
+        String des = "Dr. " + doctors.getFullName() + " shares via " + patientName;
+        return des;
     }
 
     public String username()
