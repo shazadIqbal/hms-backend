@@ -1,5 +1,6 @@
 package com.example.test.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -33,10 +34,12 @@ public class Patient {
 
 
     @OneToMany(mappedBy = "patient")
+
     private List<History> history;
 
     @OneToMany(mappedBy = "patientLab")
-    @JsonIgnore
+//    @JsonIgnore
+    @JsonBackReference
     private List<PatientLabtestDetails> patientLabtestDetails;
 
     public Patient() {
