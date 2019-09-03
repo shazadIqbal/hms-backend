@@ -7,7 +7,7 @@ public class OpdPackageDTO {
 
     String packageName;
     String packageFacility;
-    Double cashRecieved;
+    Double cashReceived;
     Long discount;
     Double total;
     Long id;
@@ -20,10 +20,10 @@ public class OpdPackageDTO {
     }
 
 
-    public OpdPackageDTO(String packageName, Double cashRecieved, Long discount, Double total, Long id,String createdBy, String updatedBy, Date createdAt, Date updateAt, String packageFacility) {
+    public OpdPackageDTO(String packageName, Double cashReceived, Long discount, Double total, Long id, String createdBy, String updatedBy, Date createdAt, Date updateAt, String packageFacility) {
         this.packageName = packageName;
         this.packageFacility = packageFacility;
-        this.cashRecieved = cashRecieved;
+        this.cashReceived = cashReceived;
         this.discount = discount;
         this.total = total;
         this.id = id;
@@ -41,12 +41,12 @@ public class OpdPackageDTO {
         this.packageName = packageName;
     }
 
-    public Double getCashRecieved() {
-        return cashRecieved;
+    public Double getCashReceived() {
+        return cashReceived;
     }
 
-    public void setCashRecieved(Double cashRecieved) {
-        this.cashRecieved = cashRecieved;
+    public void setCashReceived(Double cashReceived) {
+        this.cashReceived = cashReceived;
     }
 
     public Long getDiscount() {

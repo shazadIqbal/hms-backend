@@ -68,6 +68,7 @@ public class PatientMonitorService {
             List<Transactions> admit = new ArrayList<>();
             List<Transactions> gyne = new ArrayList<>();
             List<Transactions> obs = new ArrayList<>();
+            List<Transactions> patientPack = new ArrayList<>();
 
             long dues = 0;
             transactions.forEach((v) ->
@@ -87,6 +88,8 @@ public class PatientMonitorService {
                     gyne.add(v);
                 } else if (v.getOperationType().equalsIgnoreCase("OBSERVATION")){
                     obs.add(v);
+                } else if (v.getOperationType().equalsIgnoreCase("PACKAGE")){
+                    patientPack.add(v);
                 }
 
 
@@ -98,6 +101,7 @@ public class PatientMonitorService {
             long admitTotal = 0;
             long gyneTotal = 0;
             long obsTotal = 0;
+            long patientPackTotal = 0;
 
             for (Transactions e : er) {
                 dues += e.getDues();
@@ -125,9 +129,14 @@ public class PatientMonitorService {
                 obsTotal += ob.getTotalAmount();
             }
 
+            for (Transactions pp : patientPack) {
+                dues += pp.getDues();
+                patientPackTotal += pp.getTotalAmount();
+            }
+
 
             // plus admit in total
-            long total = labTotal + opdTotal + erTotal + admitTotal + gyneTotal + obsTotal;
+            long total = labTotal + opdTotal + erTotal + admitTotal + gyneTotal + obsTotal + patientPackTotal;
 
 
             patientMonitorDTO.setId(patient.getId());
@@ -143,6 +152,7 @@ public class PatientMonitorService {
             patientMonitorDTO.setOpd(opdTotal);
             patientMonitorDTO.setGyne(gyneTotal);
             patientMonitorDTO.setObs(obsTotal);
+            patientMonitorDTO.setPatientPackage(patientPackTotal);
             patientMonitorDTO.setTotal(total);
             // new field for admit
             patientMonitorDTO.setAdmit(admitTotal);

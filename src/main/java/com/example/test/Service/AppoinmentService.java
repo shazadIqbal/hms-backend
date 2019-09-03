@@ -92,15 +92,16 @@ public class AppoinmentService {
     }
     public List<Appoinment> getAllAppoinment(){
 
-        List<Appoinment> list= appoinmentRepository.findAll();
-        List<Appoinment> responseList=new ArrayList<>();
-        for(Appoinment A : list){
-            if(A.getStatus().equalsIgnoreCase("ACTIVE")){
-
-                responseList.add(A);
-            }
-        }
-        return responseList;
+        List<Appoinment> appoinmentList = appoinmentRepository.getAllAppoinments();
+//        List<Appoinment> responseList=new ArrayList<>();
+//        for(Appoinment A : list){
+//            if(A.getStatus().equalsIgnoreCase("ACTIVE")){
+//
+//                responseList.add(A);
+//            }
+//        }
+//        return responseList;
+        return appoinmentList;
 
     }
     public String statusDone(Long id){

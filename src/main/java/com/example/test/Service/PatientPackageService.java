@@ -25,14 +25,14 @@ public class PatientPackageService {
     UserDao userDao;
 
     public List<PatientPackage> getPackages() {
-        List<PatientPackage> list = patientPackageRepository.findAll();
-        List<PatientPackage> responseList = new ArrayList<>();
-        list.forEach(patientPackage -> {
-            if(patientPackage.getStatus().equalsIgnoreCase("Active")){
-                responseList.add(patientPackage);
-            }
-        });
-        return responseList;
+        List<PatientPackage> list = patientPackageRepository.getAllPakages();
+//        List<PatientPackage> responseList = new ArrayList<>();
+//        list.forEach(patientPackage -> {
+//            if(patientPackage.getStatus().equalsIgnoreCase("Active")){
+//                responseList.add(patientPackage);
+//            }
+//        });
+        return list;
     }
 
     public String postPackage(PatientPackageDTO pack) {

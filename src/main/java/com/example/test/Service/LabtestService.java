@@ -54,15 +54,15 @@ public class LabtestService {
     }
 
     public List<Labtestcategory> getCategory(){
-        List<Labtestcategory> list = labtestCategoryRepository.findAll();
-        List<Labtestcategory> listFiltered=new ArrayList();
-        list.forEach(c->{
-            if(c.getStatus().equalsIgnoreCase("ACTIVE"))
-            {
-                listFiltered.add(c);
-            }
-        });
-        return listFiltered;
+        List<Labtestcategory> list = labtestCategoryRepository.getAllLabCat();
+//        List<Labtestcategory> listFiltered=new ArrayList();
+//        list.forEach(c->{
+//            if(c.getStatus().equalsIgnoreCase("ACTIVE"))
+//            {
+//                listFiltered.add(c);
+//            }
+//        });
+        return list;
     }
 
     public String postLabTest(LabtestDTO labtestDTO){
@@ -82,14 +82,14 @@ public class LabtestService {
     }
 
     public List<Labtest> getLabTest() {
-        List<Labtest> list = labtestRepository.findAll();
-        List<Labtest> listFiltered = new ArrayList<>();
-        list.forEach(i -> {
-            if (i.getStatus().equalsIgnoreCase("ACTIVE")){
-                listFiltered.add(i);
-            }
-        });
-        return listFiltered;
+        List<Labtest> list = labtestRepository.getAllLabTests();
+//        List<Labtest> listFiltered = new ArrayList<>();
+//        list.forEach(i -> {
+//            if (i.getStatus().equalsIgnoreCase("ACTIVE")){
+//                listFiltered.add(i);
+//            }
+//        });
+        return list;
     }
 
     public List<Labtest> delLabTest(Long id) {

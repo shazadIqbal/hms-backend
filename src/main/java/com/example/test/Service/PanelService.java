@@ -3,6 +3,7 @@ package com.example.test.Service;
 import com.example.test.DTO.DoctorDTO;
 import com.example.test.DTO.PanelDTO;
 import com.example.test.DTO.PanelFacilityDTO;
+import com.example.test.Model.Facility;
 import com.example.test.Model.Panel;
 import com.example.test.Model.PanelFacility;
 import com.example.test.Model.User;
@@ -89,15 +90,15 @@ public class PanelService {
 
             }
             public List<Panel> getAllPanel(){
-                List<Panel> list = panelRepository.findAll();
-                List<Panel>  responseList = new ArrayList<>();
-
-                for(Panel p : list){
-                    if(p.getStatus().equalsIgnoreCase("ACTIVE")){
-                        responseList.add(p);
-                    }
-                }
-                return responseList;
+                List<Panel> list = panelRepository.getAllPanels();
+//                List<Panel>  responseList = new ArrayList<>();
+//
+//                for(Panel p : list){
+//                    if(p.getStatus().equalsIgnoreCase("ACTIVE")){
+//                        responseList.add(p);
+//                    }
+//                }
+                return list;
             }
 
             public String addNewFacility(PanelFacilityDTO facility ){
@@ -106,9 +107,9 @@ public class PanelService {
                 if(panelFacility != null){
                     return  "{\"Already Exsist\":1}";
                 }else{
-                    PanelFacility newFacility= new PanelFacility();
-                    panelFacility.setCreatedAt(new Date());
-                    panelFacility.setCreatedBy(username());
+                    PanelFacility newFacility = new PanelFacility();
+                    newFacility.setCreatedAt(new Date());
+                    newFacility.setCreatedBy(username());
                     newFacility.setFacilityName(facility.getFacilityName());
                     newFacility.setStatus("ACTIVE");
                     newFacility.setDate(new Date());
@@ -121,18 +122,14 @@ public class PanelService {
 
             }
              public  List <PanelFacility> getFacility(){
-               List< PanelFacility> facility=facilityRepository.findAll();
-               List<PanelFacility> responceList =  new ArrayList<>();
-                 for(PanelFacility f : facility){
-                     if(f.getStatus().equalsIgnoreCase("ACTIVE")){
-                         responceList.add(f);
-                     }
-                 }
-                 return responceList;
-
-
-
-
+               List< PanelFacility> facility=facilityRepository.getAllPanelFacilities();
+//               List<PanelFacility> responceList =  new ArrayList<>();
+//                 for(PanelFacility f : facility){
+//                     if(f.getStatus().equalsIgnoreCase("ACTIVE")){
+//                         responceList.add(f);
+//                     }
+//                 }
+                 return facility;
              }
 
     public String username()

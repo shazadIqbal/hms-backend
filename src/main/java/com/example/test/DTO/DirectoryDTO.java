@@ -8,13 +8,13 @@ public class DirectoryDTO {
     String name;
     String number;
     String address;
-    Integer erNo;
+    String erNo;
     private String CreatedBy;
     private String UpdatedBy;
     private Date CreatedAt;
     private Date UpdateAt;
 
-    public DirectoryDTO(String name, String number, String address, Integer erNo, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
+    public DirectoryDTO(String name, String number, String address, String erNo, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.name = name;
         this.number = number;
         this.address = address;
@@ -53,11 +53,11 @@ public class DirectoryDTO {
         this.address = address;
     }
 
-    public Integer getErNo() {
+    public String getErNo() {
         return erNo;
     }
 
-    public void setErNo(Integer erNo) {
+    public void setErNo(String erNo) {
         this.erNo = erNo;
     }
 
