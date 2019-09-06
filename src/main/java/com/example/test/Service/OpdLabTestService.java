@@ -1,5 +1,6 @@
 package com.example.test.Service;
 
+import com.example.test.Commons.LabTestRegistration;
 import com.example.test.DTO.OpdLabTestDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.DTO.TransactionRestDTO;
@@ -11,6 +12,7 @@ import com.example.test.Repository.PatientRepository;
 import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -38,8 +40,9 @@ public class OpdLabTestService {
     @Transient
     private UUID ref ;
 
-    RestTemplate restTemplate = new RestTemplate();
-
+//    RestTemplate restTemplate = new RestTemplate();
+@Autowired
+RestTemplate restTemplate;
     public String saveToAccounts(OpdLabTestDTO data) {
 
 //        for(int i=0; i<data.getLabTests().length;i++){
@@ -113,6 +116,17 @@ public class OpdLabTestService {
         List<PatientLabtestDetails> patientLabtestDetails = patientLabtestDetailsRepository.findAll();
         RestTemplateResponseDTO response = new RestTemplateResponseDTO("200","Get Successfully",patientLabtestDetails);
         return response;
+    }
+
+    public List<LabTestRegistration> getLabtests(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3NTMzNjk5LCJleHAiOjE1Njc1NTE2OTl9.SjYEgsKCz54_Z1bilLdPJdXCZnFHP7IctD_Fx2yF77U");
+        HttpEntity<String> entity = new HttpEntity<String>(headers);
+//        RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.getForObject("http://localhost:8082/api/labtestregistration/", RestTemplateResponseDTO.class);
+        ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange("http://localhost:8082/api/labtestregistration/opd", HttpMethod.GET, entity, RestTemplateResponseDTO.class);
+    List<LabTestRegistration> labTestRegistrations = response.getBody().getBodyList();
+       return labTestRegistrations;
     }
 
 
