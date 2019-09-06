@@ -1,5 +1,6 @@
 package com.example.test.Controller;
 
+import com.example.test.Commons.LabTestRegistration;
 import com.example.test.DTO.OpdLabTestDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.Model.PatientLabtestDetails;
@@ -25,5 +26,9 @@ public class OpdLabTestController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public RestTemplateResponseDTO getPatientLabtestDetails(){
         return opdLabTestService.getPatientLabtestDetails();
+    }
+    @RequestMapping(value = "/labtest/", method = RequestMethod.GET)
+    public List<LabTestRegistration> getLabTestRegistration(){
+       return opdLabTestService.getLabtests();
     }
 }

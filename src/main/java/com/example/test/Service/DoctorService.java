@@ -9,7 +9,6 @@ import com.example.test.Model.Doctor;
 import com.example.test.Model.User;
 import com.example.test.Repository.DirectoryRepository;
 import com.example.test.Repository.DoctorRepository;
-//import org.graalvm.compiler.nodes.calc.IntegerDivRemNode;
 import com.example.test.Repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,9 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Transient;
-import javax.print.Doc;
-import javax.validation.constraints.Null;
 import java.util.*;
+
+//import org.graalvm.compiler.nodes.calc.IntegerDivRemNode;
 
 @Service
 public class DoctorService {
