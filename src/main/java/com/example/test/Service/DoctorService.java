@@ -41,40 +41,40 @@ public class DoctorService {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    public List<DoctorDTO> getDoctors() {
-        List<Doctor> list = doctorRepository.findAll();
-        List<DoctorDTO> responseList = new ArrayList<>();
-        list.forEach(doctor -> {
-            DoctorDTO doctorDto = new DoctorDTO();
-            doctorDto.setMrNo(doctor.getMrno());
-            doctorDto.setFullName(doctor.getFullName());
-            doctorDto.setEmail(doctor.getEmail());
-            doctorDto.setAddress(doctor.getAddress());
-            doctorDto.setCreatedDate(doctor.getCreatedDate());
-            doctorDto.setCnic(doctor.getCnic());
-            doctorDto.setGender(doctor.getGender());
-            doctorDto.setSallary(doctor.getSallary());
-            doctorDto.setFees(doctor.getFees());
-            doctorDto.setMobile(doctor.getMobile());
-            doctorDto.setEmrNo(doctor.getEmrNo());
-            doctorDto.setAddress(doctor.getAddress());
-            doctorDto.setDateOfbirth(doctor.getDateOfbirth());
-            doctorDto.setNationality(doctor.getNationality());
-//            doctorDto.setQualification(doctor.getQualification());
-            doctorDto.setReligion(doctor.getReligion());
-            doctorDto.setHoursday(doctor.getHoursday());
-            doctorDto.setHoursday(doctor.getHoursday());
-            doctorDto.setDaysservice(doctor.getDaysservice());
-            doctorDto.setPosition(doctor.getPosition());
-            doctorDto.setDateOfbirth(doctor.getDateOfbirth());
-            doctorDto.setTimeIn(doctor.getTimeIn());
-            doctorDto.setTimeOut(doctor.getTimeOut());
-            doctorDto.setQualification(doctor.getQualification());
-            doctorDto.setAccountNo(doctor.getAccountNo());
-            doctorDto.setShare(doctor.getShare());
-            responseList.add(doctorDto);
-        });
-        return responseList;
+    public List<Doctor> getDoctors() {
+        List<Doctor> list = doctorRepository.getAllDoctors();
+//        List<Doctor> responseList = new ArrayList<>();
+//        list.forEach(doctors -> {
+//            Doctor doctor = new Doctor();
+//            doctor.setMrno(doctor.getMrno());
+//            doctor.setFullName(doctor.getFullName());
+//            doctor.setEmail(doctor.getEmail());
+//            doctor.setAddress(doctor.getAddress());
+//            doctor.setCreatedDate(doctor.getCreatedDate());
+//            doctor.setCnic(doctor.getCnic());
+//            doctor.setGender(doctor.getGender());
+//            doctor.setSallary(doctor.getSallary());
+//            doctor.setFees(doctor.getFees());
+//            doctor.setMobile(doctor.getMobile());
+//            doctor.setEmrNo(doctor.getEmrNo());
+//            doctor.setAddress(doctor.getAddress());
+//            doctor.setDateOfbirth(doctor.getDateOfbirth());
+//            doctor.setNationality(doctor.getNationality());
+////            doctorDto.setQualification(doctor.getQualification());
+//            doctor.setReligion(doctor.getReligion());
+//            doctor.setHoursday(doctor.getHoursday());
+//            doctor.setHoursday(doctor.getHoursday());
+//            doctor.setDaysservice(doctor.getDaysservice());
+//            doctor.setPosition(doctor.getPosition());
+//            doctor.setDateOfbirth(doctor.getDateOfbirth());
+//            doctor.setTimeIn(doctor.getTimeIn());
+//            doctor.setTimeOut(doctor.getTimeOut());
+//            doctor.setQualification(doctor.getQualification());
+//            doctor.setAccountNo(doctor.getAccountNo());
+//            doctor.setShare(doctor.getShare());
+//            responseList.add(doctors);
+//        });
+        return list;
     }
 
     public String postDoctorFromService(DoctorDTO doc) {
@@ -111,13 +111,13 @@ public class DoctorService {
                 doctor.setEmrNo(doc.getEmrNo());
                 doctor.setDaysservice((doc.getDaysservice()));
                 doctor.setNationality((doc.getNationality()));
-                doctor.setEmrNo(doc.getEmrNo());
                 doctor.setSpeciality(doc.getSpeciality());
                 doctor.setHoursday(doc.getHoursday());
                 doctor.setTimeIn(doc.getTimeIn());
                 doctor.setTimeOut(doc.getTimeOut());
                 doctor.setQualification(doc.getQualification());
                 doctor.setShare(doc.getShare());
+                doctor.setStatus("Active");
                 directory.setName(doc.getFullName());
                 directory.setAddress(doc.getAddress());
                 directory.setStatus("Active");
@@ -195,9 +195,17 @@ public class DoctorService {
 
     }
 
-    public String delDoctor(){
+    public List<Doctor> delDoctor(Long mrNo){
+        Optional<Doctor> response = doctorRepository.findById(mrNo);
+        if(response.isPresent()) {
+            Doctor doctor = response.get();
+            doctor.setStatus("Inactive");
+            doctorRepository.save(doctor);
+            return getDoctors();
+        }else {
+            return null;
+        }
         //listDoctor.clear();
-        return "{\"DELETED SUCCESFULLY\":1}";
     }
 
     //    Get Doctor by id will get only that doctor whose id is passed

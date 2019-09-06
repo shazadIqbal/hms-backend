@@ -117,6 +117,7 @@ RestTemplate restTemplate;
         RestTemplateResponseDTO response = new RestTemplateResponseDTO("200","Get Successfully",patientLabtestDetails);
         return response;
     }
+
     public List<LabTestRegistration> getLabtests(){
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

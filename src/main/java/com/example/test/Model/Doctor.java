@@ -8,6 +8,7 @@ import java.util.Date;
 @Table(name="Doctor")
 public class Doctor {
 
+
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     Long mrno;
@@ -31,6 +32,7 @@ public class Doctor {
     String timeIn;
     String timeOut;
     Date createdDate;
+    String status;
     private String accountNo;
     private Integer share;
     private String CreatedBy;
@@ -41,7 +43,7 @@ public class Doctor {
     public Doctor() {
     }
 
-    public Doctor(String fullName, String mobile, String emrNo, String nationality, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, Integer sallary, String dateOfbirth, Long fees, String gender, String timeIn, String timeOut, Date createdDate, String accountNo, Integer share, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
+    public Doctor(String fullName, String mobile, String emrNo, String nationality, String status, String address, String daysservice, Integer cnic, String email, String speciality, String qualification, String hoursday, String position, String religion, Integer sallary, String dateOfbirth, Long fees, String gender, String timeIn, String timeOut, Date createdDate, String accountNo, Integer share, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.fullName = fullName;
         this.mobile = mobile;
         this.emrNo = emrNo;
@@ -63,6 +65,7 @@ public class Doctor {
         this.timeOut = timeOut;
         this.createdDate = createdDate;
         this.accountNo = accountNo;
+        this.status = status;
         this.share = share;
         CreatedBy = createdBy;
         UpdatedBy = updatedBy;
@@ -284,6 +287,14 @@ public class Doctor {
 
     public void setUpdateAt(Date updateAt) {
         UpdateAt = updateAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
 

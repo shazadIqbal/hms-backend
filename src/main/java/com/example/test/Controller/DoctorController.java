@@ -22,7 +22,7 @@ public class DoctorController {
     DoctorRepository doctorRepository;
 
     @RequestMapping(value = "/" ,method = RequestMethod.GET)
-    public List<DoctorDTO> getDoctors(){
+    public List<Doctor> getDoctors(){
 
             return doctorService.getDoctors();
     }
@@ -34,9 +34,9 @@ public class DoctorController {
         return doctorService.postDoctorFromService(doc);
     }
 
-    @RequestMapping( value = "/",method = RequestMethod.DELETE)
-    public String delDoctor(){
-        return doctorService.delDoctor();
+    @RequestMapping( value = "/{mrNo}",method = RequestMethod.DELETE)
+    public List<Doctor> delDoctor(@PathVariable("mrNo") Long mrNo){
+        return doctorService.delDoctor(mrNo);
     }
 
     @GetMapping("/{mrNo}")

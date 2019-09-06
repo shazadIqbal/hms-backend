@@ -27,8 +27,10 @@ public class OpdLabTestController {
     public RestTemplateResponseDTO getPatientLabtestDetails(){
         return opdLabTestService.getPatientLabtestDetails();
     }
+
     @RequestMapping(value = "/labtest/", method = RequestMethod.GET)
     public List<LabTestRegistration> getLabTestRegistration(){
        return opdLabTestService.getLabtests();
     }
+
 }
