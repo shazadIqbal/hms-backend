@@ -77,12 +77,12 @@ public class PanelService {
                 panelsave.setPanelName(panel.getPanelName());
                 panelsave.setPanelType(panel.getPanelType());
                 panelsave.setPanelFacility(panel.getPanelFacility());
-                String startDate=panel.getPanelStartDate().substring(0,10);
-                String endDate=panel.getPanelStartDate().substring(0,10);
+//                String startDate=panel.getPanelStartDate().substring(0,10);
+//                String endDate=panel.getPanelStartDate().substring(0,10);
                 panelsave.setCreatedAt(new Date());
                 panelsave.setCreatedBy(username());
-                panelsave.setPanelStartDate(startDate);
-                panelsave.setPanelEndDate(endDate);
+//                panelsave.setPanelStartDate(startDate);
+//                panelsave.setPanelEndDate(endDate);
                 panelsave.setStatus("ACTIVE");
                 panelsave.setDate(new Date());
                 panelRepository.save(panelsave);
