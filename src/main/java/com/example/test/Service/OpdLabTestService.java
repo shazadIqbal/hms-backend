@@ -121,7 +121,7 @@ RestTemplate restTemplate;
     public List<LabTestRegistration> getLabtests(){
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3NTMzNjk5LCJleHAiOjE1Njc1NTE2OTl9.SjYEgsKCz54_Z1bilLdPJdXCZnFHP7IctD_Fx2yF77U");
+        headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3Nzk2MzE5LCJleHAiOjE1Njc4MTQzMTl9.UEngv2sFxmfiynigNMt5785hK9QAsNoKoi-WE6iOGBs");
         HttpEntity<String> entity = new HttpEntity<String>(headers);
 //        RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.getForObject("http://localhost:8082/api/labtestregistration/", RestTemplateResponseDTO.class);
         ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange("http://localhost:8082/api/labtestregistration/opd", HttpMethod.GET, entity, RestTemplateResponseDTO.class);
