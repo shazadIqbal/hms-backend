@@ -13,6 +13,10 @@ public class RestTemplateResponseDTO<T> {
     private Date CreatedAt;
     private Date UpdateAt;
 
+    public RestTemplateResponseDTO(String code, String message) {
+        this.code = code;
+        this.message = message;
+    }
 
     public RestTemplateResponseDTO() {
     }
