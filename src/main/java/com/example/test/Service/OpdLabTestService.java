@@ -21,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.persistence.Transient;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -121,12 +122,26 @@ RestTemplate restTemplate;
     public List<LabTestRegistration> getLabtests(){
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3NTMzNjk5LCJleHAiOjE1Njc1NTE2OTl9.SjYEgsKCz54_Z1bilLdPJdXCZnFHP7IctD_Fx2yF77U");
+        headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3ODc4MzIxLCJleHAiOjE1Njc4OTYzMjF9.SenIskJhEH0YXSR5cRNCsTZJpRNj8FkfkNnd-_HapvU");
         HttpEntity<String> entity = new HttpEntity<String>(headers);
 //        RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.getForObject("http://localhost:8082/api/labtestregistration/", RestTemplateResponseDTO.class);
         ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange("http://localhost:8082/api/labtestregistration/opd", HttpMethod.GET, entity, RestTemplateResponseDTO.class);
     List<LabTestRegistration> labTestRegistrations = response.getBody().getBodyList();
        return labTestRegistrations;
+    }
+    public RestTemplateResponseDTO changeLabtestDetailsStatus(Long id){
+        Optional<PatientLabtestDetails> patientLabtest = patientLabtestDetailsRepository.findById(id);
+       // PatientLabtestDetails patientLabtestDetails = patientLabtestDetailsRepository.findById(id).get();
+        if(patientLabtest.isPresent()) {
+            PatientLabtestDetails patientLabtestDetails = patientLabtest.get();
+            patientLabtestDetails.setStatus("Completed");
+            patientLabtestDetailsRepository.save(patientLabtestDetails);
+            return new RestTemplateResponseDTO("200", "Updated Successfully");
+        }
+        else
+        {
+            return new RestTemplateResponseDTO("500", "No Value Present");
+        }
     }
 
 

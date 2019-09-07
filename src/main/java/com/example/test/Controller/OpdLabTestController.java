@@ -3,7 +3,6 @@ package com.example.test.Controller;
 import com.example.test.Commons.LabTestRegistration;
 import com.example.test.DTO.OpdLabTestDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
-import com.example.test.Model.PatientLabtestDetails;
 import com.example.test.Service.OpdLabTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +30,11 @@ public class OpdLabTestController {
     @RequestMapping(value = "/labtest/", method = RequestMethod.GET)
     public List<LabTestRegistration> getLabTestRegistration(){
        return opdLabTestService.getLabtests();
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    public RestTemplateResponseDTO changeLabtestStatus(@PathVariable("id") Long id){
+        return opdLabTestService.changeLabtestDetailsStatus(id);
     }
 
 }
