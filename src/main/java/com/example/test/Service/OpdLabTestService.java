@@ -38,6 +38,9 @@ public class OpdLabTestService {
     @Value("${transaction.url}")
     public  String  url;
 
+    @Value("${user.token}")
+    public String userToken;
+
     @Transient
     private UUID ref ;
 
@@ -122,7 +125,7 @@ RestTemplate restTemplate;
     public List<LabTestRegistration> getLabtests(){
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiLmNvbSIsInNjb3BlcyI6W3siYXV0aG9yaXR5IjoiUk9MRV9BRE1JTiJ9XSwiaXNzIjoiaHR0cDovL2RldmdsYW4uY29tIiwiaWF0IjoxNTY3ODc4MzIxLCJleHAiOjE1Njc4OTYzMjF9.SenIskJhEH0YXSR5cRNCsTZJpRNj8FkfkNnd-_HapvU");
+        headers.set("Authorization", userToken);
         HttpEntity<String> entity = new HttpEntity<String>(headers);
 //        RestTemplateResponseDTO restTemplateResponseDTO = restTemplate.getForObject("http://localhost:8082/api/labtestregistration/", RestTemplateResponseDTO.class);
         ResponseEntity<RestTemplateResponseDTO> response = restTemplate.exchange("http://localhost:8082/api/labtestregistration/opd", HttpMethod.GET, entity, RestTemplateResponseDTO.class);
