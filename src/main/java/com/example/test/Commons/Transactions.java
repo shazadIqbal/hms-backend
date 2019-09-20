@@ -19,10 +19,11 @@ public class Transactions {
     private String UpdatedBy;
     private Date CreatedAt;
     private Date UpdateAt;
+    private boolean flag;
 
 
 
-    public Transactions(Long id, Date transactionDate, Double receivedAmount, Double totalAmount, String transactionType, String description, String currency, String operationType, Double dues, String transactionRefId, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
+    public Transactions(Long id, Date transactionDate, Double receivedAmount, Double totalAmount, String transactionType, String description, String currency, String operationType, Double dues, String transactionRefId, String createdBy, String updatedBy, Date createdAt, Date updateAt, boolean flag) {
         this.id = id;
         this.transactionDate = transactionDate;
         this.receivedAmount = receivedAmount;
@@ -37,6 +38,7 @@ public class Transactions {
         UpdatedBy = updatedBy;
         CreatedAt = createdAt;
         UpdateAt = updateAt;
+        this.flag = flag;
     }
 
     public Transactions() {
@@ -152,5 +154,13 @@ public class Transactions {
 
     public void setDues(Double dues) {
         this.dues = dues;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 }

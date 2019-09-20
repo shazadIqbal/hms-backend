@@ -17,7 +17,6 @@ public class OpdConsultancyController {
 
        return this.opdConsultancyService.saveOpdConsultancyToAccounts(data);
 
-
     }
 
 }

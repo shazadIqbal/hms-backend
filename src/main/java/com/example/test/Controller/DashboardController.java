@@ -6,6 +6,7 @@ import com.example.test.DTO.DashboardResponseDTO;
 import com.example.test.DTO.GetReportsByTimeDTO;
 import com.example.test.Service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -63,5 +64,9 @@ public class DashboardController {
         return  dashboardService.getAllDoctorTransactions(getReportsByTimeDTO);
     }
 
+    @PostMapping("/faultyreports")
+    public List<Transactions> getAllFaultyTransactions(@RequestBody GetReportsByTimeDTO getReportsByTimeDTO){
+        return dashboardService.getAllFaultyTransactions(getReportsByTimeDTO);
+    }
 
 }
