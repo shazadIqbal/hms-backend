@@ -47,6 +47,7 @@ public class OpdConsultancyService {
         request.setTotalAmount(data.getTotal());
         request.setCreatedAt(new Date());
         request.setCreatedBy(username());
+        request.setFlag(data.isFlag());
         request.setOperationType("CONSULTANCY");
         // SSET TRAnsaction reff id
         request.setTransactionRefId(ref.randomUUID().toString());

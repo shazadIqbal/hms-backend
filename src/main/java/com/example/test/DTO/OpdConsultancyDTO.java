@@ -15,17 +15,19 @@ public class OpdConsultancyDTO {
     private String UpdatedBy;
     private Date CreatedAt;
     private Date UpdateAt;
+    private boolean flag;
 
     public OpdConsultancyDTO() {
     }
 
-    public OpdConsultancyDTO(Doctor doctors, Double cashRecieved, Long discount, Double total, Long id, Long sallary, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
+    public OpdConsultancyDTO(Doctor doctors, Double cashRecieved, Long discount, Double total, Long id, Long sallary, String createdBy, String updatedBy, Date createdAt, Date updateAt, boolean flag) {
         this.doctors = doctors;
         this.cashRecieved = cashRecieved;
         this.discount = discount;
         this.total = total;
         this.id = id;
         this.sallary = sallary;
+        this.flag = flag;
         CreatedBy = createdBy;
         UpdatedBy = updatedBy;
         CreatedAt = createdAt;
@@ -110,5 +112,13 @@ public class OpdConsultancyDTO {
 
     public void setUpdateAt(Date updateAt) {
         UpdateAt = updateAt;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 }
