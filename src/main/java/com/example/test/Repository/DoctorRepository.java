@@ -19,4 +19,7 @@ public interface DoctorRepository extends JpaRepository<Doctor,Long> {
     @Query(value = "select * from doctor where status= 'ACTIVE' ", nativeQuery = true)
     public List<Doctor> getAllDoctors();
 
+    @Query(value = "select * from doctor where status = 'INACTIVE'", nativeQuery = true)
+    public List<Doctor> getAllInactiveDoctors();
+
 }
