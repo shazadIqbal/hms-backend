@@ -23,18 +23,25 @@ public class ErService {
     public String postEr(ErDTO erDTO){
 
 
-        Er er = new Er();
-        er.setName(erDTO.getName());
-        er.setCreatedAt(new Date());
-        er.setCreatedBy(username());
-        er.setResources(erDTO.getResources());
-        er.setPrice(erDTO.getPrice());
-        er.setExtraCharges(erDTO.getExtraCharges());
-        er.setTotal(erDTO.getTotal());
-        er.setStatus("Active");
-        er.setFacilities(erDTO.getFacilities());
-        erRepository.save(er);
-        return "{\"ADDED SUCCESFULLY\":1}";
+        Er ifexsist = erRepository.findByname(erDTO.getName()) ;
+        if(ifexsist==null) {
+            Er er = new Er();
+            er.setName(erDTO.getName());
+            er.setCreatedAt(new Date());
+            er.setCreatedBy(username());
+            er.setResources(erDTO.getResources());
+            er.setPrice(erDTO.getPrice());
+            er.setExtraCharges(erDTO.getExtraCharges());
+            er.setTotal(erDTO.getTotal());
+            er.setStatus("Active");
+            er.setFacilities(erDTO.getFacilities());
+            erRepository.save(er);
+            return "{\"ADDED SUCCESFULLY\":1}";
+        }
+        else
+        {
+            return "{\"ALREADY EXSIST\":0}";
+        }
     }
     public List<Er> getEr(){
         List<Er> er = erRepository.getAllEr();

@@ -36,18 +36,24 @@ public class PatientPackageService {
     }
 
     public String postPackage(PatientPackageDTO pack) {
-        PatientPackage patientPackage = new PatientPackage();
-        patientPackage.setpName(pack.getpName());
-        patientPackage.setpFacility(pack.getpFacility());
-        patientPackage.setpStartDate(pack.getpStartDate());
-        patientPackage.setpEndDate(pack.getpEndDate());
-        patientPackage.setpSponsor(pack.getpSponsor());
-        patientPackage.setpPrice(pack.getpPrice());
-        patientPackage.setCreatedAt(new Date());
-        patientPackage.setCreatedBy(username());
-        patientPackage.setStatus("Active");
-        patientPackageRepository.save(patientPackage);
-        return "{\"ADDED SUCCESFULLY\":1}";
+        PatientPackage isexsist = patientPackageRepository.findBypNameAndPFacility(pack.getpName() , pack.getpFacility());
+        if(isexsist==null) {
+            PatientPackage patientPackage = new PatientPackage();
+            patientPackage.setpName(pack.getpName());
+            patientPackage.setpFacility(pack.getpFacility());
+            patientPackage.setpStartDate(pack.getpStartDate());
+            patientPackage.setpEndDate(pack.getpEndDate());
+            patientPackage.setpSponsor(pack.getpSponsor());
+            patientPackage.setpPrice(pack.getpPrice());
+            patientPackage.setCreatedAt(new Date());
+            patientPackage.setCreatedBy(username());
+            patientPackage.setStatus("Active");
+            patientPackageRepository.save(patientPackage);
+            return "{\"ADDED SUCCESFULLY\":1 , \"code\":200}";
+        }
+        else{
+            return "{\"Already Exsist\":0 , \"code\":208}";
+        }
     }
 
 

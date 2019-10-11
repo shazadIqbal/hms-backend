@@ -8,14 +8,14 @@ import java.util.Date;
 public class PatientPackage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String pName;
-    String pFacility;
-    Date pStartDate;
-    Date pEndDate;
-    String pSponsor;
-    Long pPrice;
-    String status;
+    private Long id;
+    private String pName;
+    private String pFacility;
+    private Date pStartDate;
+    private Date pEndDate;
+    private String pSponsor;
+    private Long pPrice;
+    private String status;
     private String CreatedBy;
     private String UpdatedBy;
     private Date CreatedAt;
@@ -133,4 +133,6 @@ public class PatientPackage {
     public void setUpdateAt(Date updateAt) {
         UpdateAt = updateAt;
     }
+
+
 }
