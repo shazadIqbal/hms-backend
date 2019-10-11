@@ -17,4 +17,6 @@ public interface ErRepository extends JpaRepository<Er,Long> {
     @Query(value = "select * from er where status = 'ACTIVE' ", nativeQuery = true)
     public List<Er> getAllEr();
 
+    Er findByname(String name);
+
 }
