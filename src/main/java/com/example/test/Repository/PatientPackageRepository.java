@@ -15,4 +15,6 @@ public interface PatientPackageRepository extends JpaRepository<PatientPackage, 
     @Query(value = "select * from patient_package where status = 'ACTIVE' ", nativeQuery = true)
     public List<PatientPackage> getAllPakages();
 
+    PatientPackage findBypNameAndPFacility(String pName,String pFacility);
+
 }

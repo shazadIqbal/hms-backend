@@ -27,6 +27,11 @@ public class DoctorController {
             return doctorService.getDoctors();
     }
 
+    @GetMapping("/getinactivedoctors")
+    public List<Doctor> getInactiveDoctors() {
+        return doctorService.getInactiveDoctors();
+    }
+
 //    Add a new doctor
     @RequestMapping( value = "/",method = RequestMethod.POST)
     public String postDoctorFromService(@RequestBody DoctorDTO doc){
@@ -37,6 +42,11 @@ public class DoctorController {
     @RequestMapping( value = "/{mrNo}",method = RequestMethod.DELETE)
     public List<Doctor> delDoctor(@PathVariable("mrNo") Long mrNo){
         return doctorService.delDoctor(mrNo);
+    }
+
+    @PostMapping("/activedoctor/{mrNo}")
+    public List<Doctor> activeDoctor(@PathVariable("mrNo") Long mrNo) {
+        return doctorService.activeDoctor(mrNo);
     }
 
     @GetMapping("/{mrNo}")

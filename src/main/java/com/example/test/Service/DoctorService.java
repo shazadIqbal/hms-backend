@@ -77,6 +77,11 @@ public class DoctorService {
         return list;
     }
 
+    public List<Doctor> getInactiveDoctors() {
+        List<Doctor> list = doctorRepository.getAllInactiveDoctors();
+        return list;
+    }
+
     public String postDoctorFromService(DoctorDTO doc) {
 
 
@@ -206,6 +211,18 @@ public class DoctorService {
             return null;
         }
         //listDoctor.clear();
+    }
+
+    public List<Doctor> activeDoctor(Long mrNo) {
+        Optional<Doctor> response = doctorRepository.findById(mrNo);
+        if (response.isPresent()) {
+            Doctor doctor = response.get();
+            doctor.setStatus("ACTIVE");
+            doctorRepository.save(doctor);
+            return getDoctors();
+        } else {
+            return null;
+        }
     }
 
     //    Get Doctor by id will get only that doctor whose id is passed
