@@ -17,6 +17,8 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Transient;
 import javax.sql.rowset.spi.SyncResolver;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,7 +31,7 @@ public class PatientService {
     @Autowired
     PatientRepository patientRepository;
 
-    @Value("${account.url}")
+    @Value("${transaction.url}")
     public String url;
 
     @Autowired
@@ -59,7 +61,9 @@ public class PatientService {
 
     //Insert Patient into Database
     public String postPatient(PatientDTO pat) {
-
+//        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+//        Date today = new Date();
+//        Date todayWithZeroTime = formatter.parse(formatter.format(today));
             Patient patient = new Patient();
             AccountRestDTO accountRestDTO = new AccountRestDTO();
             Patient findPatientByMobile = patientRepository.findByPhoneNo(pat.getPhoneNo());
@@ -80,6 +84,10 @@ public class PatientService {
                 patient.setStatus("Active");
                 patient.setAccountNo(corrId.toString());
                 patient.setStatus("Active");
+//                Date date = new Date();
+//                String pattern = "yyyy-MM-dd";
+//                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+//                String convertedDate = simpleDateFormat.format(date);
                 patient.setDate(new Date());
 
 //       if patient is registered in gynyAndObs
