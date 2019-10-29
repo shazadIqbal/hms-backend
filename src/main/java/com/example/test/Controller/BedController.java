@@ -32,4 +32,6 @@ public class BedController {
         return this.bedService.getSelectedBedType(bedType);
 
     }
+
+
 }

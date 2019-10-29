@@ -73,21 +73,25 @@ public class PanelService {
 
             }
             public String savePanel(PanelDTO panel ){
-                Panel panelsave= new Panel();
-                panelsave.setPanelName(panel.getPanelName());
-                panelsave.setPanelType(panel.getPanelType());
-                panelsave.setPanelFacility(panel.getPanelFacility());
+                Panel isexsist =  panelRepository.findByPanelName(panel.getPanelName());
+                if(isexsist == null){
+                    Panel panelsave= new Panel();
+                    panelsave.setPanelName(panel.getPanelName());
+                    panelsave.setPanelType(panel.getPanelType());
+                    panelsave.setPanelFacility(panel.getPanelFacility());
 //                String startDate=panel.getPanelStartDate().substring(0,10);
 //                String endDate=panel.getPanelStartDate().substring(0,10);
-                panelsave.setCreatedAt(new Date());
-                panelsave.setCreatedBy(username());
+                    panelsave.setCreatedAt(new Date());
+                    panelsave.setCreatedBy(username());
 //                panelsave.setPanelStartDate(startDate);
 //                panelsave.setPanelEndDate(endDate);
-                panelsave.setStatus("ACTIVE");
-                panelsave.setDate(new Date());
-                panelRepository.save(panelsave);
-                return "added successfully";
-
+                    panelsave.setStatus("ACTIVE");
+                    panelsave.setDate(new Date());
+                    panelRepository.save(panelsave);
+                    return "{\"successfully added\":1,\"code\":200}";
+                }else{
+                    return "{\"already exsists\":0,\"code\":208}";
+                }
             }
             public List<Panel> getAllPanel(){
                 List<Panel> list = panelRepository.getAllPanels();

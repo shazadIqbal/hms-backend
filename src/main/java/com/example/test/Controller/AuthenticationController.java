@@ -51,4 +51,10 @@ public class AuthenticationController {
     public List<User> getAllUsers(){
         return this.userService.findAll();
     }
+
+    @DeleteMapping("/{id}")
+    public List<User> deleteUser(@PathVariable("id") Long id) {
+        return this.userService.delete(id);
+    }
+
 }
