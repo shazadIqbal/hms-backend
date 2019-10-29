@@ -58,6 +58,7 @@ public class OpdAdmitService {
             request.setTotalAmount(opdAdmitDTO.getPrice());
             request.setOperationType("ADMIT");
             request.setTransactionType("DEBIT");
+
             request.setDescription(opdAdmitdescriptionlist(patient.getName(), opdAdmitDTO.getBedID()));
 
             //refid
@@ -85,11 +86,12 @@ public class OpdAdmitService {
         Optional<Bed> bed = bedRepository.findById(bedID);
         String des;
         if (bed.isPresent()) {
-
-            des = patientName + " avails " + " the bed   number  " + bedID + " of bedtype " + bed.get().getBedType();
+            des ="NO DESCRIPTION AVAILAIBLE";
             return des;
         }
-        return  "NO DESCRIPTION AVAILAIBLE";
+        else{
+            return "BED NOT PRESENT";
+        }
 
     }
     public String username()

@@ -24,6 +24,7 @@ public class BedService {
     @Autowired
     UserDao userDao;
 
+
     public String createBed(BedDto bedDto){
          //LOOP for creating multiple objects of the beds of same type with dif id
 
@@ -73,7 +74,6 @@ public List<Bed> getSelectedBedType(String bedType){
         return  user.getName();
 
     }
-
 
 
 }
