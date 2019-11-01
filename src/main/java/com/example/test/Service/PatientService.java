@@ -88,7 +88,7 @@ public class PatientService {
 //                String convertedDate = simpleDateFormat.format(date);
                 patient.setDate(new Date());
                 patient.setBedId(-1L);
-                patient.setDischarge(Boolean.FALSE);
+                patient.setDischarge(Boolean.TRUE);
 
 //       if patient is registered in gynyAndObs
 
