@@ -19,7 +19,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class PatientMonitorService {
@@ -158,6 +157,8 @@ public class PatientMonitorService {
             patientMonitorDTO.setAdmit(admitTotal);
             // new field for admitLabel
             patientMonitorDTO.setDues(dues);
+            patientMonitorDTO.setDischarge(patient.getDischarge());
+            patientMonitorDTO.setBedId(patient.getBedId());
 
             return patientMonitorDTO;
         }

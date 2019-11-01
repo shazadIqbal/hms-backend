@@ -18,12 +18,14 @@ public class PatientDTO {
     private String UpdatedBy;
     private Date CreatedAt;
     private Date UpdateAt;
+    private Boolean discharge;
+    private Long bedId;
 
     public PatientDTO() {
 
     }
 
-    public PatientDTO(Long id, String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, Boolean gynAndObsRegistration, String husbandOfAndFatherOf, Date registrationDate, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
+    public PatientDTO(Long id, String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, Boolean gynAndObsRegistration, String husbandOfAndFatherOf, Date registrationDate, String createdBy, String updatedBy, Date createdAt, Date updateAt, Boolean discharge, Long bedId) {
         this.id = id;
         this.name = name;
         this.cnic = cnic;
@@ -39,6 +41,24 @@ public class PatientDTO {
         UpdatedBy = updatedBy;
         CreatedAt = createdAt;
         UpdateAt = updateAt;
+        this.discharge = discharge;
+        this.bedId = bedId;
+    }
+
+    public Boolean getDischarge() {
+        return discharge;
+    }
+
+    public void setDischarge(Boolean discharge) {
+        this.discharge = discharge;
+    }
+
+    public Long getBedId() {
+        return bedId;
+    }
+
+    public void setBedId(Long bedId) {
+        this.bedId = bedId;
     }
 
     public Long getId() {

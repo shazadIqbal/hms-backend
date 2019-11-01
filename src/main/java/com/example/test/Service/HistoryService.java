@@ -3,8 +3,10 @@ package com.example.test.Service;
 
 import com.example.test.Commons.Transactions;
 import com.example.test.DTO.RestTemplateResponseDTO;
+import com.example.test.Model.Bed;
 import com.example.test.Model.History;
 import com.example.test.Model.Patient;
+import com.example.test.Repository.BedRepository;
 import com.example.test.Repository.HistoryRepository;
 import com.example.test.Repository.PatientRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -15,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,16 +36,22 @@ public class HistoryService {
     @Autowired
     HistoryRepository historyRepository;
 
+    @Autowired
+    BedRepository bedRepository;
+
     RestTemplate restTemplate = new RestTemplate();
 
 
     public String addPatientHistory(Long id) {
 
         Optional<Patient> p = patientRepository.findById(id);
-
-
         Patient patient = p.get();
-
+        Optional<Bed> bed = bedRepository.findById(patient.getBedId());
+        Bed bedNew = bed.get();
+        bedNew.setOccupied(Boolean.FALSE);
+        bedRepository.save(bedNew);
+        patient.setDischarge(Boolean.TRUE);
+        patient.setBedId(-1L);
 
         if (p.isPresent()) {
 

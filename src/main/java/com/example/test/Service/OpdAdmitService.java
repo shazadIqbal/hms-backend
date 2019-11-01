@@ -1,5 +1,4 @@
 package com.example.test.Service;
-import com.example.test.DTO.BedDto;
 import com.example.test.DTO.OpdAdmitDTO;
 import com.example.test.DTO.RestTemplateResponseDTO;
 import com.example.test.DTO.TransactionRestDTO;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Transient;
-import javax.validation.constraints.Null;
 import java.util.Date;
 import java.util.Optional;
 import java.util.UUID;
@@ -50,6 +48,9 @@ public class OpdAdmitService {
             bednew.setBedType(opdAdmitDTO.getBedType());
 
             bedRepository.save(bednew);
+            patient.setBedId(bednew.getId());
+            patient.setDischarge(Boolean.FALSE);
+            patientRepository.save(patient);
             TransactionRestDTO request = new TransactionRestDTO();
             request.setAccountNoUUID(patient.getAccountNo());
             request.setCreatedAt(new Date());
