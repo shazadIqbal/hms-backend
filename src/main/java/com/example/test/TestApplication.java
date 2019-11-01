@@ -57,7 +57,7 @@ public class TestApplication {
 		connector.setScheme("http");
 		connector.setPort(8080);
 		connector.setSecure(false);
-		connector.setRedirectPort(8443);
+		connector.setRedirectPort(8444);
 		return connector;
 	}
 
