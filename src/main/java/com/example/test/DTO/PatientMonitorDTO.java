@@ -18,6 +18,8 @@ public class PatientMonitorDTO {
     private Boolean gynAndObsRegistration;
     private String husbandOfAndFatherOf;
     private Date registrationDate;
+    private Boolean discharge;
+    private Long bedId;
 
     Long admit;
     String admitLabel;
@@ -45,6 +47,22 @@ public class PatientMonitorDTO {
         this.admitLabel = admitLabel;
         this.gyne = gyne;
         this.obs = obs;
+    }
+
+    public Boolean getDischarge() {
+        return discharge;
+    }
+
+    public void setDischarge(Boolean discharge) {
+        this.discharge = discharge;
+    }
+
+    public Long getBedId() {
+        return bedId;
+    }
+
+    public void setBedId(Long bedId) {
+        this.bedId = bedId;
     }
 
     public Long getId() {
