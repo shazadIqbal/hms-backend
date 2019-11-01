@@ -7,7 +7,6 @@ import com.example.test.Model.Patient;
 import com.example.test.Model.User;
 import com.example.test.Repository.PatientRepository;
 import com.example.test.Repository.UserDao;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,10 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.Transient;
-import javax.sql.rowset.spi.SyncResolver;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +28,9 @@ public class PatientService {
 
     @Value("${transaction.url}")
     public String url;
+
+    @Value("${account.url}")
+    public String accountUrl;
 
     @Autowired
     UserDao userDao;
@@ -89,6 +87,8 @@ public class PatientService {
 //                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 //                String convertedDate = simpleDateFormat.format(date);
                 patient.setDate(new Date());
+                patient.setBedId(-1L);
+                patient.setDischarge(Boolean.TRUE);
 
 //       if patient is registered in gynyAndObs
 
@@ -98,7 +98,7 @@ public class PatientService {
                 accountRestDTO.setGender(pat.getGender());
                 accountRestDTO.setName(pat.getName());
                 accountRestDTO.setAccountType("Patient Account");
-                RestTemplateResponseDTO result = restTemplate.postForObject(url, accountRestDTO, RestTemplateResponseDTO.class);
+                RestTemplateResponseDTO result = restTemplate.postForObject(accountUrl, accountRestDTO, RestTemplateResponseDTO.class);
 //00 Means posted successfully 01 means duplicate
         if(result.getCode().equalsIgnoreCase("200")){
             patientRepository.save(patient);

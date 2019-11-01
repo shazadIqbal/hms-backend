@@ -137,6 +137,8 @@ public class DoctorService {
                 accountRestDTO.setAccountType("Doctor Account");
                 RestTemplateResponseDTO result = restTemplate.postForObject(url, accountRestDTO, RestTemplateResponseDTO.class);
 
+            } else {
+                return "{\"CAN NOT ADD DUPLICATE RECORD\"WARN\":1}";
             }
         }catch (Exception e){
             System.out.println(e);

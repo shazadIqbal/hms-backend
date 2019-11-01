@@ -15,4 +15,6 @@ public interface PanelRepository extends JpaRepository<Panel,Long> {
     @Query(value = "select * from panel where status = 'ACTIVE' ", nativeQuery = true)
     public List<Panel> getAllPanels();
 
+    Panel findByPanelName(String panelName);
+
 }

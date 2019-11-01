@@ -42,13 +42,22 @@ public class UserServiceImpl implements UserDetailsService {
 	}
 
 	public List<User> findAll() {
-		List<User> list = new ArrayList<>();
-		userDao.findAll().iterator().forEachRemaining(list::add);
+		List<User> list = userDao.getActiveUsers();
+		//userDao.findAll().iterator().forEachRemaining(list::add);
 		return list;
 	}
 
-	public void delete(Long id) {
-		userDao.deleteById(id);
+	public List<User> delete(Long id) {
+//		List<User> list = new ArrayList<>();
+//		userDao.deleteById(id);
+//		return list;
+		Optional<User> user = userDao.findById(id);
+		if (user.isPresent()) {
+			User user1 = user.get();
+			user1.setActive(false);
+			userDao.save(user1);
+		}
+		return this.findAll();
 	}
 
 	public User findOne(String username) {

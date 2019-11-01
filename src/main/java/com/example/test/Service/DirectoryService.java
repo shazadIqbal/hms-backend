@@ -26,7 +26,8 @@ public class DirectoryService {
 
     public String postDirectory(DirectoryDTO directoryDto) {
 
-
+        Directory isExist = directoryRepository.findByNumber(directoryDto.getNumber());
+        if(isExist == null){
         Directory directory = new Directory();
         directory.setCreatedBy(username());
         directory.setCreatedAt(new Date());
@@ -35,12 +36,11 @@ public class DirectoryService {
         directory.setAddress(directoryDto.getAddress());
         directory.setErNo(directoryDto.getErNo());
         directory.setStatus("Active");
-
-
         directoryRepository.save(directory);
-
-
         return "{\"Record added successfully\":1}";
+    } else {
+        return "{\"Already Exist\":0}";
+        }
     }
 
     public List<Directory> getDirectory() {

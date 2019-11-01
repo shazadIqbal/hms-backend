@@ -36,7 +36,7 @@ public class ErService {
             er.setStatus("Active");
             er.setFacilities(erDTO.getFacilities());
             erRepository.save(er);
-            return "{\"ADDED SUCCESFULLY\":1}";
+            return "{\"ADDEDSUCCESFULLY\":1}";
         }
         else
         {

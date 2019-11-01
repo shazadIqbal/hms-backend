@@ -1,7 +1,6 @@
 package com.example.test.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -31,8 +30,8 @@ public class Patient {
     private String UpdatedBy;
     private Date CreatedAt;
     private Date UpdateAt;
-
-
+    private Boolean discharge;
+    private Long bedId;
     @OneToMany(mappedBy = "patient")
 
     private List<History> history;
@@ -46,7 +45,7 @@ public class Patient {
 
     }
 
-    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, String accountNo, Boolean gynAndObsRegistration, String husbandOfAndFatherOf, Date registrationDate, Date date, String createdBy, String updatedBy, Date createdAt, Date updateAt, List<History> history) {
+    public Patient(String name, String cnic, String phoneNo, Integer age, String gender, String address, String status, String accountNo, Boolean gynAndObsRegistration, String husbandOfAndFatherOf, Date registrationDate, Date date, String createdBy, String updatedBy, Date createdAt, Date updateAt, Boolean discharge, Long bedId, List<History> history, List<PatientLabtestDetails> patientLabtestDetails) {
         this.name = name;
         this.cnic = cnic;
         this.phoneNo = phoneNo;
@@ -63,7 +62,26 @@ public class Patient {
         UpdatedBy = updatedBy;
         CreatedAt = createdAt;
         UpdateAt = updateAt;
+        this.discharge = discharge;
+        this.bedId = bedId;
         this.history = history;
+        this.patientLabtestDetails = patientLabtestDetails;
+    }
+
+    public Long getBedId() {
+        return bedId;
+    }
+
+    public void setBedId(Long bedId) {
+        this.bedId = bedId;
+    }
+
+    public Boolean getDischarge() {
+        return discharge;
+    }
+
+    public void setDischarge(Boolean discharge) {
+        this.discharge = discharge;
     }
 
     public Long getId() {
