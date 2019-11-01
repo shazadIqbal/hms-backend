@@ -45,7 +45,7 @@ public class PatientPackageService {
             patientPackage.setpEndDate(pack.getpEndDate());
             patientPackage.setpSponsor(pack.getpSponsor());
             patientPackage.setpPrice(pack.getpPrice());
-            patientPackage.setCreatedAt(new Date());
+                patientPackage.setCreatedAt(new Date());
             patientPackage.setCreatedBy(username());
             patientPackage.setStatus("Active");
             patientPackageRepository.save(patientPackage);

@@ -10,7 +10,7 @@ public class DoctorDTO {
    String nationality;
     String address;
     String daysservice;
-   Integer cnic;
+   String cnic;
    Long fees;
     String email;
     String speciality;
@@ -34,7 +34,7 @@ public class DoctorDTO {
     public DoctorDTO() {
     }
 
-    public DoctorDTO(Long mrNo, String fullName, String mobile, String emrNo, String nationality, String address, String daysservice, Integer cnic, Long fees, String email, String speciality, String qualification, String hoursday, String position, String religion, Integer sallary, String dateOfbirth, String gender, String timeIn, String timeOut, Date createdDate, String accountNo, Integer share, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
+    public DoctorDTO(Long mrNo, String fullName, String mobile, String emrNo, String nationality, String address, String daysservice, String cnic, Long fees, String email, String speciality, String qualification, String hoursday, String position, String religion, Integer sallary, String dateOfbirth, String gender, String timeIn, String timeOut, Date createdDate, String accountNo, Integer share, String createdBy, String updatedBy, Date createdAt, Date updateAt) {
         this.mrNo = mrNo;
         this.fullName = fullName;
         this.mobile = mobile;
@@ -120,11 +120,11 @@ public class DoctorDTO {
         this.daysservice = daysservice;
     }
 
-    public Integer getCnic() {
+    public String getCnic() {
         return cnic;
     }
 
-    public void setCnic(Integer cnic) {
+    public void setCnic(String cnic) {
         this.cnic = cnic;
     }
 
