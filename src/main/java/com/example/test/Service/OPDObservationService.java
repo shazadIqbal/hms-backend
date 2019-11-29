@@ -34,7 +34,8 @@ public class OPDObservationService {
     @Transient
     private UUID ref;
 
-    RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    RestTemplate restTemplate;
 
     public String saveOpdObservationToAccounts(OPDObservationDTO data){
         Patient patient = patientRepository.findById(data.getId()).get();

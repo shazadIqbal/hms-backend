@@ -28,7 +28,9 @@ public class OpdErService {
 
     @Transient
     private UUID ref;
-    RestTemplate restTemplate = new RestTemplate();
+
+    @Autowired
+    RestTemplate restTemplate;
 
     @Autowired
     UserDao userDao;

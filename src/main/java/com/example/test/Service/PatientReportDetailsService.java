@@ -14,8 +14,10 @@ import java.util.List;
 public class PatientReportDetailsService {
     @Autowired
     RestTemplate restTemplate;
+
     @Value("${user.token}")
     public String userToken;
+
     public List<PatientReport> getPatientReportByPatientId(Long patientId){
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);

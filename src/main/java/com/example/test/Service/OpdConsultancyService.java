@@ -33,8 +33,8 @@ public class OpdConsultancyService {
     @Value("${transaction.url}")
     public String url;
 
-
-    RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    RestTemplate restTemplate;
 
     public String saveOpdConsultancyToAccounts(OpdConsultancyDTO data) {
 

@@ -32,7 +32,8 @@ public class PatientMonitorService {
     @Autowired
     UserDao userDao;
 
-    RestTemplate restTemplate = new RestTemplate();//connect two spring applications together
+    @Autowired
+    RestTemplate restTemplate;//connect two spring applications together
 
 
     public PatientMonitorDTO getPatientMonitor(Long id) {

@@ -39,7 +39,8 @@ public class DoctorService {
     @Transient
     private UUID corrId;
 
-    RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    RestTemplate restTemplate;
 
     public List<Doctor> getDoctors() {
         List<Doctor> list = doctorRepository.getAllDoctors();

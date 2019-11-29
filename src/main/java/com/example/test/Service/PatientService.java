@@ -37,7 +37,8 @@ public class PatientService {
     @Transient
     private UUID corrId;
 
-    RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    RestTemplate restTemplate;
 
     //Get Active Patients from Database
     public List<Patient> getPatients() {

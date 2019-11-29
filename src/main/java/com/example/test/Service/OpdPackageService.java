@@ -33,7 +33,8 @@ public class OpdPackageService {
     @Autowired
     UserDao userDao;
 
-    RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    RestTemplate restTemplate;
 
     public String saveOpdPackageToAccounts(OpdPackageDTO data){
 

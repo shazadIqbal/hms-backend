@@ -44,9 +44,9 @@ public class OpdLabTestService {
     @Transient
     private UUID ref ;
 
-//    RestTemplate restTemplate = new RestTemplate();
-@Autowired
-RestTemplate restTemplate;
+    @Autowired
+    RestTemplate restTemplate;
+
     public String saveToAccounts(OpdLabTestDTO data) {
 
 //        for(int i=0; i<data.getLabTests().length;i++){

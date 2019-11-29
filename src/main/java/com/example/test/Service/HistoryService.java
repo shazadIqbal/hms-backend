@@ -39,7 +39,8 @@ public class HistoryService {
     @Autowired
     BedRepository bedRepository;
 
-    RestTemplate restTemplate = new RestTemplate();
+    @Autowired
+    RestTemplate restTemplate;
 
 
     public String addPatientHistory(Long id) {

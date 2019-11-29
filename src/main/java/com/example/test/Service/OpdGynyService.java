@@ -33,7 +33,9 @@ public class OpdGynyService {
 
     @Transient
     private UUID ref;
-    RestTemplate restTemplate = new RestTemplate();
+
+    @Autowired
+    RestTemplate restTemplate;
 
 
     public String saveOpdGynyToAccounts(OpdGynyDTO data){
